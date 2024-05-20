@@ -3,7 +3,7 @@ import { MenuItem } from './menu.model';
 export const MENU: MenuItem[] = [
     {
         id: 1,
-        label: 'MENUITEMS.MENU.TEXT',
+        label: '',
         isTitle: true
     },
     {
@@ -14,7 +14,7 @@ export const MENU: MenuItem[] = [
     },
     {
         id: 3,
-        label: 'MENUITEMS.APPS.TEXT',
+        label: 'Comm Engagement',
         icon: 'grid',
         subItems: [
             {
@@ -123,7 +123,7 @@ export const MENU: MenuItem[] = [
     },
     {
         id: 16,
-        label: 'MENUITEMS.AUTHENTICATION.TEXT',
+        label: 'Farmers',
         icon: 'users',
         subItems: [
             {
@@ -179,7 +179,7 @@ export const MENU: MenuItem[] = [
     },
     {
         id: 25,
-        label: 'MENUITEMS.PAGES.TEXT',
+        label: 'Groups',
         icon: 'file-text',
         subItems: [
             {
@@ -233,350 +233,517 @@ export const MENU: MenuItem[] = [
         ]
     },
     {
-        id: 34,
-        label: 'MENUITEMS.MENU.TEXT',
-        isTitle: true
-    },
-    {
-        id: 35,
-        label: 'MENUITEMS.COMPONENTS.TEXT',
-        icon: 'briefcase',
+        id: 25,
+        label: 'Seeds Distribution',
+        icon: 'file-text',
         subItems: [
             {
-                id: 36,
-                label: 'MENUITEMS.COMPONENTS.LIST.ALERTS',
+                id: 26,
+                label: 'MENUITEMS.PAGES.LIST.STARTER',
                 link: '/',
-                parentId: 35
+                parentId: 25
             },
             {
-                id: 37,
-                label: 'MENUITEMS.COMPONENTS.LIST.BUTTONS',
+                id: 27,
+                label: 'MENUITEMS.PAGES.LIST.MAINTENANCE',
                 link: '/',
-                parentId: 35
+                parentId: 25
             },
             {
-                id: 38,
-                label: 'MENUITEMS.COMPONENTS.LIST.CARDS',
+                id: 28,
+                label: 'Coming Soon',
                 link: '/',
-                parentId: 35
+                parentId: 25
             },
             {
-                id: 39,
-                label: 'MENUITEMS.COMPONENTS.LIST.CAROUSEL',
+                id: 29,
+                label: 'MENUITEMS.PAGES.LIST.TIMELINE',
                 link: '/',
-                parentId: 35
+                parentId: 25
             },
             {
-                id: 40,
-                label: 'MENUITEMS.COMPONENTS.LIST.DROPDOWNS',
+                id: 30,
+                label: 'MENUITEMS.PAGES.LIST.FAQS',
                 link: '/',
-                parentId: 35
+                parentId: 25
             },
             {
-                id: 41,
-                label: 'MENUITEMS.COMPONENTS.LIST.GRID',
+                id: 31,
+                label: 'MENUITEMS.PAGES.LIST.PRICING',
                 link: '/',
-                parentId: 35
+                parentId: 25
             },
             {
-                id: 42,
-                label: 'MENUITEMS.COMPONENTS.LIST.IMAGES',
+                id: 32,
+                label: 'MENUITEMS.PAGES.LIST.ERROR404',
                 link: '/',
-                parentId: 35
+                parentId: 25
             },
             {
-                id: 44,
-                label: 'MENUITEMS.COMPONENTS.LIST.MODALS',
+                id: 32,
+                label: 'MENUITEMS.PAGES.LIST.ERROR500',
                 link: '/',
-                parentId: 35
-            },
-            {
-                id: 44,
-                label: 'MENUITEMS.COMPONENTS.LIST.OFFCANVAS',
-                link: '/',
-                parentId: 35
-            },
-            {
-                id: 46,
-                label: 'MENUITEMS.COMPONENTS.LIST.PROGRESSBAR',
-                link: '/',
-                parentId: 35
-            },
-            {
-                id: 44,
-                label: 'MENUITEMS.COMPONENTS.LIST.PLACEHOLDERS',
-                link: '/',
-                parentId: 35
-            },
-            {
-                id: 48,
-                label: 'MENUITEMS.COMPONENTS.LIST.TABS',
-                link: '/',
-                parentId: 35
-            },
-            {
-                id: 49,
-                label: 'MENUITEMS.COMPONENTS.LIST.TYPOGRAPHY',
-                link: '/',
-                parentId: 35
-            },
-            {
-                id: 49,
-                label: 'MENUITEMS.COMPONENTS.LIST.TOASTS',
-                link: '/',
-                parentId: 35
-            },
-            {
-                id: 50,
-                label: 'MENUITEMS.COMPONENTS.LIST.VIDEO',
-                link: '/',
-                parentId: 35
-            },
-            {
-                id: 51,
-                label: 'MENUITEMS.COMPONENTS.LIST.GENERAL',
-                link: '/',
-                parentId: 35
-            },
-            {
-                id: 52,
-                label: 'MENUITEMS.COMPONENTS.LIST.COLORS',
-                link: '/',
-                parentId: 35
-            },
-            {
-                id: 52,
-                label: 'MENUITEMS.COMPONENTS.LIST.UTILITIES',
-                link: '/',
-                parentId: 35
-            }
-        ]
-    },
-    {
-        id: 53,
-        label: 'MENUITEMS.EXTENDED.TEXT',
-        icon: 'gift',
-        subItems: [
-            {
-                id: 54,
-                label: 'MENUITEMS.EXTENDED.LIST.LIGHTBOX',
-                link: '/',
-                parentId: 53
-            },
-            {
-                id: 55,
-                label: 'MENUITEMS.EXTENDED.LIST.RANGESLIDER',
-                link: '/',
-                parentId: 53
-            },
-            {
-                id: 56,
-                label: 'MENUITEMS.EXTENDED.LIST.SWEETALERT',
-                link: '/',
-                parentId: 53
-            },
-            {
-                id: 57,
-                label: 'MENUITEMS.EXTENDED.LIST.RATING',
-                link: '/',
-                parentId: 53
-            },
-            {
-                id: 58,
-                label: 'MENUITEMS.EXTENDED.LIST.NOTIFICATION',
-                link: '/',
-                parentId: 53
-            }
-        ]
-    },
-    {
-        id: 59,
-        label: 'MENUITEMS.FORMS.TEXT',
-        icon: 'box',
-        badge: {
-            variant: 'danger',
-            text: 'MENUITEMS.FORMS.BADGE',
-        },
-        subItems: [
-            {
-                id: 60,
-                label: 'MENUITEMS.FORMS.LIST.ELEMENTS',
-                link: '/',
-                parentId: 59
-            },
-            {
-                id: 61,
-                label: 'MENUITEMS.FORMS.LIST.VALIDATION',
-                link: '/',
-                parentId: 59
-            },
-            {
-                id: 62,
-                label: 'MENUITEMS.FORMS.LIST.ADVANCED',
-                link: '/',
-                parentId: 59
-            },
-            {
-                id: 63,
-                label: 'MENUITEMS.FORMS.LIST.EDITOR',
-                link: '/',
-                parentId: 59
-            },
-            {
-                id: 64,
-                label: 'MENUITEMS.FORMS.LIST.FILEUPLOAD',
-                link: '/',
-                parentId: 59
-            },
-            {
-                id: 65,
-                label: 'MENUITEMS.FORMS.LIST.WIZARD',
-                link: '/',
-                parentId: 59
-            },
-            {
-                id: 66,
-                label: 'MENUITEMS.FORMS.LIST.MASK',
-                link: '/',
-                parentId: 59
-            }
-        ]
-    },
-    {
-        id: 67,
-        icon: 'sliders',
-        label: 'MENUITEMS.TABLES.TEXT',
-        subItems: [
-            {
-                id: 68,
-                label: 'MENUITEMS.TABLES.LIST.BASIC',
-                link: '/',
-                parentId: 67
-            },
-            {
-                id: 69,
-                label: 'MENUITEMS.TABLES.LIST.ADVANCED',
-                link: '/',
-                parentId: 67
-            }
-        ]
-    },
-    {
-        id: 70,
-        icon: 'pie-chart',
-        label: 'MENUITEMS.CHARTS.TEXT',
-        subItems: [
-            {
-                id: 71,
-                label: 'MENUITEMS.CHARTS.LIST.APEX',
-                link: '/',
-                parentId: 70
-            },
-            {
-                id: 72,
-                label: 'MENUITEMS.CHARTS.LIST.ECHARTS',
-                link: '/',
-                parentId: 70
-            },
-            {
-                id: 73,
-                label: 'MENUITEMS.CHARTS.LIST.CHARTJS',
-                link: '/',
-                parentId: 70
-            }
-        ]
-    },
-    {
-        id: 74,
-        label: 'MENUITEMS.ICONS.TEXT',
-        icon: 'cpu',
-        subItems: [
-            {
-                id: 75,
-                label: 'MENUITEMS.ICONS.LIST.BOXICONS',
-                link: '/',
-                parentId: 74
-            },
-            {
-                id: 76,
-                label: 'MENUITEMS.ICONS.LIST.MATERIALDESIGN',
-                link: '/',
-                parentId: 74
-            },
-            {
-                id: 77,
-                label: 'MENUITEMS.ICONS.LIST.DRIPICONS',
-                link: '/',
-                parentId: 74
-            },
-            {
-                id: 78,
-                label: 'MENUITEMS.ICONS.LIST.FONTAWESOME',
-                link: '/',
-                parentId: 74
+                parentId: 25
             },
         ]
     },
     {
-        id: 79,
-        label: 'MENUITEMS.MAPS.TEXT',
-        icon: 'map',
+        id: 25,
+        label: 'Reports',
+        icon: 'file-text',
         subItems: [
             {
-                id: 80,
-                label: 'MENUITEMS.MAPS.LIST.GOOGLEMAP',
+                id: 26,
+                label: 'MENUITEMS.PAGES.LIST.STARTER',
                 link: '/',
-                parentId: 79
+                parentId: 25
             },
             {
-                id: 81,
-                label: 'MENUITEMS.MAPS.LIST.LEAFLET',
+                id: 27,
+                label: 'MENUITEMS.PAGES.LIST.MAINTENANCE',
                 link: '/',
-                parentId: 79
+                parentId: 25
             },
             {
-                id: 81,
-                label: 'MENUITEMS.MAPS.LIST.AMCHARTS',
+                id: 28,
+                label: 'Coming Soon',
                 link: '/',
-                parentId: 79,
-                badge: {
-                    variant: 'danger',
-                    text: 'MENUITEMS.APPS.BADGE',
-                },
-            }
+                parentId: 25
+            },
+            {
+                id: 29,
+                label: 'MENUITEMS.PAGES.LIST.TIMELINE',
+                link: '/',
+                parentId: 25
+            },
+            {
+                id: 30,
+                label: 'MENUITEMS.PAGES.LIST.FAQS',
+                link: '/',
+                parentId: 25
+            },
+            {
+                id: 31,
+                label: 'MENUITEMS.PAGES.LIST.PRICING',
+                link: '/',
+                parentId: 25
+            },
+            {
+                id: 32,
+                label: 'MENUITEMS.PAGES.LIST.ERROR404',
+                link: '/',
+                parentId: 25
+            },
+            {
+                id: 32,
+                label: 'MENUITEMS.PAGES.LIST.ERROR500',
+                link: '/',
+                parentId: 25
+            },
         ]
     },
     {
-        id: 82,
-        label: 'MENUITEMS.MULTILEVEL.TEXT',
-        icon: 'share-2',
+        id: 25,
+        label: 'Users',
+        icon: 'users',
         subItems: [
             {
-                id: 83,
-                label: 'MENUITEMS.MULTILEVEL.LIST.LEVEL1.1',
+                id: 26,
+                label: 'MENUITEMS.PAGES.LIST.STARTER',
                 link: '/',
-                parentId: 82
+                parentId: 25
             },
             {
-                id: 83,
-                label: 'MENUITEMS.MULTILEVEL.LIST.LEVEL1.2',
-                parentId: 82,
-                subItems: [
-                    {
-                        id: 84,
-                        label: 'MENUITEMS.MULTILEVEL.LIST.LEVEL1.LEVEL2.1',
-                        link: '/',
-                        parentId: 83,
-                    },
-                    {
-                        id: 85,
-                        label: 'MENUITEMS.MULTILEVEL.LIST.LEVEL1.LEVEL2.2',
-                        link: '/',
-                        parentId: 83,
-                    }
-                ]
+                id: 27,
+                label: 'MENUITEMS.PAGES.LIST.MAINTENANCE',
+                link: '/',
+                parentId: 25
+            },
+            {
+                id: 28,
+                label: 'Coming Soon',
+                link: '/',
+                parentId: 25
+            },
+            {
+                id: 29,
+                label: 'MENUITEMS.PAGES.LIST.TIMELINE',
+                link: '/',
+                parentId: 25
+            },
+            {
+                id: 30,
+                label: 'MENUITEMS.PAGES.LIST.FAQS',
+                link: '/',
+                parentId: 25
+            },
+            {
+                id: 31,
+                label: 'MENUITEMS.PAGES.LIST.PRICING',
+                link: '/',
+                parentId: 25
+            },
+            {
+                id: 32,
+                label: 'MENUITEMS.PAGES.LIST.ERROR404',
+                link: '/',
+                parentId: 25
+            },
+            {
+                id: 32,
+                label: 'MENUITEMS.PAGES.LIST.ERROR500',
+                link: '/',
+                parentId: 25
             },
         ]
-    }
+    },
+
+
+    // {
+    //     id: 34,
+    //     label: 'MENUITEMS.MENU.TEXT',
+    //     isTitle: true
+    // },
+    // {
+    //     id: 35,
+    //     label: 'MENUITEMS.COMPONENTS.TEXT',
+    //     icon: 'briefcase',
+    //     subItems: [
+    //         {
+    //             id: 36,
+    //             label: 'MENUITEMS.COMPONENTS.LIST.ALERTS',
+    //             link: '/',
+    //             parentId: 35
+    //         },
+    //         {
+    //             id: 37,
+    //             label: 'MENUITEMS.COMPONENTS.LIST.BUTTONS',
+    //             link: '/',
+    //             parentId: 35
+    //         },
+    //         {
+    //             id: 38,
+    //             label: 'MENUITEMS.COMPONENTS.LIST.CARDS',
+    //             link: '/',
+    //             parentId: 35
+    //         },
+    //         {
+    //             id: 39,
+    //             label: 'MENUITEMS.COMPONENTS.LIST.CAROUSEL',
+    //             link: '/',
+    //             parentId: 35
+    //         },
+    //         {
+    //             id: 40,
+    //             label: 'MENUITEMS.COMPONENTS.LIST.DROPDOWNS',
+    //             link: '/',
+    //             parentId: 35
+    //         },
+    //         {
+    //             id: 41,
+    //             label: 'MENUITEMS.COMPONENTS.LIST.GRID',
+    //             link: '/',
+    //             parentId: 35
+    //         },
+    //         {
+    //             id: 42,
+    //             label: 'MENUITEMS.COMPONENTS.LIST.IMAGES',
+    //             link: '/',
+    //             parentId: 35
+    //         },
+    //         {
+    //             id: 44,
+    //             label: 'MENUITEMS.COMPONENTS.LIST.MODALS',
+    //             link: '/',
+    //             parentId: 35
+    //         },
+    //         {
+    //             id: 44,
+    //             label: 'MENUITEMS.COMPONENTS.LIST.OFFCANVAS',
+    //             link: '/',
+    //             parentId: 35
+    //         },
+    //         {
+    //             id: 46,
+    //             label: 'MENUITEMS.COMPONENTS.LIST.PROGRESSBAR',
+    //             link: '/',
+    //             parentId: 35
+    //         },
+    //         {
+    //             id: 44,
+    //             label: 'MENUITEMS.COMPONENTS.LIST.PLACEHOLDERS',
+    //             link: '/',
+    //             parentId: 35
+    //         },
+    //         {
+    //             id: 48,
+    //             label: 'MENUITEMS.COMPONENTS.LIST.TABS',
+    //             link: '/',
+    //             parentId: 35
+    //         },
+    //         {
+    //             id: 49,
+    //             label: 'MENUITEMS.COMPONENTS.LIST.TYPOGRAPHY',
+    //             link: '/',
+    //             parentId: 35
+    //         },
+    //         {
+    //             id: 49,
+    //             label: 'MENUITEMS.COMPONENTS.LIST.TOASTS',
+    //             link: '/',
+    //             parentId: 35
+    //         },
+    //         {
+    //             id: 50,
+    //             label: 'MENUITEMS.COMPONENTS.LIST.VIDEO',
+    //             link: '/',
+    //             parentId: 35
+    //         },
+    //         {
+    //             id: 51,
+    //             label: 'MENUITEMS.COMPONENTS.LIST.GENERAL',
+    //             link: '/',
+    //             parentId: 35
+    //         },
+    //         {
+    //             id: 52,
+    //             label: 'MENUITEMS.COMPONENTS.LIST.COLORS',
+    //             link: '/',
+    //             parentId: 35
+    //         },
+    //         {
+    //             id: 52,
+    //             label: 'MENUITEMS.COMPONENTS.LIST.UTILITIES',
+    //             link: '/',
+    //             parentId: 35
+    //         }
+    //     ]
+    // },
+    // {
+    //     id: 53,
+    //     label: 'MENUITEMS.EXTENDED.TEXT',
+    //     icon: 'gift',
+    //     subItems: [
+    //         {
+    //             id: 54,
+    //             label: 'MENUITEMS.EXTENDED.LIST.LIGHTBOX',
+    //             link: '/',
+    //             parentId: 53
+    //         },
+    //         {
+    //             id: 55,
+    //             label: 'MENUITEMS.EXTENDED.LIST.RANGESLIDER',
+    //             link: '/',
+    //             parentId: 53
+    //         },
+    //         {
+    //             id: 56,
+    //             label: 'MENUITEMS.EXTENDED.LIST.SWEETALERT',
+    //             link: '/',
+    //             parentId: 53
+    //         },
+    //         {
+    //             id: 57,
+    //             label: 'MENUITEMS.EXTENDED.LIST.RATING',
+    //             link: '/',
+    //             parentId: 53
+    //         },
+    //         {
+    //             id: 58,
+    //             label: 'MENUITEMS.EXTENDED.LIST.NOTIFICATION',
+    //             link: '/',
+    //             parentId: 53
+    //         }
+    //     ]
+    // },
+    // {
+    //     id: 59,
+    //     label: 'MENUITEMS.FORMS.TEXT',
+    //     icon: 'box',
+    //     badge: {
+    //         variant: 'danger',
+    //         text: 'MENUITEMS.FORMS.BADGE',
+    //     },
+    //     subItems: [
+    //         {
+    //             id: 60,
+    //             label: 'MENUITEMS.FORMS.LIST.ELEMENTS',
+    //             link: '/',
+    //             parentId: 59
+    //         },
+    //         {
+    //             id: 61,
+    //             label: 'MENUITEMS.FORMS.LIST.VALIDATION',
+    //             link: '/',
+    //             parentId: 59
+    //         },
+    //         {
+    //             id: 62,
+    //             label: 'MENUITEMS.FORMS.LIST.ADVANCED',
+    //             link: '/',
+    //             parentId: 59
+    //         },
+    //         {
+    //             id: 63,
+    //             label: 'MENUITEMS.FORMS.LIST.EDITOR',
+    //             link: '/',
+    //             parentId: 59
+    //         },
+    //         {
+    //             id: 64,
+    //             label: 'MENUITEMS.FORMS.LIST.FILEUPLOAD',
+    //             link: '/',
+    //             parentId: 59
+    //         },
+    //         {
+    //             id: 65,
+    //             label: 'MENUITEMS.FORMS.LIST.WIZARD',
+    //             link: '/',
+    //             parentId: 59
+    //         },
+    //         {
+    //             id: 66,
+    //             label: 'MENUITEMS.FORMS.LIST.MASK',
+    //             link: '/',
+    //             parentId: 59
+    //         }
+    //     ]
+    // },
+    // {
+    //     id: 67,
+    //     icon: 'sliders',
+    //     label: 'MENUITEMS.TABLES.TEXT',
+    //     subItems: [
+    //         {
+    //             id: 68,
+    //             label: 'MENUITEMS.TABLES.LIST.BASIC',
+    //             link: '/',
+    //             parentId: 67
+    //         },
+    //         {
+    //             id: 69,
+    //             label: 'MENUITEMS.TABLES.LIST.ADVANCED',
+    //             link: '/',
+    //             parentId: 67
+    //         }
+    //     ]
+    // },
+    // {
+    //     id: 70,
+    //     icon: 'pie-chart',
+    //     label: 'MENUITEMS.CHARTS.TEXT',
+    //     subItems: [
+    //         {
+    //             id: 71,
+    //             label: 'MENUITEMS.CHARTS.LIST.APEX',
+    //             link: '/',
+    //             parentId: 70
+    //         },
+    //         {
+    //             id: 72,
+    //             label: 'MENUITEMS.CHARTS.LIST.ECHARTS',
+    //             link: '/',
+    //             parentId: 70
+    //         },
+    //         {
+    //             id: 73,
+    //             label: 'MENUITEMS.CHARTS.LIST.CHARTJS',
+    //             link: '/',
+    //             parentId: 70
+    //         }
+    //     ]
+    // },
+    // {
+    //     id: 74,
+    //     label: 'MENUITEMS.ICONS.TEXT',
+    //     icon: 'cpu',
+    //     subItems: [
+    //         {
+    //             id: 75,
+    //             label: 'MENUITEMS.ICONS.LIST.BOXICONS',
+    //             link: '/',
+    //             parentId: 74
+    //         },
+    //         {
+    //             id: 76,
+    //             label: 'MENUITEMS.ICONS.LIST.MATERIALDESIGN',
+    //             link: '/',
+    //             parentId: 74
+    //         },
+    //         {
+    //             id: 77,
+    //             label: 'MENUITEMS.ICONS.LIST.DRIPICONS',
+    //             link: '/',
+    //             parentId: 74
+    //         },
+    //         {
+    //             id: 78,
+    //             label: 'MENUITEMS.ICONS.LIST.FONTAWESOME',
+    //             link: '/',
+    //             parentId: 74
+    //         },
+    //     ]
+    // },
+    // {
+    //     id: 79,
+    //     label: 'MENUITEMS.MAPS.TEXT',
+    //     icon: 'map',
+    //     subItems: [
+    //         {
+    //             id: 80,
+    //             label: 'MENUITEMS.MAPS.LIST.GOOGLEMAP',
+    //             link: '/',
+    //             parentId: 79
+    //         },
+    //         {
+    //             id: 81,
+    //             label: 'MENUITEMS.MAPS.LIST.LEAFLET',
+    //             link: '/',
+    //             parentId: 79
+    //         },
+    //         {
+    //             id: 81,
+    //             label: 'MENUITEMS.MAPS.LIST.AMCHARTS',
+    //             link: '/',
+    //             parentId: 79,
+    //             badge: {
+    //                 variant: 'danger',
+    //                 text: 'MENUITEMS.APPS.BADGE',
+    //             },
+    //         }
+    //     ]
+    // },
+    // {
+    //     id: 82,
+    //     label: 'MENUITEMS.MULTILEVEL.TEXT',
+    //     icon: 'share-2',
+    //     subItems: [
+    //         {
+    //             id: 83,
+    //             label: 'MENUITEMS.MULTILEVEL.LIST.LEVEL1.1',
+    //             link: '/',
+    //             parentId: 82
+    //         },
+    //         {
+    //             id: 83,
+    //             label: 'MENUITEMS.MULTILEVEL.LIST.LEVEL1.2',
+    //             parentId: 82,
+    //             subItems: [
+    //                 {
+    //                     id: 84,
+    //                     label: 'MENUITEMS.MULTILEVEL.LIST.LEVEL1.LEVEL2.1',
+    //                     link: '/',
+    //                     parentId: 83,
+    //                 },
+    //                 {
+    //                     id: 85,
+    //                     label: 'MENUITEMS.MULTILEVEL.LIST.LEVEL1.LEVEL2.2',
+    //                     link: '/',
+    //                     parentId: 83,
+    //                 }
+    //             ]
+    //         },
+    //     ]
+    // }
 ];
 

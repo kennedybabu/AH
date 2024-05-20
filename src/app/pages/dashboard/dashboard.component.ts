@@ -12,6 +12,17 @@ export class DashboardComponent implements OnInit {
 
   // bread crumb items
   breadCrumbItems!: Array<{}>;
+  num: number = 0;
+
+
+  constructor() {}
+
+  option = {
+    startVal: this.num,
+    useEasing: true,
+    duration: 2,
+    decimalPlaces: 2,
+  };
 
 
   ngOnInit(): void {
@@ -22,9 +33,9 @@ export class DashboardComponent implements OnInit {
       { label: 'Dashboard' },
       { label: 'Dashboard', active: true }
     ];
-
-
   }
+
+
 
 
 }
