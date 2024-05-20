@@ -19,6 +19,8 @@ import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 import { ErrorInterceptor } from './core/helpers/error.interceptor';
 import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 
+import { DateFormatDirective } from './shared/directives/date-format.directive';
+
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
 } else {
@@ -51,7 +53,8 @@ export function createTranslateLoader(http: HttpClient): any {
     NgbTooltipModule,
     NgbPopoverModule,
     NgbNavModule,
-    ExtrapagesModule
+    ExtrapagesModule,
+    DateFormatDirective
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
