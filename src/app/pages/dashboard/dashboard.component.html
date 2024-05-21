@@ -2,103 +2,51 @@
 <app-pagetitle title="Dashboard" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
 <!-- end page title -->
 
-<!-- <div class="col-sm-12">
-    <form [formGroup]="searchForm" class="app-search d-none d-lg-block">
-      <div class="row">
-        <div class="col-12 col-md">
-          <div class="input-group">
-              <input class="form-control" placeholder="Start" ngbDatepicker name="dp" formControlName="startDate" 
-                 #d1="ngbDatepicker">
-              <div class="input-group-append">
-                <div class="input-group-text" (click)="d1.toggle()">
-                  <i class="fa fa-calendar" style="cursor: pointer;"></i>
-                </div>
-              </div>
-            </div>
-        </div>
-        <div class="col-12 col-md">
-          <div class="input-group">
-              <input class="form-control" placeholder="End" ngbDatepicker formControlName="endDate" name="dp"
-              #d2="ngbDatepicker">
-              <div class="input-group-append">
-                <div class="input-group-text" (click)="d2.toggle()">
-                  <i class="fa fa-calendar" style="cursor: pointer;"></i>
-                </div>
-              </div>
-            </div>
-        </div>
-        <div class="col-12 col-md">
-          <div class="form-group">
-            <ng-select [items]="counties"  (change)="subCounties($event)" [multiple]="true"  [virtualScroll]="true" bindLabel="name"  bindValue="county_id"
-            placeholder="Select County" formControlName="countyId">
-            </ng-select>          
-          </div>
-        </div>
-        <div class="col-12 col-md">
-          <div class="form-group">
-            <ng-select [items]="sub_counties" [multiple]="true" (change)="getWards($event)"  [virtualScroll]="true" bindLabel="name" bindValue="subCountyId"
-            placeholder="Select Sub County" formControlName="subCountyId">
-            </ng-select>            
-          </div>
-        </div>
-        <div class="col">
-            <div class="form-group">
-              <ng-select [items]="wards"  (change)="fetchGroups($event)" [multiple]="true" [virtualScroll]="true" bindLabel="name" bindValue="wardId"
-              placeholder="Select Ward" formControlName="wardId">
-              </ng-select>              
-            </div>
-        </div>
-        <div class="col-12 col-md">
-          <div class="form-group">
-            <ng-select [items]="groups"  [virtualScroll]="true" [multiple]="true" bindLabel="group_name" bindValue="group_id"
-            placeholder="Select Group" formControlName="groupId">
-            </ng-select>                
-          </div>
-        </div>
-        <div class="col-12 col-md">
-          <button type="button" (click)="search()"  class="btn gradient-mint"> <i class="ft-search mr-1"></i>Search</button>
-        </div>
-      </div>
-    </form>  
-</div> -->
-
 <div>
     <div class="card">
         <div class="card-body p-4">
             <div class="row">
-                <div class="col-lg-12 d-flex gap-1">
-                    <form [formGroup]="searchForm">
-                        <div class="col col-md-2">
-                            <label for="example-datetime-local-input" class="form-label">Start Date</label>
-                            <input class="form-control" type="date" placeholder="Start" formControlName="startDate"
-                                id="example-datetime-local-input">
+                <div>
+                    <form [formGroup]="searchForm" class="col-lg-12 d-flex gap-1">
+                        <div class="row">
+                            <div class="col-xl col-md-6">
+                                <label for="example-datetime-local-input" class="form-label">Start Date</label>
+                                <input class="form-control" type="date" placeholder="Start" formControlName="startDate"
+                                    id="example-datetime-local-input">
+                            </div>
+                            <div class="col-xl-2 col-md-6">
+                                <label for="example-datetime-local-input" class="form-label">End Date</label>
+                                <input class="form-control" type="date" placeholder="End" formControlName="endDate"
+                                    id="example-datetime-local-input">
+                            </div>
+                            <div class="col-xl col-md-6">
+                                <label for="county">County</label>
+                                <ng-select id="county"  [items]="counties" [multiple]="true" (change)="subCounties($event)"  [virtualScroll]="true" bindLabel="name" bindValue="county_id"
+                                placeholder="County" formControlName="countyId">
+                                </ng-select> 
+                            </div>
+                            <div class="col-xl col-md-6">
+                                <label for="county">Sub County</label>
+                                <ng-select id="county"  [items]="sub_counties" [multiple]="true" (change)="getWards($event)"  [virtualScroll]="true" bindLabel="name" bindValue="subCountyId"
+                                placeholder="Sub County" formControlName="subCountyId">
+                                </ng-select> 
+                            </div>
+                            <div class="col-xl col-md-6">
+                                <label for="county">Ward</label>
+                                <ng-select id="county"  (change)="filterGroups($event)" [items]="wards" [multiple]="true"  [virtualScroll]="true" bindLabel="name" bindValue="wardId"
+                                placeholder="Ward" formControlName="wardId">
+                                </ng-select> 
+                            </div>  
+                            <div class="col-xl col-md-6">
+                                <label for="county">Group</label>
+                                <ng-select id="county"  [items]="groups" [multiple]="true"  [virtualScroll]="true" bindLabel="group_name" bindValue="group_id"
+                                placeholder="Group" formControlName="groupId">
+                                </ng-select> 
+                            </div>   
+                            <div class="col-xl col-md-6 d-flex align-items-end">
+                                <button (click)="search()" style="color: #e9ecef;margin-bottom: 2px;" class="btn w-100 secondary-color btn-block" type="submit">search</button>
+                            </div>  
                         </div>
-                        <div class="col col-md-2">
-                            <label for="example-datetime-local-input" class="form-label">End Date</label>
-                            <input class="form-control" type="date" placeholder="End" formControlName="endDate"
-                                id="example-datetime-local-input">
-                        </div>
-                        <div class="col col-md-2">
-                            <label for="county">County</label>
-                            <ng-select id="county"  [items]="sub_counties" [multiple]="true" (change)="getWards($event)"  [virtualScroll]="true" bindLabel="name" bindValue="subCountyId"
-                            placeholder="Select Sub County" formControlName="subCountyId">
-                            </ng-select> 
-                        </div>
-                        <div class="col col-md-2">
-                            <label for="county">Sub County</label>
-                            <ng-select id="county"  [items]="sub_counties" [multiple]="true" (change)="getWards($event)"  [virtualScroll]="true" bindLabel="name" bindValue="subCountyId"
-                            placeholder="Select Sub County" formControlName="subCountyId">
-                            </ng-select> 
-                        </div>
-                        <div class="col col-md-2">
-                            <label for="county">Ward</label>
-                            <ng-select id="county"  [items]="sub_counties" [multiple]="true" (change)="getWards($event)"  [virtualScroll]="true" bindLabel="name" bindValue="subCountyId"
-                            placeholder="Select Sub County" formControlName="subCountyId">
-                            </ng-select> 
-                        </div>    
-                        <div class="col-md-2 col d-flex align-items-end">
-                            <button (click)="search()" style="color: #e9ecef;" class="btn w-100 secondary-color btn-block" type="submit">search</button>
-                        </div>   
                     </form>             
                 </div>
             </div>
@@ -116,7 +64,7 @@
                     <div class="col-6">
                         <span class="text-muted mb-3 lh-1 d-block text-truncate">ToT</span>
                         <h4 class="mb-3">
-                            $<span [countUp]="865.2" [options]="option" class="counter-value"></span>K
+                            <span [countUp]="ToTsNo" class="counter-value"></span>
                         </h4>
                     </div>
 
@@ -142,7 +90,7 @@
                     <div class="col-6">
                         <span class="text-muted mb-3 lh-1 d-block text-truncate">Farmers</span>
                         <h4 class="mb-3">
-                            <span [countUp]="6258" class="counter-value"></span>
+                            <span [countUp]="totalMembers" class="counter-value"></span>
                         </h4>
                     </div>
                     <div class="col-6">
@@ -167,7 +115,7 @@
                     <div class="col-6">
                         <span class="text-muted mb-3 lh-1 d-block text-truncate">Groups</span>
                         <h4 class="mb-3">
-                            $<span [countUp]="4.32" [options]="option" class="counter-value"></span>M
+                            <span [countUp]="totalGroups" class="counter-value"></span>
                         </h4>
                     </div>
                     <div class="col-6">
@@ -350,4 +298,83 @@
         <!-- end row -->
     </div>
     <!-- end col -->
+</div>
+
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex flex-wrap align-items-center mb-4">
+                    <h5 class="card-title me-2">
+                        Trials
+                    </h5>
+                    <div class="ms-auto">
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row align-items-center">
+                    <div class="col-xl-12">
+                        <div>
+                            <!-- <apx-chart dir="ltr" class="apex-charts" [chart]="marketOverview.chart" [series]="marketOverview.series" [legend]="marketOverview.legend" [stroke]="marketOverview.stroke" [colors]="marketOverview.colors" [fill]="marketOverview.fill" [dataLabels]="marketOverview.dataLabels" [xaxis]="marketOverview.xaxis" [markers]="marketOverview.markers" [plotOptions]="marketOverview.plotOptions" [yaxis]="marketOverview.yaxis" [tooltip]="marketOverview.tooltip" [grid]="marketOverview.grid" [labels]="marketOverview.labels">
+                            </apx-chart> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex flex-wrap align-items-center mb-4">
+                    <h5 class="card-title me-2">
+                        Trials
+                    </h5>
+                    <div class="ms-auto">
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row align-items-center">
+                    <div class="col-xl-12">
+                        <div>
+                            <!-- <apx-chart dir="ltr" class="apex-charts" [chart]="marketOverview.chart" [series]="marketOverview.series" [legend]="marketOverview.legend" [stroke]="marketOverview.stroke" [colors]="marketOverview.colors" [fill]="marketOverview.fill" [dataLabels]="marketOverview.dataLabels" [xaxis]="marketOverview.xaxis" [markers]="marketOverview.markers" [plotOptions]="marketOverview.plotOptions" [yaxis]="marketOverview.yaxis" [tooltip]="marketOverview.tooltip" [grid]="marketOverview.grid" [labels]="marketOverview.labels">
+                            </apx-chart> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title me-2">
+                Farmer Trainings
+            </h5>
+        </div>
+
+        <div class="row align-items-center">
+            <apx-chart
+            [series]="trainingChart.series"
+            [chart]="trainingChart.chart"
+            [legend]="trainingChart.legend"
+            [xaxis]="trainingChart.xaxis"
+            [yaxis]="trainingChart.yaxis"
+            [grid]="trainingChart.grid"
+            [stroke]="trainingChart.stroke"
+            [tooltip]="trainingChart.tooltip"
+            [plotOptions]="trainingChart.plotOptions"
+            [colors]="trainingChart.fill.colors"
+            ></apx-chart>
+        </div>
+    </div>
 </div>
