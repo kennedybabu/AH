@@ -26,6 +26,7 @@ import {
   ApexNonAxisChartSeries
 } from 'ng-apexcharts';
 import { MembersService } from 'src/app/core/services/members.service';
+import { EChartsOption } from 'echarts';
 
 export type countyOptions = {
   series: ApexAxisChartSeries;
@@ -106,7 +107,11 @@ export class DashboardComponent implements OnInit {
   monthlyChart: Partial<optionChart> | any;
   trainingChartCategories=[]
   totalTrained=[]
-  
+  genderData!: EChartsOption;
+  chartOptions!: Partial<ChartOptions> | any;
+  countyReport:Partial<countyOptions> | any;
+
+
 
   constructor(
     private formBuilder:FormBuilder,
@@ -233,6 +238,157 @@ export class DashboardComponent implements OnInit {
       },           
       colors: ['#ef476f', '#ffd166', '#06d6a0', '#90be6d', '#118ab2', '#fe7f2d']   
     };
+
+    this.genderData = {
+      tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b} : {c} ({d}%)'
+      },
+    
+      legend: {
+        orient: 'horizontal',
+        bottom: 'bottom'
+      },
+      series: [
+        {
+          name: 'Gender Comparison',
+          type: 'pie',
+          roseType: 'area',
+          radius: [20, 120],
+          center: ['50%', '50%'],
+
+          // roseType: 'area',
+          // itemStyle: {
+          //   borderRadius: 5
+          // },
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          },
+          data:[
+            
+            {
+              "value": 0,
+              "name": "Male"
+            },
+            
+            {
+              "value": 0,
+              "name": "Female"
+            },
+            {
+              "value": 0,
+              "name": "Persons With Disability"
+            },
+            {
+              "value": 0,
+              "name": "Total"
+            }
+          ]
+        }
+        
+      ]
+    };
+
+    this.chartOptions = {        
+      series: [
+        {
+          name: "VCL Incomes",
+          data: [0, 0, 0, 0, 0], 
+          color: '#90e0ef'        
+        }
+      ],
+    
+      chart: {
+       height: 360,
+       type: "area",
+       toolbar: {
+        show: false,
+      },
+     },
+     dataLabels: {
+       enabled: false // This will disable data labels for all data points
+     },
+     stroke: {
+       curve: "smooth"
+     },
+      plotOptions: {
+       bar: {
+         borderRadius: 4,
+         columnWidth: '45%',
+         distributed: true,
+         borderRadiusApplication: 'end',
+       },
+     },     
+      xaxis: {
+        categories: []
+      },
+      fill: {
+        colors: ['#90e0ef']
+      }
+    };
+
+    this.countyReport = {
+      series: [
+        {
+          name: "Income",
+          type: "area",
+          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        },
+        {
+          name: "Farmers",
+          type: "line",
+          data: [0, 0, 0, 0, 0, 0, 0,0,0, 0]
+        }
+      ],
+      chart: {
+        height: 350,
+        type: "line"
+      },
+      stroke: {
+        width: [0, 4]
+      },
+     
+      dataLabels: {
+        enabled: true,
+        enabledOnSeries: [1],
+        style: {
+          colors: ['#90e0ef']
+        }
+      },
+      labels: [
+        "Machakos",
+        "Meru",
+        "Taita Taveta",
+        "Makueni",
+        "Elgeyo Marakwet",
+        "Homa Bay",
+        "Kitui",
+        "Siaya",
+        "Busia",
+        "Tharaka Nithi"
+      ],
+      xaxis: {
+        type: "text"
+      },
+      yaxis: [
+        {
+          title: {
+            text: "Income"
+          }
+        },
+        {
+          opposite: true,
+          title: {
+            text: "Farmers"
+          }
+        }
+      ],
+      colors: ['#98c1d9', '#540d6e']
+    };
   }
 
   subCounties(event:Event) {
@@ -256,7 +412,6 @@ export class DashboardComponent implements OnInit {
       filtered_array.forEach(element => {
         this.wards=this.wards.concat(element.wards)
       })
-
     }
   }
 
@@ -299,7 +454,7 @@ export class DashboardComponent implements OnInit {
         this.femalePercentage = (this.summary.total_female_members + this.summary.total_disabled_female_tots) 
         this.disabledPercentage = (this.summary.total_disabled_male_tots+ this.summary.total_disabled_female_tots)  
 
-        // this.setGenderChart()
+        this.setGenderChart()
         this.cdr.markForCheck()
       }
     })
@@ -352,5 +507,56 @@ export class DashboardComponent implements OnInit {
       }
       this.cdr.markForCheck()
     }
+  }
+
+  setGenderChart () {
+    this.genderData = {
+        tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)'
+        },
+      
+        legend: {
+          orient: 'horizontal',
+          bottom: 'bottom'
+        },
+        series: [
+          {
+            name: 'Gender Comparison',
+            type: 'pie',
+            roseType: 'area',
+            radius: [20, 120],
+            center: ['50%', '50%'],
+  
+            // roseType: 'area',
+            // itemStyle: {
+            //   borderRadius: 5
+            // },
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
+            },
+            data:[   
+            
+              {
+                "value": (this.summary.total_male_members + this.summary.total_disabled_male_tots) / this.totalNumber * 100,
+                "name": "Male"
+              },              
+              {
+                "value": (this.summary.total_female_members + this.summary.total_disabled_female_tots) / this.totalNumber * 100,
+                "name": "Female"
+              },
+              {
+                "value": (this.summary.total_disabled_male_tots+ this.summary.total_disabled_female_tots) / this.totalNumber * 100,
+                "name":"Living with disability"
+              },
+            ]
+          }
+          
+        ]
+    };
   }
 }

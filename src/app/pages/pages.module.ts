@@ -48,7 +48,9 @@ import { NgxEchartsModule } from 'ngx-echarts';
     ReactiveFormsModule,
     NgbModule,
     NgSelectModule,
-    NgxEchartsModule
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
