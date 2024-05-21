@@ -318,6 +318,18 @@
                 <div class="row align-items-center">
                     <div class="col-xl-12">
                         <div>
+                            <apx-chart
+                                [series]="monthlyChart.series"
+                                [chart]="monthlyChart.chart"
+                                [legend]="monthlyChart.legend"
+                                [xaxis]="monthlyChart.xaxis"
+                                [yaxis]="monthlyChart.yaxis"
+                                [grid]="monthlyChart.grid"
+                                [stroke]="monthlyChart.stroke"
+                                [tooltip]="monthlyChart.tooltip"
+                                [plotOptions]="monthlyChart.plotOptions"
+                                [colors]="monthlyChart.colors"
+                            ></apx-chart>
                             <!-- <apx-chart dir="ltr" class="apex-charts" [chart]="marketOverview.chart" [series]="marketOverview.series" [legend]="marketOverview.legend" [stroke]="marketOverview.stroke" [colors]="marketOverview.colors" [fill]="marketOverview.fill" [dataLabels]="marketOverview.dataLabels" [xaxis]="marketOverview.xaxis" [markers]="marketOverview.markers" [plotOptions]="marketOverview.plotOptions" [yaxis]="marketOverview.yaxis" [tooltip]="marketOverview.tooltip" [grid]="marketOverview.grid" [labels]="marketOverview.labels">
                             </apx-chart> -->
                         </div>

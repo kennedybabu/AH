@@ -103,6 +103,7 @@ export class DashboardComponent implements OnInit {
   disabledPercentage!: number
 
   trainingChart!: Partial<optionChart> | any
+  monthlyChart: Partial<optionChart> | any;
   trainingChartCategories=[]
   totalTrained=[]
   
@@ -143,6 +144,7 @@ export class DashboardComponent implements OnInit {
     });
     this.getSummary()
     this.getCourseSummary()
+    this.memberValueChain()
 
     this.trainingChart = {
       series: [
@@ -188,6 +190,48 @@ export class DashboardComponent implements OnInit {
         colors: ['#540d6e', '#ee4266', '#ffd23f', '#a663cc', '#0ead69', '#8f2d56']
       }
       
+    };
+
+    this.monthlyChart = {
+      series: [
+        {
+          name: "VCL Involment",
+          data:[]
+        }
+      ],
+      chart: {
+        height: 360,
+        type: "bar",
+        toolbar: {
+        show: false,
+       }
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          borderRadius:6,
+          distributed: true,
+          borderRadiusApplication: 'end',
+          borderRadiusWhenStacked: 'all',
+        },
+      },
+     
+      stroke: {
+        show: false,
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      legend: {
+        show: false,
+      },
+      grid: {
+        show: false,
+      },   
+      xaxis: {
+        categories: []
+      },           
+      colors: ['#ef476f', '#ffd166', '#06d6a0', '#90be6d', '#118ab2', '#fe7f2d']   
     };
   }
 
@@ -261,6 +305,15 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  memberValueChain() {
+    this.membersService.getMemberValueChain().subscribe((res) => {
+      if(res.statusCode == 200) {
+          this.updateChartOptionsData(res.message)
+          this.cdr.markForCheck()
+      }
+    })
+  }
+
   getCourseSummary() {
     this.membersService.getCoursesTrainedMembers().subscribe((res) => {
       if(res.statusCode == 200) {
@@ -269,6 +322,18 @@ export class DashboardComponent implements OnInit {
         this.cdr.markForCheck()
       }
     })
+  }
+
+  updateChartOptionsData(data: any) {
+    const categories = data.map((row: any) => row.valueChainName)
+    const values = data.map((row: any) => row.memberCount)
+
+    this.monthlyChart = {
+      ...this.monthlyChart,
+      series: [{ data: values }],
+      xaxis: { categories: categories }
+    }
+    this.cdr.markForCheck()
   }
 
   updateTrainedChart(data: any) {

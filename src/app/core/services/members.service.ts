@@ -22,4 +22,9 @@ export class MembersService {
           map((this.extractData))
         )
     }
+    getMemberValueChain(){
+        return this.http.get(endpoint + 'member-value-chain/get/count-details').pipe(
+          map((this.extractData))
+        )
+    }
 }
