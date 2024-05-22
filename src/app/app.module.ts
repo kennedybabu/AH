@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgbModule, NgbTooltipModule, NgbPopoverModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerModule } from "ngx-spinner"
 
 import { PagesModule } from './pages/pages.module';
 import { LayoutsModule } from './layouts/layouts.module';
@@ -21,6 +22,10 @@ import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 
 import { DateFormatDirective } from './shared/directives/date-format.directive';
 import { BackendInterceptor } from './backend.interceptor';
+import { CoursesModule } from './courses/courses.module';
+import { VlcModule } from './vlc/vlc.module';
+
+// import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 
 
 if (environment.defaultauth === 'firebase') {
@@ -56,7 +61,12 @@ export function createTranslateLoader(http: HttpClient): any {
     NgbPopoverModule,
     NgbNavModule,
     ExtrapagesModule,
-    DateFormatDirective
+    DateFormatDirective,
+    NgxSpinnerModule,
+    CoursesModule,
+    VlcModule
+    // ReactiveFormsModule,
+    // FormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

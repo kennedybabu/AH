@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { NgxSpinnerService } from "ngx-spinner";
+
+
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'minia';
+  title = 'Africa Harvest';
+
+  constructor(private spinner:NgxSpinnerService) {}
 }

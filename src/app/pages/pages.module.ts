@@ -28,7 +28,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     CommonModule,

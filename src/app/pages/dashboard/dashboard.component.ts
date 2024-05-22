@@ -2,7 +2,6 @@ import { Ward } from './../../shared/data/ward.model';
 import { SubCounty } from './../../shared/data/subCounty.model';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DateFormatDirective } from 'src/app/shared/directives/date-format.directive';
 import { counties } from 'src/app/shared/data/Counties';
 import { County } from 'src/app/shared/data/county.model';
 import { GroupsService } from 'src/app/core/services/groups.service';
@@ -132,7 +131,7 @@ export class DashboardComponent implements OnInit {
     /**
      * BreadCrumb 
      */
-      this.counties = counties
+    this.counties = counties
 
     this.breadCrumbItems = [
       { label: 'Dashboard' },

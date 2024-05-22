@@ -54,4 +54,10 @@ export class GroupsService {
         )
       }
 
+      getGroupMembers(data: any):Observable<any> {
+        return this.http.get(endpoint+'members/'+ data +'?page=1&size=15').pipe(
+          map((this.extractData))
+        )
+      }
+
 }

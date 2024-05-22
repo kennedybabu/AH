@@ -18,107 +18,24 @@ export const MENU: MenuItem[] = [
         icon: 'grid',
         subItems: [
             {
-                id: 4,
-                label: 'MENUITEMS.APPS.LIST.CALENDAR',
-                link: '/',
-                parentId: 3
-            },
-            {
-                id: 5,
-                label: 'MENUITEMS.APPS.LIST.CHAT',
-                link: '/',
-                parentId: 3
-            },
-            {
-                id: 6,
-                label: 'MENUITEMS.APPS.LIST.EMAIL',
-                icon: 'bx-receipt',
-                subItems: [
-                    {
-                        id: 7,
-                        label: 'MENUITEMS.APPS.LIST.INBOX',
-                        link: '/',
-                        parentId: 6
-                    },
-                    {
-                        id: 8,
-                        label: 'MENUITEMS.APPS.LIST.READEMAIL',
-                        link: '/',
-                        parentId: 6
-                    },
-                ]
-            },
-            {
                 id: 9,
-                label: 'MENUITEMS.APPS.LIST.INVOICES',
+                label: 'Training',
                 icon: 'bx-receipt',
                 subItems: [
                     {
                         id: 10,
-                        label: 'MENUITEMS.APPS.LIST.INVOICELIST',
-                        link: '/',
+                        label: 'Add Training',
+                        link: '/courses/add-training',
                         parentId: 9
                     },
                     {
                         id: 11,
-                        label: 'MENUITEMS.APPS.LIST.INVOICEDETAIL',
+                        label: 'Training List',
                         link: '/',
                         parentId: 9
                     },
                 ]
-            },
-            {
-                id: 12,
-                label: 'MENUITEMS.APPS.LIST.CONTACTS',
-                subItems: [
-                    {
-                        id: 13,
-                        label: 'MENUITEMS.APPS.LIST.USERGRID',
-                        link: '/',
-                        parentId: 12
-                    },
-                    {
-                        id: 14,
-                        label: 'MENUITEMS.APPS.LIST.USERLIST',
-                        link: '/',
-                        parentId: 12
-                    },
-                    {
-                        id: 15,
-                        label: 'MENUITEMS.APPS.LIST.PROFILE',
-                        link: '/',
-                        parentId: 12
-                    }
-                ]
-            },
-            {
-                id: 12,
-                label: 'MENUITEMS.APPS.LIST.BLOG',
-                badge: {
-                    variant: 'danger',
-                    text: 'MENUITEMS.APPS.BADGE',
-                },
-                subItems: [
-                    {
-                        id: 13,
-                        label: 'MENUITEMS.APPS.LIST.BLOGGRID',
-                        link: '/',
-                        parentId: 12
-                    },
-                    {
-                        id: 14,
-                        label: 'MENUITEMS.APPS.LIST.BLOGLIST',
-                        link: '/',
-                        parentId: 12
-                    },
-                    {
-                        id: 15,
-                        label: 'MENUITEMS.APPS.LIST.BLOGDETAILS',
-                        link: '/',
-                        parentId: 12
-                    }
-                ]
-            }
+            }  
         ]
     },
     {
@@ -128,53 +45,10 @@ export const MENU: MenuItem[] = [
         subItems: [
             {
                 id: 17,
-                label: 'MENUITEMS.AUTHENTICATION.LIST.LOGIN',
+                label: 'Add Farmer',
                 link: '/',
                 parentId: 16
-            },
-            {
-                id: 18,
-                label: 'MENUITEMS.AUTHENTICATION.LIST.REGISTER',
-                link: '/',
-                parentId: 16
-            },
-
-            {
-                id: 19,
-                label: 'MENUITEMS.AUTHENTICATION.LIST.RECOVERPWD',
-                link: '/',
-                parentId: 16
-            },
-            {
-                id: 20,
-                label: 'MENUITEMS.AUTHENTICATION.LIST.LOCKSCREEN',
-                link: '/',
-                parentId: 16
-            },
-            {
-                id: 21,
-                label: 'MENUITEMS.AUTHENTICATION.LIST.LOGOUT',
-                link: '/',
-                parentId: 16
-            },
-            {
-                id: 22,
-                label: 'MENUITEMS.AUTHENTICATION.LIST.CONFIRMMAIL',
-                link: '/',
-                parentId: 16
-            },
-            {
-                id: 23,
-                label: 'MENUITEMS.AUTHENTICATION.LIST.EMAILVERIFICATION',
-                link: '/',
-                parentId: 16
-            },
-            {
-                id: 24,
-                label: 'MENUITEMS.AUTHENTICATION.LIST.TWOSTEPVERIFICATION',
-                link: '/',
-                parentId: 16
-            }
+            } 
         ]
     },
     {
@@ -184,217 +58,85 @@ export const MENU: MenuItem[] = [
         subItems: [
             {
                 id: 26,
-                label: 'MENUITEMS.PAGES.LIST.STARTER',
+                label: 'Add Group',
                 link: '/',
                 parentId: 25
-            },
-            {
-                id: 27,
-                label: 'MENUITEMS.PAGES.LIST.MAINTENANCE',
-                link: '/',
-                parentId: 25
-            },
-            {
-                id: 28,
-                label: 'Coming Soon',
-                link: '/',
-                parentId: 25
-            },
-            {
-                id: 29,
-                label: 'MENUITEMS.PAGES.LIST.TIMELINE',
-                link: '/',
-                parentId: 25
-            },
-            {
-                id: 30,
-                label: 'MENUITEMS.PAGES.LIST.FAQS',
-                link: '/',
-                parentId: 25
-            },
-            {
-                id: 31,
-                label: 'MENUITEMS.PAGES.LIST.PRICING',
-                link: '/',
-                parentId: 25
-            },
-            {
-                id: 32,
-                label: 'MENUITEMS.PAGES.LIST.ERROR404',
-                link: '/',
-                parentId: 25
-            },
-            {
-                id: 32,
-                label: 'MENUITEMS.PAGES.LIST.ERROR500',
-                link: '/',
-                parentId: 25
-            },
+            }            
         ]
     },
     {
-        id: 25,
+        id: 35,
         label: 'Seeds Distribution',
         icon: 'file-text',
         subItems: [
             {
                 id: 26,
-                label: 'MENUITEMS.PAGES.LIST.STARTER',
+                label: 'ToTs',
                 link: '/',
-                parentId: 25
+                parentId: 35
             },
             {
                 id: 27,
-                label: 'MENUITEMS.PAGES.LIST.MAINTENANCE',
+                label: 'Farmers',
                 link: '/',
-                parentId: 25
-            },
-            {
-                id: 28,
-                label: 'Coming Soon',
-                link: '/',
-                parentId: 25
-            },
-            {
-                id: 29,
-                label: 'MENUITEMS.PAGES.LIST.TIMELINE',
-                link: '/',
-                parentId: 25
-            },
-            {
-                id: 30,
-                label: 'MENUITEMS.PAGES.LIST.FAQS',
-                link: '/',
-                parentId: 25
-            },
-            {
-                id: 31,
-                label: 'MENUITEMS.PAGES.LIST.PRICING',
-                link: '/',
-                parentId: 25
-            },
-            {
-                id: 32,
-                label: 'MENUITEMS.PAGES.LIST.ERROR404',
-                link: '/',
-                parentId: 25
-            },
-            {
-                id: 32,
-                label: 'MENUITEMS.PAGES.LIST.ERROR500',
-                link: '/',
-                parentId: 25
-            },
+                parentId: 35
+            }
         ]
     },
     {
-        id: 25,
+        id: 45,
         label: 'Reports',
         icon: 'file-text',
         subItems: [
             {
                 id: 26,
-                label: 'MENUITEMS.PAGES.LIST.STARTER',
+                label: 'Farmers Report',
                 link: '/',
-                parentId: 25
+                parentId: 45
             },
             {
                 id: 27,
-                label: 'MENUITEMS.PAGES.LIST.MAINTENANCE',
+                label: 'Training Report',
                 link: '/',
-                parentId: 25
+                parentId: 45
             },
             {
                 id: 28,
-                label: 'Coming Soon',
+                label: 'Groups Report',
                 link: '/',
-                parentId: 25
+                parentId: 45
             },
             {
                 id: 29,
-                label: 'MENUITEMS.PAGES.LIST.TIMELINE',
+                label: 'Seeds Distribution',
                 link: '/',
-                parentId: 25
+                parentId: 45
             },
             {
                 id: 30,
-                label: 'MENUITEMS.PAGES.LIST.FAQS',
+                label: 'ToTs',
                 link: '/',
-                parentId: 25
-            },
-            {
-                id: 31,
-                label: 'MENUITEMS.PAGES.LIST.PRICING',
-                link: '/',
-                parentId: 25
-            },
-            {
-                id: 32,
-                label: 'MENUITEMS.PAGES.LIST.ERROR404',
-                link: '/',
-                parentId: 25
-            },
-            {
-                id: 32,
-                label: 'MENUITEMS.PAGES.LIST.ERROR500',
-                link: '/',
-                parentId: 25
-            },
+                parentId: 45
+            }
         ]
     },
     {
-        id: 25,
+        id: 55,
         label: 'Users',
         icon: 'users',
         subItems: [
             {
                 id: 26,
-                label: 'MENUITEMS.PAGES.LIST.STARTER',
+                label: 'Add User',
                 link: '/',
-                parentId: 25
+                parentId: 55
             },
             {
                 id: 27,
-                label: 'MENUITEMS.PAGES.LIST.MAINTENANCE',
+                label: 'Users',
                 link: '/',
-                parentId: 25
-            },
-            {
-                id: 28,
-                label: 'Coming Soon',
-                link: '/',
-                parentId: 25
-            },
-            {
-                id: 29,
-                label: 'MENUITEMS.PAGES.LIST.TIMELINE',
-                link: '/',
-                parentId: 25
-            },
-            {
-                id: 30,
-                label: 'MENUITEMS.PAGES.LIST.FAQS',
-                link: '/',
-                parentId: 25
-            },
-            {
-                id: 31,
-                label: 'MENUITEMS.PAGES.LIST.PRICING',
-                link: '/',
-                parentId: 25
-            },
-            {
-                id: 32,
-                label: 'MENUITEMS.PAGES.LIST.ERROR404',
-                link: '/',
-                parentId: 25
-            },
-            {
-                id: 32,
-                label: 'MENUITEMS.PAGES.LIST.ERROR500',
-                link: '/',
-                parentId: 25
-            },
+                parentId: 55
+            }
         ]
     },
 
