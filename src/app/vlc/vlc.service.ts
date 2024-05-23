@@ -15,6 +15,12 @@ export class VlcService {
         return body || {}
     }
 
+    createSeedDistribution(data: any): Observable<any> {
+        return this.http.post(endpoint+'seed-distribution/batch-create', data).pipe(
+          map((this.extractData))
+        )
+      }
+
     getValueChains(): Observable<any> {
         return this.http.get(endpoint + 'value-chain/all',).pipe(
           map(this.extractData));
