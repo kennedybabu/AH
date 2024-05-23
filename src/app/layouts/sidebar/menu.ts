@@ -92,31 +92,31 @@ export const MENU: MenuItem[] = [
             {
                 id: 14,
                 label: 'Farmers Report',
-                link: '/',
+                link: '/reports/farmers',
                 parentId: 13
             },
             {
                 id: 15,
                 label: 'Training Report',
-                link: '/',
+                link: '/reports/trainings',
                 parentId: 13
             },
             {
                 id: 16,
                 label: 'Groups Report',
-                link: '/',
+                link: '/reports/groups',
                 parentId: 13
             },
             {
                 id: 17,
                 label: 'Seeds Distribution',
-                link: '/',
+                link: '/reports/seeds-distribution',
                 parentId: 13
             },
             {
                 id: 18,
                 label: 'ToTs',
-                link: '/',
+                link: '/reports/tots',
                 parentId: 13
             }
         ]

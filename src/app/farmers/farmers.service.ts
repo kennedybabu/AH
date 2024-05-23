@@ -32,5 +32,16 @@ export class FarmersService {
           map((this.extractData))
         )
     }
+
+    getMembersByLocations(data: any): Observable<any> {
+      return this.http.post(endpoint+'/members/by-location?page=1&size=20', data).pipe(
+        map((this.extractData))
+      )
+    }
+
+    getClients(data: any): Observable<any> {
+      return this.http.post(endpoint + 'members?page=1&size=15', data).pipe(
+        map(this.extractData));
+    }
     
  }
