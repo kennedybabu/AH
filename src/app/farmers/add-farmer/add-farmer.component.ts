@@ -2,14 +2,14 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FarmersService } from '../farmers.service';
 import { ColumnMode } from '@swimlane/ngx-datatable';
-import { counties } from 'src/app/shared/data/Counties';
-import { County } from 'src/app/shared/data/county.model';
-import { SubCounty } from 'src/app/shared/data/subCounty.model';
-import { Ward } from 'src/app/shared/data/ward.model';
-import { SharedModule } from 'src/app/shared/shared.module';
-import { GroupsService } from 'src/app/groups/groups.services';
+import { counties } from '../../shared/data/Counties';
+import { County } from '../../shared/data/county.model';
+import { SubCounty } from '../../shared/data/subCounty.model';
+import { Ward } from '../../shared/data/ward.model';
+import { SharedModule } from '../../shared/shared.module';
+import { GroupsService } from '../../groups/groups.services';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { VlcService } from 'src/app/vlc/vlc.service';
+import { VlcService } from '../../vlc/vlc.service';
 
 @Component({
   selector: 'app-add-farmer',
@@ -27,8 +27,6 @@ export class AddFarmerComponent implements OnInit {
   groups=[]
   breadCrumbItems: any;
   valueChains=[]
-
-
 
   // trials: any = countyData
   genders: any=[{"name":"Female"}, {"name":"Male"}]

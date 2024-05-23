@@ -16,6 +16,12 @@ export class GroupsService {
         return body || {}
     }
 
+    addGroup(data: any): Observable<any>{
+        return this.http.post(endpoint+ 'groups/create', data).pipe(
+          map((this.extractData))
+        )
+    }
+
     getGroupMembers(data: any):Observable<any> {
         return this.http.get(endpoint+'members/'+ data +'?page=1&size=15').pipe(
           map((this.extractData))

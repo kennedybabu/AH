@@ -9,8 +9,8 @@ const routes: Routes = [
   { path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) },
   { path: 'auth', loadChildren:() => import('./account/auth/auth.module').then(m=> m.AuthModule)},
   { path: 'courses', component: LayoutComponent, loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule), canActivate:[AuthGuard]},
-  { path: 'farmers', component: LayoutComponent, loadChildren: () => import('./farmers/farmers.module').then(m => m.FarmersModule), canActivate:[AuthGuard]}
-
+  { path: 'farmers', component: LayoutComponent, loadChildren: () => import('./farmers/farmers.module').then(m => m.FarmersModule), canActivate:[AuthGuard]},
+  { path: 'groups', component: LayoutComponent, loadChildren: () => import('./groups/groups.module').then(m => m.GroupsModule), canActivate:[AuthGuard]}
 ];
 
 @NgModule({

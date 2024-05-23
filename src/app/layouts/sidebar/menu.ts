@@ -21,6 +21,7 @@ export const MENU: MenuItem[] = [
                 id: 9,
                 label: 'Training',
                 icon: 'bx-receipt',
+                parentId: 3,
                 subItems: [
                     {
                         id: 10,
@@ -59,7 +60,7 @@ export const MENU: MenuItem[] = [
             {
                 id: 13,
                 label: 'Add Group',
-                link: '/',
+                link: '/groups/add-group',
                 parentId: 5
             }            
         ]
