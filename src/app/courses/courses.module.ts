@@ -17,6 +17,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { NgxEchartsModule } from 'ngx-echarts';
 
+
+// import {MatTableModule} from '@angular/material/table';
+
+
 @NgModule({
   declarations: [],
   imports: [
@@ -33,7 +37,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
     SimplebarAngularModule,
     CarouselModule,
     FeatherModule.pick(allIcons),
-    LeafletModule
+    LeafletModule,
+    // MatTableModule
   ]
 })
 export class CoursesModule { }

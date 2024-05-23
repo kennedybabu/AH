@@ -7,7 +7,6 @@ import { County } from 'src/app/shared/data/county.model';
 import { GroupsService } from 'src/app/core/services/groups.service';
 import { SummaryService } from 'src/app/core/services/summary.service';
 import {
-  ChartComponent,
   ApexAxisChartSeries,
   ApexChart,
   ApexXAxis,
@@ -51,9 +50,7 @@ export type ChartOptions = {
   stroke: ApexStroke;
   legend: ApexLegend;
   grid: ApexGrid;
-
 };
-
 export interface optionChart {
   series: ApexAxisChartSeries;
   chart: ApexChart;

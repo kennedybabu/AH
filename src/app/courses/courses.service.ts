@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { endpoint } from '../core/services/auth.service';
 import { Observable, map } from 'rxjs';
 
+
 @Injectable({
     providedIn:'root'
 })
@@ -32,5 +33,11 @@ export class CoursesService {
         return this.http.post(endpoint+'training/create', data).pipe(
           map((this.extractData))
         )
+    }
+
+    getTrainings(data: any): Observable<any> {
+      return this.http.get(endpoint+"training/all?page=1&size=15").pipe(
+        map((this.extractData))
+      )
     }
 }

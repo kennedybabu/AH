@@ -31,7 +31,7 @@ export const MENU: MenuItem[] = [
                     {
                         id: 11,
                         label: 'Training List',
-                        link: '/',
+                        link: '/courses/trainings',
                         parentId: 9
                     },
                 ]
@@ -39,103 +39,103 @@ export const MENU: MenuItem[] = [
         ]
     },
     {
-        id: 16,
+        id: 4,
         label: 'Farmers',
         icon: 'users',
         subItems: [
             {
-                id: 17,
+                id: 12,
                 label: 'Add Farmer',
-                link: '/',
-                parentId: 16
+                link: '/farmers/add-farmer',
+                parentId: 4
             } 
         ]
     },
     {
-        id: 25,
+        id: 5,
         label: 'Groups',
         icon: 'file-text',
         subItems: [
             {
-                id: 26,
+                id: 13,
                 label: 'Add Group',
                 link: '/',
-                parentId: 25
+                parentId: 5
             }            
         ]
     },
     {
-        id: 35,
+        id: 6,
         label: 'Seeds Distribution',
         icon: 'file-text',
         subItems: [
             {
-                id: 26,
+                id: 14,
                 label: 'ToTs',
                 link: '/',
-                parentId: 35
+                parentId: 6
             },
             {
-                id: 27,
+                id: 15,
                 label: 'Farmers',
                 link: '/',
-                parentId: 35
+                parentId: 6
             }
         ]
     },
     {
-        id: 45,
+        id: 7,
         label: 'Reports',
         icon: 'file-text',
         subItems: [
             {
-                id: 26,
+                id: 16,
                 label: 'Farmers Report',
                 link: '/',
-                parentId: 45
+                parentId: 7
             },
             {
-                id: 27,
+                id: 17,
                 label: 'Training Report',
                 link: '/',
-                parentId: 45
+                parentId: 7
             },
             {
-                id: 28,
+                id: 18,
                 label: 'Groups Report',
                 link: '/',
-                parentId: 45
+                parentId: 7
             },
             {
-                id: 29,
+                id: 19,
                 label: 'Seeds Distribution',
                 link: '/',
-                parentId: 45
+                parentId: 7
             },
             {
-                id: 30,
+                id: 20,
                 label: 'ToTs',
                 link: '/',
-                parentId: 45
+                parentId: 7
             }
         ]
     },
     {
-        id: 55,
+        id: 8,
         label: 'Users',
         icon: 'users',
         subItems: [
             {
-                id: 26,
+                id: 21,
                 label: 'Add User',
                 link: '/',
-                parentId: 55
+                parentId: 8
             },
             {
-                id: 27,
+                id: 22,
                 label: 'Users',
                 link: '/',
-                parentId: 55
+                parentId: 8
             }
         ]
     },

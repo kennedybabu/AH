@@ -8,7 +8,9 @@ const routes: Routes = [
   { path: 'pages', loadChildren: () => import('./extrapages/extrapages.module').then(m => m.ExtrapagesModule), canActivate: [AuthGuard] },
   { path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) },
   { path: 'auth', loadChildren:() => import('./account/auth/auth.module').then(m=> m.AuthModule)},
-  { path: 'courses', component: LayoutComponent, loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule), canActivate:[AuthGuard]}
+  { path: 'courses', component: LayoutComponent, loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule), canActivate:[AuthGuard]},
+  { path: 'farmers', component: LayoutComponent, loadChildren: () => import('./farmers/farmers.module').then(m => m.FarmersModule), canActivate:[AuthGuard]}
+
 ];
 
 @NgModule({
