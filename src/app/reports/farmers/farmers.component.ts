@@ -125,9 +125,7 @@ export class FarmersComponent implements OnInit {
               this.cdr.markForCheck()
           }
       })
-
     }
-
   }
 
   view(row: any){
