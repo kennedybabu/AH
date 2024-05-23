@@ -73,13 +73,13 @@ export const MENU: MenuItem[] = [
             {
                 id: 12,
                 label: 'ToTs',
-                link: '/',
+                link: '/seeds-distribution/tot',
                 parentId: 11
             },
             {
                 id: 13,
                 label: 'Farmers',
-                link: '/',
+                link: '/seeds-distribution/farmer',
                 parentId: 11
             }
         ]

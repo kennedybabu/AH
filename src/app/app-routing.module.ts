@@ -10,7 +10,8 @@ const routes: Routes = [
   { path: 'auth', loadChildren:() => import('./account/auth/auth.module').then(m=> m.AuthModule)},
   { path: 'courses', component: LayoutComponent, loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule), canActivate:[AuthGuard]},
   { path: 'farmers', component: LayoutComponent, loadChildren: () => import('./farmers/farmers.module').then(m => m.FarmersModule), canActivate:[AuthGuard]},
-  { path: 'groups', component: LayoutComponent, loadChildren: () => import('./groups/groups.module').then(m => m.GroupsModule), canActivate:[AuthGuard]}
+  { path: 'groups', component: LayoutComponent, loadChildren: () => import('./groups/groups.module').then(m => m.GroupsModule), canActivate:[AuthGuard]},
+  { path: 'seeds-distribution', component: LayoutComponent, loadChildren: () => import('./seeds-dist/seeds-dist.module').then(m => m.SeedsDistModule), canActivate:[AuthGuard]}
 ];
 
 @NgModule({

@@ -19,5 +19,20 @@ export class VlcService {
         return this.http.get(endpoint + 'value-chain/all',).pipe(
           map(this.extractData));
     }
+
+
+    getAllSeedVarieties(): Observable<any> {
+        return this.http.get(endpoint+'seed-varieties').pipe(
+          map((this.extractData))
+        )
+    }
+
+
+    seedDistributionReg(data: any): Observable<any> {
+        return this.http.post(endpoint+ 'seed-distribution/create', data).pipe(
+          map((this.extractData))
+        )
+    }
+    
     
 }
