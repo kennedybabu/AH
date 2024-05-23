@@ -15,6 +15,11 @@ export class FarmersService {
         return body || {}
     }
 
+    addFarmer(data: any): Observable<any> {
+        return this.http.post(endpoint + 'member/create', data).pipe(
+          map(this.extractData));
+    }
+
 
     getGroupMembers(data: any):Observable<any> {
         return this.http.get(endpoint+'members/'+ data +'?page=1&size=15').pipe(

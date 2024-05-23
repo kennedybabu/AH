@@ -1,17 +1,20 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FarmersService } from '../farmers.service';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { counties } from 'src/app/shared/data/Counties';
 import { County } from 'src/app/shared/data/county.model';
 import { SubCounty } from 'src/app/shared/data/subCounty.model';
 import { Ward } from 'src/app/shared/data/ward.model';
-
+import { SharedModule } from 'src/app/shared/shared.module';
+import { GroupsService } from 'src/app/groups/groups.services';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { VlcService } from 'src/app/vlc/vlc.service';
 
 @Component({
   selector: 'app-add-farmer',
   standalone: true,
-  imports: [],
+  imports: [SharedModule, ReactiveFormsModule, NgSelectModule],
   templateUrl: './add-farmer.component.html',
   styleUrl: './add-farmer.component.scss'
 })
@@ -22,6 +25,9 @@ export class AddFarmerComponent implements OnInit {
   sub_counties: SubCounty[] = []
   wards: Ward[] = []
   groups=[]
+  breadCrumbItems: any;
+  valueChains=[]
+
 
 
   // trials: any = countyData
@@ -32,15 +38,22 @@ export class AddFarmerComponent implements OnInit {
   constructor(
     private formBuilder:FormBuilder,
     private cdr:ChangeDetectorRef,
-    private farmersService:FarmersService){}
+    private farmersService:FarmersService,
+    private groupsService:GroupsService,
+    private vlcService:VlcService){}
 
   ngOnInit(): void {
     this.counties = counties
 
+    this.breadCrumbItems = [
+      { label: 'Farmers' },
+      { label: 'Add Farmer', active: true }
+    ];
+
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       msisdn: ['', Validators.required],
-      wardId:['', Validators.required],
+      wardId:[[], Validators.required],
       lastName:['', Validators.required],
       groupId:['', Validators.required],
       idNumber:['', Validators.required],
@@ -50,7 +63,9 @@ export class AddFarmerComponent implements OnInit {
       disabled: ['', Validators.required],
       countyId: [[], Validators.required],
       subCountyId: [[], Validators.required],
-  });
+    });
+
+    this.getValueChains()
   }
 
   getWardId(event: any) {
@@ -71,13 +86,55 @@ export class AddFarmerComponent implements OnInit {
         "endDate":''
     }
     // this.spinner.show()
-    // this.service.getGroupsByLocation(obj).subscribe((res) => {
-    //     if(res.statusCode == 200) {
-    //         this.spinner.hide()
-    //         this.groups = res.message
-    //         console.log(res, 'groups')
-    //     }
-    // })
+    this.groupsService.getGroupsByLocation(obj).subscribe((res) => {
+        if(res.statusCode == 200) {
+            this.groups = res.message
+            console.log(res, 'groups')
+        }
+    })
+  }
+
+  filterGroups(data: any) {
+    if(this.registerForm) {
+      let obj = {
+          "countyId": this.registerForm.get('countyId')?.value,
+          "subCountyId": this.registerForm.get('subCountyId')?.value,
+          "wardId": this.registerForm.get('wardId')?.value,
+          "startDate": this.registerForm.get('startDate')?.value ? this.searchForm.get('startDate')?.value: '',
+          "endDate": this.registerForm.get('endDate')?.value ? this.searchForm.get('endDate')?.value : '',
+      }
+      this.groupsService.getGroupsByLocation(obj).subscribe((res) => {
+          if(res.statusCode == 200) {
+              this.groups = res.message 
+              this.cdr.markForCheck()
+              console.log(this.groups)
+          }
+      })
+    }
+  }
+
+  getWards(event: Event) {
+    this.getWardGroups()
+  }
+
+  onsubmit() {
+    // this.spinner.show()
+      let obj = {
+        "groupId": this.registerForm.get('groupId')?.value,
+        "wardId": this.registerForm.get('wardId')?.value,
+        "firstName": this.registerForm.get('firstName')?.value,
+        "lastName": this.registerForm.get('lastName')?.value,
+        "msisdn": this.registerForm.get('msisdn')?.value,
+        "idNumber": this.registerForm.get('idNumber')?.value,
+        "dob": this.registerForm.get('dob')?.value,
+        "gender": this.registerForm.get('gender')?.value,
+        "valueChains": this.registerForm.get('valueChains')?.value
+      }
+      this.farmersService.addFarmer(obj).subscribe((res)=>{
+        // this.spinner.hide();
+        // this.toastr.success('Added Successfully','Success');
+        this.registerForm.reset();
+      })
   }
 
   subCounties(event: any) {
@@ -86,10 +143,7 @@ export class AddFarmerComponent implements OnInit {
      let filtered_array=this.counties.filter((obj:any)=>ids.includes(obj.county_id))
      filtered_array.forEach(element => {
        this.sub_counties=this.sub_counties.concat(element.sub_counties)
-     });
-
-     console.log(this.sub_counties)
-
+    });
  }
 
  filterWards(event:any) {
@@ -97,7 +151,13 @@ export class AddFarmerComponent implements OnInit {
    let filtered_array = this.sub_counties.filter((obj: any) =>ids.includes(obj.subCountyId))
    filtered_array.forEach(element => {
        this.wards=this.wards.concat(element.wards)
-    })
+  })
  }
+
+ getValueChains() {
+    this.vlcService.getValueChains().subscribe((res) => {
+      this.valueChains = res.message
+    })
+  }
 
 }

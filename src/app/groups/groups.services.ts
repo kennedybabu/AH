@@ -22,4 +22,10 @@ export class GroupsService {
         )
     }
 
+    getGroupsByLocation(data: any):Observable<any> {
+        return this.http.post(endpoint + 'groups/by-locations', data).pipe(
+          map((this.extractData))
+        )
+    }
+
 }
