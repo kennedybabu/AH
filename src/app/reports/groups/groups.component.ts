@@ -1,12 +1,180 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { SubCounty } from 'src/app/shared/data/subCounty.model';
+import { SharedModule } from '../../shared/shared.module';
+import { County } from '../../shared/data/county.model';
+import { Ward } from '../../shared/data/ward.model';
+import { counties } from 'src/app/shared/data/Counties';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { GroupsService } from 'src/app/core/services/groups.service';
+import { Router } from '@angular/router';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { ColumnMode, NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 
 @Component({
   selector: 'app-groups',
   standalone: true,
-  imports: [],
+  imports: [SharedModule, ReactiveFormsModule, FormsModule, NgSelectModule, NgxDatatableModule],
   templateUrl: './groups.component.html',
   styleUrl: './groups.component.scss'
 })
-export class GroupsComponent {
+export class GroupsComponent implements OnInit {
+  breadCrumbItems!: Array<{}>;
+  searchForm!: FormGroup;
+  counties: County[]=[]
+  sub_counties: SubCounty[] = []
+  wards: Ward[] = []
+  groups=[]
+  ColumnMode= ColumnMode;
+  public columns = [];
+  dataParams: any = {  
+    page_num: '',  
+    page_size: ''  
+  }; 
+
+
+  constructor(
+    private formBuilder:FormBuilder,
+    private cdr: ChangeDetectorRef,
+    private groupsService: GroupsService,
+    private router:Router
+    ){}
+
+
+  ngOnInit(): void {
+    this.dataParams.page_num = 1
+    this.dataParams.page_size = 10
+
+    this.counties = counties
+    this.breadCrumbItems = [
+      { label: 'Reports' },
+      { label: 'Groups', active: true }
+    ];
+
+    this.searchForm = this.formBuilder.group({
+      start_date:['', Validators.required],
+      end_date:['', Validators.required],
+      countyId:[[],Validators.required],
+      subCountyId:[[], Validators.required],
+      wardId:[[], Validators.required],
+      groupId: [[],Validators.required]
+    });
+
+    this.getGroups()
+  }
+
+  edit(row: any){
+    console.log(row)
+    // sessionStorage.setItem('selected',JSON.stringify(row))
+    // this.router.navigate(['/groups/details/',row.group_id])
+  }
+
+
+  viewGroupDetails(row: any) {
+    console.log(row)
+    sessionStorage.setItem('selected',JSON.stringify(row))
+    this.router.navigate(['/groups/details/',row.group_id])
+  }
+
+  getGroups() {
+    // this.spinner.show()
+    this.groupsService.getGroups().subscribe((res) => {
+        if(res.statusCode == 200) {
+            this.groups = res.message
+            this.cdr.markForCheck()
+            // this.spinner.hide()
+        }
+    })
+  }
+
+  onSubmit(){
+    // this.service.searchSalesReport(this.searchForm.value).subscribe((res)=>{
+    //   this.rows = res;
+    //     this.ref.markForCheck();
+    // })
+  }
+
+  filtergroups(event: any) {
+    let object = {
+      "countyId": this.searchForm.get('countyId')?.value,
+      "subCountyId": this.searchForm.get('subCountyId')?.value,
+      "wardId": this.searchForm.get('wardId')?.value,
+      "startDate":'',
+      "endDate":''
+    }
+    this.groupsService.getGroupsByLocation(object).subscribe((res) => {
+      console.log(res)
+    })
+  }
+
+  filterGroups(data: any) {
+    console.log('called')
+    // this.spinner.show()
+    this.groupsService.getGroupsByLocation(data).subscribe((res) => {
+        if(res.statusCode == 200) {
+          console.log(res)
+            this.groups = res.message 
+            this.cdr.markForCheck()
+            // this.spinner.hide
+        }
+        if(res.statusCode == 417) {
+            // this.spinner.hide()
+        }
+    })
+    // this.spinner.hide()
+  }
+
+  search(){
+    let obj = {
+        "countyId": this.searchForm.get('countyId')?.value,
+        "subCountyId": this.searchForm.get('subCountyId')?.value,
+        "wardId": this.searchForm.get('wardId')?.value,
+        "startDate": "",
+        "endDate":""
+    }
+    console.log(obj)
+    this.filterGroups(obj)
+  }
+
+  subCounties() {
+    let ids = this.searchForm.get('countyId')?.value
+     let filtered_array=this.counties.filter((obj:any)=>ids.includes(obj.county_id))
+     filtered_array.forEach(element => {
+       this.sub_counties=this.sub_counties.concat(element.sub_counties)
+     });
+ }
+
+ filterWards(event: Event) {
+   let ids = this.searchForm.get('subCountyId')?.value 
+   let filtered_array = this.sub_counties.filter((obj: any) =>ids.includes(obj.subCountyId))
+   filtered_array.forEach(element => {
+     this.wards=this.wards.concat(element.wards)
+   })
+ }
+
+ getWards(){
+  let ids = this.searchForm.get('subCountyId')?.value 
+  let filtered_array = this.sub_counties.filter((obj: any) =>ids.includes(obj.subCountyId))
+  filtered_array.forEach(element => {
+    this.wards=this.wards.concat(element.wards)
+  })
+}
+
+setPage(pageInfo: any) {
+  console.log(pageInfo)
+  this.dataParams.page_num = pageInfo.offset + 1;
+  // this.dataParams.pafe_size = 
+  // this.serverResultsService.getResults(this.page).subscribe(pagedData => {
+  //   this.page = pagedData.page;
+  //   this.rows = pagedData.data;
+  // });
+  this.groupsService.getDynamicGroups(this.dataParams.page_num).subscribe((res) => {
+    this.groups = res.message 
+    // this.spinner.hide()
+    this.cdr.markForCheck()
+})
+}
+
+  
 
 }
