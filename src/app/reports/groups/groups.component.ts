@@ -42,7 +42,7 @@ export class GroupsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.dataParams.page_num = 1
+    this.dataParams.page_num = 0
     this.dataParams.page_size = 10
 
     this.counties = counties
@@ -163,16 +163,11 @@ export class GroupsComponent implements OnInit {
 setPage(pageInfo: any) {
   console.log(pageInfo)
   this.dataParams.page_num = pageInfo.offset + 1;
-  // this.dataParams.pafe_size = 
-  // this.serverResultsService.getResults(this.page).subscribe(pagedData => {
-  //   this.page = pagedData.page;
-  //   this.rows = pagedData.data;
-  // });
   this.groupsService.getDynamicGroups(this.dataParams.page_num).subscribe((res) => {
     this.groups = res.message 
     // this.spinner.hide()
     this.cdr.markForCheck()
-})
+  })
 }
 
   

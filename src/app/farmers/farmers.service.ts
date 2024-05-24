@@ -40,7 +40,7 @@ export class FarmersService {
     }
 
     getClients(data: any): Observable<any> {
-      return this.http.post(endpoint + 'members?page=1&size=15', data).pipe(
+      return this.http.post(endpoint + 'members?page='+data.page+'&size=15', data.dataObj).pipe(
         map(this.extractData));
     }
     

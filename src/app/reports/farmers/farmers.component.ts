@@ -45,8 +45,8 @@ export class FarmersComponent implements OnInit {
     private farmersService:FarmersService){}
 
   ngOnInit(): void {
-    this.dataParams.page_num = 1
-    this.dataParams.page_size = 15
+    this.dataParams.page_num = 0
+    this.dataParams.page_size = 10
 
     this.counties = counties
 
@@ -93,7 +93,7 @@ export class FarmersComponent implements OnInit {
     this.farmersService.getMembersByLocations(data).subscribe((res) => {
         if(res.statusCode == 200) {
             this.rows = res.message
-            console.log(this.rows)
+            // console.log(this.rows)
             this.cdr.markForCheck()
             // this.spinner.hide()
         }
@@ -134,11 +134,34 @@ export class FarmersComponent implements OnInit {
 
   getUsers(){
     // this.spinner.show()
-    this.farmersService.getClients(this.currentPage).subscribe((res)=> {
+    let data = {
+      page: this.dataParams.page_num,
+      dataObj: this.searchForm.value
+    }
+    this.farmersService.getClients(data).subscribe((res)=> {
+      if(res.statusCode == 200) {
         this.rows = res.message;
-        this.filteredArray = this.rows
+        // this.filteredArray = this.rows
         this.cdr.markForCheck();
         // this.spinner.hide()
+      }
+    })
+  }
+
+  setPage(pageInfo: any) {
+    // console.log(pageInfo)
+    this.dataParams.page_num = pageInfo.offset + 1;
+    let data = {
+      page: this.dataParams.page_num,
+      dataObj: this.searchForm.value
+    }
+    this.farmersService.getClients(data).subscribe((res)=> {
+      if(res.statusCode == 200) {
+        this.rows = res.message;
+        // this.filteredArray = this.rows
+        this.cdr.markForCheck();
+        // this.spinner.hide()
+      }
     })
   }
 

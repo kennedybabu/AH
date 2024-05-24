@@ -47,15 +47,21 @@
         </div>
     </div>
     <div class="card">
-        <div class="card-body">
+        <!-- <div class="card-body"> -->
             <ngx-datatable 
+                #table
                 class="bootstrap no-detail-row"
                 [rows]="rows" 
                 [rowHeight]="50" 
                 class="bootstrap core-bootstrap" 
                 [columnMode]="ColumnMode.force" 
                 [headerHeight]="50" 
-                [footerHeight]="50" >
+                [footerHeight]="50" 
+                [externalPaging]="true"
+                [count]="rows.length"
+                [offset]="dataParams.page_num" 
+                [limit]="dataParams.page_size"
+                (page)="setPage($event)">
                     <ngx-datatable-column name="Name" >
                     <ng-template let-row="row" ngx-datatable-cell-template >
                         {{row.first_name }} {{row.last_name }}
@@ -71,7 +77,7 @@
                         <i class="fa-solid fa-eye text-success" style="font-size:20px;" (click)="view(row)"></i>
                     </ng-template>
                     </ngx-datatable-column>
-          </ngx-datatable>
-        </div>
+            </ngx-datatable>
+        <!-- </div> -->
     </div>
 </div>
