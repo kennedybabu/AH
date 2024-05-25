@@ -21,5 +21,13 @@ export class TotsService {
           map((this.extractData))
         )
     }
+
+    getAllToTs(data: any): Observable<any> {
+        return this.http.get(endpoint+'users/tots/2?page='+data+'&size=25').pipe(
+          map((this.extractData))
+        )
+    }
+
+
     
 }

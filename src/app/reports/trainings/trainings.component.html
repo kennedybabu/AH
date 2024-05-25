@@ -47,4 +47,40 @@
             </form>  
         </div>
     </div>
+
+    <div class="card">
+        <ngx-datatable 
+            [rows]="trainings" 
+            [rowHeight]="50" 
+            class="bootstrap core-bootstrap" 
+            [columnMode]="ColumnMode.force" 
+            [headerHeight]="50" 
+            [footerHeight]="50"
+            [externalPaging]="true"
+            [count]="trainings.length"
+            [offset]="dataParams.page_num" 
+            [limit]="dataParams.page_size"
+            (page)="setPage($event)" >
+            <ngx-datatable-column name="Date"  prop="created_at" >
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{ value }}
+                </ng-template>
+            </ngx-datatable-column>                                      
+            <ngx-datatable-column name="Course"  prop="course.title" ></ngx-datatable-column>
+            <ngx-datatable-column name="Module"  prop="course_module.title" ></ngx-datatable-column>
+            <ngx-datatable-column name="Trainer"  prop="trainer.name" ></ngx-datatable-column>
+            <ngx-datatable-column name="VLC"  prop="value_chain.value_chain_name"></ngx-datatable-column>
+            <ngx-datatable-column name="Date"  prop="next_training_date" >
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{ value }}
+                </ng-template>
+            </ngx-datatable-column> 
+            <ngx-datatable-column name="Details"  prop="details" >
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                <button  (click)="view(row)" class="round" class="btn btn-sm btn-warning">Details</button>
+
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>    
+    </div>
 </div>

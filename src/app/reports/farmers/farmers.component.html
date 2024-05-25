@@ -1,4 +1,4 @@
-<app-pagetitle title="Reports" [breadcrumbItems]="breadCrumbItems" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+<app-pagetitle title="Reports" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
 
 <div>
     <div class="card">
@@ -47,37 +47,35 @@
         </div>
     </div>
     <div class="card">
-        <!-- <div class="card-body"> -->
-            <ngx-datatable 
-                #table
-                class="bootstrap no-detail-row"
-                [rows]="rows" 
-                [rowHeight]="50" 
-                class="bootstrap core-bootstrap" 
-                [columnMode]="ColumnMode.force" 
-                [headerHeight]="50" 
-                [footerHeight]="50" 
-                [externalPaging]="true"
-                [count]="rows.length"
-                [offset]="dataParams.page_num" 
-                [limit]="dataParams.page_size"
-                (page)="setPage($event)">
-                    <ngx-datatable-column name="Name" >
+        <ngx-datatable 
+            #table
+            class="bootstrap no-detail-row"
+            [rows]="rows" 
+            [rowHeight]="50" 
+            class="bootstrap core-bootstrap" 
+            [columnMode]="ColumnMode.force" 
+            [headerHeight]="50" 
+            [footerHeight]="50" 
+            [externalPaging]="true"
+            [count]="rows.length"
+            [offset]="dataParams.page_num" 
+            [limit]="dataParams.page_size"
+            (page)="setPage($event)">
+                <ngx-datatable-column name="Name" >
+                <ng-template let-row="row" ngx-datatable-cell-template >
+                    {{row.first_name }} {{row.last_name }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Mobile"  prop="msisdn" ></ngx-datatable-column>
+                <ngx-datatable-column name="ID Number"  prop="id_number" ></ngx-datatable-column>
+                <ngx-datatable-column name="County"  prop="county_title" ></ngx-datatable-column>
+                <ngx-datatable-column name="Sub County"  prop="sub_county_title" ></ngx-datatable-column>
+                <ngx-datatable-column name="Ward"  prop="ward_name" ></ngx-datatable-column>
+                <ngx-datatable-column name="Details"  prop="more">
                     <ng-template let-row="row" ngx-datatable-cell-template >
-                        {{row.first_name }} {{row.last_name }}
-                    </ng-template>
+                    <button (click)="view(row)" class="round" class="btn btn-sm btn-success"> <i class="fa-solid fa-user-group"></i> View Member</button>
+                        </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="Mobile"  prop="msisdn" ></ngx-datatable-column>
-                    <ngx-datatable-column name="ID Number"  prop="id_number" ></ngx-datatable-column>
-                    <ngx-datatable-column name="County"  prop="county_title" ></ngx-datatable-column>
-                    <ngx-datatable-column name="Sub County"  prop="sub_county_title" ></ngx-datatable-column>
-                    <ngx-datatable-column name="Ward"  prop="ward_name" ></ngx-datatable-column>
-                    <ngx-datatable-column name="More Details"  prop="more">
-                    <ng-template let-row="row" ngx-datatable-cell-template >
-                        <i class="fa-solid fa-eye text-success" style="font-size:20px;" (click)="view(row)"></i>
-                    </ng-template>
-                    </ngx-datatable-column>
-            </ngx-datatable>
-        <!-- </div> -->
+        </ngx-datatable>
     </div>
 </div>

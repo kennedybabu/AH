@@ -87,11 +87,11 @@
   
 .ngx-datatable.bootstrap .datatable-footer {  
   background-color: transparent;  
-  color: red;  
+  color: rgb(255, 174, 0);  
 }  
   
 .ngx-datatable.bootstrap .datatable-footer .datatable-pager a {  
-  color: blue;  
+  color: #1f6f50;  
 }  
   
 .pager li>a,  
@@ -101,8 +101,8 @@
   
 .ngx-datatable.bootstrap .datatable-footer .datatable-pager ul li:not(.disabled).active a,  
 .ngx-datatable.bootstrap .datatable-footer .datatable-pager ul li:not(.disabled):hover a {  
-  background-color: blue;  
-  border-color: blue;  
+  background-color: #1f6f50;  
+  border-color: #1f6f50;  
   color: #fff;  
 }  
   

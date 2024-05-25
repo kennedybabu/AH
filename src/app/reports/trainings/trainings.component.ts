@@ -1,7 +1,8 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ColumnMode, NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { GroupsService } from 'src/app/groups/groups.services';
 import { counties } from 'src/app/shared/data/Counties';
 import { County } from 'src/app/shared/data/county.model';
@@ -23,6 +24,8 @@ export class TrainingsComponent implements OnInit {
   counties: County[]=[]
   sub_counties: SubCounty[] = []
   wards: Ward[] = []
+  ColumnMode = ColumnMode;
+  trainings=[]
   dataParams: any = {  
     page_num: '',  
     page_size: ''  
@@ -69,9 +72,22 @@ export class TrainingsComponent implements OnInit {
     if(data.subCountyId.length > 0){
         data.wardId=[]
         data.countyId=[]
-    } 
+    }
+  }
 
+  view(row: any){
 
+  }
+
+  setPage(pageInfo: any) {
+    this.dataParams.page_num = pageInfo.offset + 1;
+    // let data = {
+    //   page: this.dataParams.page_num,
+    //   dataObj: this.searchForm.value
+    // }
+    // this.totsService.getAllToTs(this.dataParams.page_num).subscribe((res) => {
+    //   this.rows = res.message;
+    // })
   }
 
   subCounties(event:Event) {
