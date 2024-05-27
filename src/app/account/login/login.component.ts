@@ -64,13 +64,15 @@ export class LoginComponent implements OnInit {
    * Form submit
    */
   onSubmit() {
-    console.log('caled', this.loginForm.value)
     this.submitted = true;
 
     this.authenticationService.login(this.loginForm.value).subscribe((res) => {
-      sessionStorage.setItem("token", res.message.access_token)
-      sessionStorage.setItem("username", res.message.user_info.firstname)
-      this.router.navigate(['/'])
+      if(res.statusCode == 200) {
+        sessionStorage.setItem("token", res.message.access_token)
+        sessionStorage.setItem("username", res.message.user_info.firstname)
+        sessionStorage.setItem("id", res.message.user_info.userId)
+        this.router.navigate(['/'])
+      }
     })
 
 

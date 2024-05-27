@@ -26,12 +26,14 @@ export class AddGroupComponent  implements OnInit {
   sub_counties: SubCounty[] = []
   wards: Ward[] = []
   groups=[]
-
+  userId!: any
 
   constructor(
     private groupsService:GroupsService,
     private cdr:ChangeDetectorRef,
-    private formBuilder:FormBuilder) {}
+    private formBuilder:FormBuilder) {
+      this.userId = sessionStorage.getItem('userId')
+    }
 
   ngOnInit(): void {
     this.counties = counties
@@ -54,41 +56,32 @@ export class AddGroupComponent  implements OnInit {
   }
 
   onSubmit(){ 
-    // this.spinner.show()
     let data = {
       "groupName": this.registerForm.get('groupName')?.value,
       "description": this.registerForm.get('description')?.value,
       "wardId": this.wardId,
-      "userId": 1
+      "userId": this.userId
     }
-    console.log(data, 'data')
     this.groupsService.addGroup(data).subscribe(
       (res) => {
         if(res.statusCode == 201) {
-          // this.spinner.hide()
-          // this.toastr.success('Added Succesfuly', 'Success')
           this.registerForm.reset()
           this.searchForm.reset() 
         }
       })
-      // this.spinner.hide()
   }
 
   filterGroups(data: any) {
-    // this.spinner.show()
     this.groupsService.getGroupsByLocation(data).subscribe((res) => {
         if(res.statusCode == 200) {
             this.groups = res.message 
             this.cdr.markForCheck()
-            // this.spinner.hide
         }
     })
-    // this.spinner.hide()
   }
 
   getWards(event: any){
     let ids = this.searchForm.get('subCountyId')?.value 
-    console.log(ids)
     let filtered_array = this.sub_counties.filter((obj: any) =>ids.includes(obj.subCountyId))
     filtered_array.forEach(element => {
       this.wards=this.wards.concat(element.wards)
@@ -96,20 +89,16 @@ export class AddGroupComponent  implements OnInit {
   }
 
 subCounties(event: any) {
-    console.log('called')
     let ids = this.searchForm.get('countyId')?.value
-    // console.log(ids)
      let filtered_array=this.counties.filter((obj:any)=>ids.includes(obj.county_id))
      filtered_array.forEach(element => {
        this.sub_counties=this.sub_counties.concat(element.sub_counties)
      });
-     console.log(this.sub_counties)
 
  }
 
  filterWards(event: any) {
    let ids = this.searchForm.get('subCountyId')?.value 
-   console.log(ids)
    let filtered_array = this.sub_counties.filter((obj: any) =>ids.includes(obj.subCountyId))
    filtered_array.forEach(element => {
      this.wards=this.wards.concat(element.wards)
