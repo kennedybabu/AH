@@ -24,6 +24,7 @@ import { DateFormatDirective } from './shared/directives/date-format.directive';
 import { BackendInterceptor } from './backend.interceptor';
 import { CoursesModule } from './courses/courses.module';
 import { VlcModule } from './vlc/vlc.module';
+import { HttpRequestInterceptor } from './http.interceptor';
 
 // import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 
@@ -73,6 +74,7 @@ export function createTranslateLoader(http: HttpClient): any {
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: BackendInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
