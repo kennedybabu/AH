@@ -76,6 +76,8 @@ export class LoginComponent implements OnInit {
     })
 
 
+
+
     // stop here if form is invalid
     
     // if (this.loginForm.invalid) {
@@ -91,6 +93,13 @@ export class LoginComponent implements OnInit {
     // }
   }
 
+
+
+  logout() {
+      sessionStorage.removeItem('token');
+      sessionStorage.removeItem('username');
+      sessionStorage.removeItem('id');
+  }
 
 
   /**

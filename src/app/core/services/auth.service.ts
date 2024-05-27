@@ -4,6 +4,7 @@ import { User } from '../models/auth.models';
 import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { end } from '@popperjs/core';
+import { Router } from '@angular/router';
 export const endpoint = 'https://ah.egroup.co.ke/api/';
 
 
@@ -17,7 +18,7 @@ export class AuthenticationService {
     user!: User;
     currentUserValue: any;
 
-    constructor(private http:HttpClient) { }
+    constructor(private http:HttpClient,private router:Router) { }
 
     /**
      * Performs the register
@@ -64,10 +65,13 @@ export class AuthenticationService {
     /**
      * Logout the user
      */
+   
     logout() {
-        // logout the user
-        return getFirebaseBackend()!.logout();
-    }
+        sessionStorage.removeItem('token');
+         sessionStorage.removeItem('username');
+         sessionStorage.removeItem('id');
+         this.router.navigate(['/account/login']);
+     }
 
     /**
      * Reset password
