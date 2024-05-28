@@ -129,13 +129,13 @@ export const MENU: MenuItem[] = [
             {
                 id: 20,
                 label: 'Add User',
-                link: '/',
+                link: '/users/add-user',
                 parentId: 19
             },
             {
                 id: 21,
                 label: 'Users',
-                link: '/',
+                link: '/users/userlist',
                 parentId: 19
             }
         ]

@@ -54,7 +54,6 @@ export class FarmersComponent implements OnInit {
       { label: 'Reports' },
       { label: 'Farmers', active: true }
     ];
-
     this.searchForm = this.formBuilder.group({
         start_date:['', Validators.required],
         end_date:['', Validators.required],
@@ -63,10 +62,8 @@ export class FarmersComponent implements OnInit {
         wardId: [[], Validators.required],
         groupId: [[], Validators.required]
       });
-
       this.getUsers()
   }
-
   subCounties(event:Event) {
     if(this.searchForm) {
       let ids = this.searchForm.get('countyId')?.value
@@ -88,8 +85,6 @@ export class FarmersComponent implements OnInit {
         data.wardId=[]
         data.countyId=[]
     }
-    
-
     this.farmersService.getMembersByLocations(data).subscribe((res) => {
         if(res.statusCode == 200) {
             this.rows = res.message
