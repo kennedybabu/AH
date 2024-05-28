@@ -25,6 +25,7 @@ import {
 } from 'ng-apexcharts';
 import { MembersService } from 'src/app/core/services/members.service';
 import { EChartsOption } from 'echarts';
+import { VlcService } from 'src/app/vlc/vlc.service';
 
 export type countyOptions = {
   series: ApexAxisChartSeries;
@@ -107,6 +108,10 @@ export class DashboardComponent implements OnInit {
   chartOptions!: Partial<ChartOptions> | any;
   countyReport:Partial<countyOptions> | any;
 
+  searchedStat: any 
+  totalIncome!:number 
+
+
 
 
   constructor(
@@ -114,7 +119,8 @@ export class DashboardComponent implements OnInit {
     private groupsService:GroupsService,
     private cdr:ChangeDetectorRef,
     private summaryService:SummaryService,
-    private membersService:MembersService) {}
+    private membersService:MembersService,
+    private vlcService:VlcService) {}
 
   option = {
     startVal: this.num,
@@ -123,11 +129,23 @@ export class DashboardComponent implements OnInit {
     decimalPlaces: 2,
   };
 
+  private formatDate(date: Date): string {
+    let d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
+
 
   ngOnInit(): void {
-    /**
-     * BreadCrumb 
-     */
+    const date = new Date()
+    const startDate = new Date()
+    startDate.setMonth(startDate.getMonth() - 1)
     this.counties = counties
 
     this.breadCrumbItems = [
@@ -140,8 +158,8 @@ export class DashboardComponent implements OnInit {
       subCountyId: [[], Validators.required],
       wardId: [[], Validators.required],
       groupId: [[], Validators.required],
-      startDate:['', Validators.required],
-      endDate:['', Validators.required],
+      startDate:[this.formatDate(startDate), Validators.required],
+      endDate:[this.formatDate(date), Validators.required],
     });
     this.getSummary()
     this.getCourseSummary()
@@ -395,6 +413,8 @@ export class DashboardComponent implements OnInit {
         this.sub_counties = this.sub_counties.concat(element.sub_counties)
      });
     }
+
+    this.search()
   }
 
   fetchGroups(event:Event) {
@@ -409,10 +429,44 @@ export class DashboardComponent implements OnInit {
         this.wards=this.wards.concat(element.wards)
       })
     }
+
+    this.search()
   }
 
   search(){
     console.log(this.searchForm.value)
+    this.getIncomeSummary(this.searchForm.value)
+    this.filterVLCSummaryByLocation(this.searchForm.value)
+    this.filterGroups(this.searchForm.value)
+    this.filterCount(this.searchForm.value)
+  }
+
+  getIncomeSummary(data: any) {
+    this.membersService.getTotalMembersCountiesIncomeSummary(data).subscribe((res) => {
+      console.log(res)
+        if(res.statusCode == 200) {
+            this.searchedStat = res.message.message 
+            this.totalMembers = res.message.message.members[0] 
+            this.totalIncome = this.searchedStat.incomes[0]
+            this.cdr.markForCheck()
+        }
+    })
+  }
+
+  filterVLCSummaryByLocation(data: any) {
+    this.vlcService.getValueChainSummaryByLocation(data).subscribe((res) => {
+        if(res.statusCode == 200) {
+            const categories = res.message.map((row: any) => row.value_chain_name)
+            const values = res.message.map((row: any) => row.member_count)
+
+            this.monthlyChart = {
+            ...this.monthlyChart,
+            series: [{ data: values }],
+            xaxis: { categories: categories }
+            }
+            this.cdr.markForCheck()
+        }
+    })
   }
 
   filterGroups(data: any) {
@@ -431,9 +485,32 @@ export class DashboardComponent implements OnInit {
               this.cdr.markForCheck()
           }
       })
-
     }
+  }
 
+  filterCount(data: any){
+    let obj = {
+        "countyId":this.searchForm.get('countyId')?.value,
+        "subCountyId": this.searchForm.get('subCountyId')?.value,
+        "wardId": this.searchForm.get('wardId')?.value,
+        "groupId": this.searchForm.get('groupId')?.value
+    }
+    this.membersService.getCountsByLocations(obj).subscribe((res) => {
+        if(res.statusCode == 200) {
+            this.totalGroups = res.message.total_groups 
+            this.ToTsNo = res.message.total_tots 
+            let males = res.message.total_male_members 
+            let females = res.message.total_female_members 
+            this.totalNumber = males + females 
+            let pwd = res.message.total_disabled_male_tots + res.message.total_disabled_female_tots
+            this.malePercentage = (males / this.totalNumber ) * 100 
+            this.femalePercentage = (females / this.totalNumber) * 100 
+            this.disabledPercentage = (pwd / this.totalNumber) * 100
+            
+            this.setGenderChart()
+            this.cdr.markForCheck()
+        }
+    })
   }
   
   getSummary() {

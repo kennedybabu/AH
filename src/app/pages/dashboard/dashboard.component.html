@@ -11,7 +11,7 @@
                         <div class="row">
                             <div class="col-xl col-md-6">
                                 <label for="example-datetime-local-input" class="form-label">Start Date</label>
-                                <input class="form-control" type="date" placeholder="Start" formControlName="startDate"
+                                <input class="form-control" type="date"  placeholder="Start" formControlName="startDate"
                                     id="example-datetime-local-input">
                             </div>
                             <div class="col-xl-2 col-md-6">
@@ -39,7 +39,7 @@
                             </div>  
                             <div class="col-xl col-md-6">
                                 <label for="county">Group</label>
-                                <ng-select id="county"  [items]="groups" [multiple]="true"  [virtualScroll]="true" bindLabel="group_name" bindValue="group_id"
+                                <ng-select id="county"  [items]="groups" [multiple]="true" (change)="search()"  [virtualScroll]="true" bindLabel="group_name" bindValue="group_id"
                                 placeholder="Group" formControlName="groupId">
                                 </ng-select> 
                             </div>   

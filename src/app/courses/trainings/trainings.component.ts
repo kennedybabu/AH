@@ -11,10 +11,6 @@ import { CoursesService } from '../courses.service';
 import { ColumnMode, NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { CommonModule } from '@angular/common';
 import { offset } from '@popperjs/core';
-// import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-// import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-// import { MatSort } from '@angular/material/sort';
-// import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 
 export interface TrainingData {
   training_id: number, 
@@ -39,19 +35,11 @@ export interface TrainingData {
     FormsModule, 
     NgxDatatableModule,
     CommonModule
-    // MatFormFieldModule,
-    // MatPaginatorModule,
-    // MatTableModule
   ],
   templateUrl: './trainings.component.html',
   styleUrl: './trainings.component.scss',
 })
 export class TrainingsComponent implements OnInit, AfterViewInit {
-  // displayedColumns: string[] = ['name', 'course', 'course_module', 'training_date', 'next_training_date', 'members_trained', 'value_chain_name'];
-  // dataSource = new MatTableDataSource<any>;
-
-  // @ViewChild(MatPaginator) paginator!: MatPaginator;
-  // @ViewChild(MatSort) sort!: MatSort;
   ColumnMode= ColumnMode;
   breadCrumbItems: any;
   searchForm!: FormGroup;
@@ -99,28 +87,12 @@ export class TrainingsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
 
-    // setTimeout(() => {
-    //   if (this.dataSource.paginator) {
-    //     this.dataSource.paginator = this.paginator;
-    //     this.dataSource.sort = this.sort;  
-    //   }
-    // }, 0)
+
   }
 
   viewDetails(row: any){
 
   }
-
-  // setPage(selectedPage:number) {
-  //   // this.currentPage = this.currentPage + selectedPage
-  //   // this.service.getTrainings(this.currentPage).subscribe((res) => {
-  //   //     if(res.statusCode == 200) {
-  //   //       this.trainings = res.message.trainings
-  //   //       this.cdr.markForCheck()
-  //   //       this.spinner.hide()
-  //   //     }
-  //   // })
-  // }
 
   setPage(pageInfo: any) {
     // this.p = pageInfo.offset;
@@ -135,7 +107,8 @@ export class TrainingsComponent implements OnInit, AfterViewInit {
   }
 
   getTrainings() {
-    this.coursesService.getTrainings(1).subscribe((res) => {
+    this.coursesService.getTrainings(this.dataParams.page_num).subscribe((res) => {
+      console.log(res)
       if(res.statusCode == 200) {
         this.trainings = res.message.trainings
         // this.dataSource.data = this.trainings
