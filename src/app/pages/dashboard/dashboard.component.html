@@ -98,8 +98,12 @@
               <div class="col-xl col-md-6 d-flex align-items-end">
                 <button
                   (click)="search()"
-                  style="color: #e9ecef; margin-bottom: 2px"
-                  class="btn w-100 secondary-color btn-block"
+                  style="
+                    color: #fff;
+                    margin-bottom: 2px;
+                    background-color: #fbb43c;
+                  "
+                  class="btn w-100 btn-block"
                   type="submit"
                 >
                   search
@@ -116,14 +120,20 @@
 <div class="row">
   <div class="col-xl-3 col-md-6">
     <!-- card -->
-    <div class="card card-h-100">
+    <div style="background-color: #1f6e50" class="card card-h-100">
       <!-- card body -->
       <div class="card-body">
         <div class="row align-items-center">
           <div class="col-6">
-            <span class="text-muted mb-3 lh-1 d-block text-truncate">ToT</span>
+            <span class="mb-3 lh-1 d-block text-truncate" style="color: white"
+              >ToT</span
+            >
             <h4 class="mb-3">
-              <span [countUp]="ToTsNo" class="counter-value"></span>
+              <span
+                [countUp]="ToTsNo"
+                class="counter-value"
+                style="color: white"
+              ></span>
             </h4>
           </div>
 
@@ -145,16 +155,20 @@
 
   <div class="col-xl-3 col-md-6">
     <!-- card -->
-    <div class="card card-h-100">
+    <div class="card card-h-100" style="background-color: #fbb43c">
       <!-- card body -->
       <div class="card-body">
         <div class="row align-items-center">
           <div class="col-6">
-            <span class="text-muted mb-3 lh-1 d-block text-truncate"
+            <span class="mb-3 lh-1 d-block text-truncate" style="color: white"
               >Farmers</span
             >
             <h4 class="mb-3">
-              <span [countUp]="totalMembers" class="counter-value"></span>
+              <span
+                [countUp]="totalMembers"
+                class="counter-value"
+                style="color: white"
+              ></span>
             </h4>
           </div>
           <div class="col-6">
@@ -175,16 +189,20 @@
 
   <div class="col-xl-3 col-md-6">
     <!-- card -->
-    <div class="card card-h-100">
+    <div class="card card-h-100" style="background-color: #2e384c">
       <!-- card body -->
       <div class="card-body">
         <div class="row align-items-center">
           <div class="col-6">
-            <span class="text-muted mb-3 lh-1 d-block text-truncate"
+            <span class="mb-3 lh-1 d-block text-truncate" style="color: white"
               >Groups</span
             >
             <h4 class="mb-3">
-              <span [countUp]="totalGroups" class="counter-value"></span>
+              <span
+                [countUp]="totalGroups"
+                class="counter-value"
+                style="color: white"
+              ></span>
             </h4>
           </div>
           <div class="col-6">
@@ -205,19 +223,20 @@
 
   <div class="col-xl-3 col-md-6">
     <!-- card -->
-    <div class="card card-h-100">
+    <div class="card card-h-100" style="background-color: #7ac2ad">
       <!-- card body -->
       <div class="card-body">
         <div class="row align-items-center">
           <div class="col-6">
-            <span class="text-muted mb-3 lh-1 d-block text-truncate"
+            <span class="mb-3 lh-1 d-block text-truncate" style="color: white"
               >Total Income</span
             >
-            <h4 class="mb-3">
+            <h4 class="mb-3" style="color: white">
               <span
                 [countUp]="12.37"
                 [options]="option"
                 class="counter-value"
+                style="color: white"
               ></span
               >%
             </h4>
