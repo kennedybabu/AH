@@ -9,14 +9,13 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss'],
 })
 
 /**
  * Sidebar Component
  */
 export class SidebarComponent implements OnInit {
-
   @ViewChild('sideMenu') sideMenu!: ElementRef;
   menu: any;
   menuItems: MenuItem[] = [];
@@ -33,36 +32,19 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.menuItems = MENU;
   }
-
-  /***
-   * Activate droup down set 
-   */
   ngAfterViewInit() {
     this.menu = new MetisMenu('#side-menu');
     this._activateMenuDropdown();
   }
-
-  /**
-   * Returns true or false if given menu item has child or not
-   * @param item menuItem
-   */
   hasItems(item: MenuItem) {
     return item.subItems !== undefined ? item.subItems.length > 0 : false;
   }
-
-  /**
-   * remove active and mm-active class
-   */
   _removeAllClass(className: any) {
     const els = document.getElementsByClassName(className);
     while (els[0]) {
       els[0].classList.remove(className);
     }
   }
-
-  /**
-   * Activate the parent dropdown
-   */
   _activateMenuDropdown() {
     this._removeAllClass('mm-active');
     this._removeAllClass('mm-show');
