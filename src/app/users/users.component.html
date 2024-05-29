@@ -33,7 +33,7 @@
       />
       <div
         style="
-          background-color: #FBB43C;
+          background-color: #fbb43c;
           color: white;
           height: 40px;
           width: 50px;
@@ -140,7 +140,6 @@
       <div class="col-2" style="height: 100%">Date of Birth</div>
       <div class="col-2" style="height: 100%">Actions</div>
     </div>
-
     <div>
       <div
         *ngFor="let user of users"
@@ -167,10 +166,12 @@
         </div>
         <div class="col-2 d-flex align-items-center">
           <svg
+            style="cursor: pointer"
             xmlns="http://www.w3.org/2000/svg"
             width="20"
             height="20"
             viewBox="0 0 24 24"
+            (click)="navigateToProfile(user)"
           >
             <path
               fill="currentColor"

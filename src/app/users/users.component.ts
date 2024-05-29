@@ -36,6 +36,9 @@ export class UsersComponent implements OnInit {
   onParamsChange() {
     this.fetchUsers();
   }
+  navigateToProfile(user: UserInfo) {
+    this.router.navigate(['/users', user?.email]);
+  }
   navigateToAddUser() {
     this.router.navigate(['/users/add-user']);
   }
