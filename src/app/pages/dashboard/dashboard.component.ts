@@ -109,10 +109,7 @@ export class DashboardComponent implements OnInit {
   countyReport:Partial<countyOptions> | any;
 
   searchedStat: any 
-  totalIncome!:number 
-
-
-
+  totalIncome:number = 0 
 
   constructor(
     private formBuilder:FormBuilder,

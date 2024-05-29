@@ -62,8 +62,11 @@ export class TrainingsComponent implements OnInit, AfterViewInit {
     private coursesService:CoursesService){}
 
   ngOnInit(): void {
-    this.dataParams.page_num = 1
-    this.dataParams.page_size = 15
+    const date = new Date()
+    const startDate = new Date()
+    startDate.setMonth(startDate.getMonth() - 1)
+    this.dataParams.page_num = 0
+    this.dataParams.page_size = 8
     this.counties = counties
 
     this.breadCrumbItems = [
@@ -76,13 +79,25 @@ export class TrainingsComponent implements OnInit, AfterViewInit {
       subCountyId: [[], Validators.required],
       wardId: [[], Validators.required],
       groupId: [[], Validators.required],
-      startDate:['', Validators.required],
-      endDate:['', Validators.required],
+      startDate:[this.formatDate(startDate), Validators.required],
+      endDate:[this.formatDate(date), Validators.required],
     });
       
 
     this.getTrainings()
     this.setPage({ offset: 0 })
+  }
+
+  private formatDate(date: Date): string {
+    let d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
   }
 
   ngAfterViewInit(): void {
