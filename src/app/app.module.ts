@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpClientModule,
+  HttpClient,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 import { initFirebaseBackend } from './authUtils';
@@ -9,8 +13,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { NgbModule, NgbTooltipModule, NgbPopoverModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxSpinnerModule } from "ngx-spinner"
+import {
+  NgbModule,
+  NgbTooltipModule,
+  NgbPopoverModule,
+  NgbNavModule,
+} from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { PagesModule } from './pages/pages.module';
 import { LayoutsModule } from './layouts/layouts.module';
@@ -24,9 +33,12 @@ import { DateFormatDirective } from './shared/directives/date-format.directive';
 import { BackendInterceptor } from './backend.interceptor';
 import { CoursesModule } from './courses/courses.module';
 import { VlcModule } from './vlc/vlc.module';
+import { UsersService } from './users/users.service';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { PaginationModule } from './pagination/pagination.module';
 
 // import { ReactiveFormsModule,FormsModule } from '@angular/forms';
-
 
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
@@ -38,17 +50,15 @@ export function createTranslateLoader(http: HttpClient): any {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {
         provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient]
-      }
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
+      },
     }),
     HttpClientModule,
     BrowserModule,
@@ -64,16 +74,23 @@ export function createTranslateLoader(http: HttpClient): any {
     DateFormatDirective,
     NgxSpinnerModule,
     CoursesModule,
-    VlcModule
+    VlcModule,
     // ReactiveFormsModule,
-    // FormsModule
+    FormsModule,
+    CommonModule,
+    PaginationModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: BackendInterceptor, multi: true},
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: FakeBackendInterceptor,
+      multi: true,
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: BackendInterceptor, multi: true },
+    UsersService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

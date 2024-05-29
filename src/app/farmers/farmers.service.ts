@@ -19,14 +19,11 @@ export class FarmersService {
         return this.http.post(endpoint + 'member/create', data).pipe(
           map(this.extractData));
     }
-
-
     getGroupMembers(data: any):Observable<any> {
         return this.http.get(endpoint+'members/'+ data +'?page=1&size=15').pipe(
           map((this.extractData))
         )
     }
-
     getWardToTs(data: any): Observable<any> {
         return this.http.get(endpoint+'users/tot/2/'+ data).pipe(
           map((this.extractData))
