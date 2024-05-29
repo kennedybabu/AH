@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-// import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { endpoint } from './auth.service';
@@ -24,6 +23,19 @@ export class MembersService {
     }
     getMemberValueChain(){
         return this.http.get(endpoint + 'member-value-chain/get/count-details').pipe(
+          map((this.extractData))
+        )
+    }
+
+    getTotalMembersCountiesIncomeSummary(data: any): Observable<any> {
+        return this.http.post(endpoint+'reports/members-titles-income-summary', data).pipe(
+          map((this.extractData))
+        )
+    }
+
+
+    getCountsByLocations(data: any): Observable<any> {
+        return this.http.post(endpoint+'reports/counts-by-locations-and-date-range', data).pipe(
           map((this.extractData))
         )
     }

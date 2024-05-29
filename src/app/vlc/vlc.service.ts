@@ -39,6 +39,12 @@ export class VlcService {
           map((this.extractData))
         )
     }
+
+    getValueChainSummaryByLocation(data: any): Observable<any> {
+      return this.http.post(endpoint+ 'reports/vc-summary' ,data).pipe(
+        map((this.extractData))
+      )
+    }
     
     
 }

@@ -36,6 +36,7 @@
               "node_modules/leaflet/dist/leaflet.css",
               "node_modules/ngx-lightbox/lightbox.css",
               "node_modules/ngx-ui-switch/ui-switch.component.css",
+              "node_modules/ngx-spinner/animations/ball-clip-rotate-multiple.css",
               "src/styles.scss",
               "src/assets/scss/bootstrap.scss",
               "src/assets/scss/app.scss",

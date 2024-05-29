@@ -130,6 +130,13 @@
 .text-secondary {
     color: #1f6f50!important;
 }
+.secondary-color.btn-block {
+  color: #e9ecef!important;
+}
+
+ng-select {
+  background-color: transparent!important;
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @media (max-width: 500px) {

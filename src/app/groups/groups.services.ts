@@ -34,4 +34,11 @@ export class GroupsService {
         )
     }
 
+    getGroupDetails(data: any): Observable<any> {
+      return this.http.get(endpoint+'groups/get/'+data).pipe(
+        map((this.extractData))
+      )
+    }
+
+
 }

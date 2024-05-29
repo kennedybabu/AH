@@ -34,10 +34,13 @@ export class TotComponent implements OnInit {
   recipient: any=[{"name":"ToT"}]
   selectedVcs: SeedDetails[] = []
   seedVarieties=[]
+  userId!: any
 
   constructor(
     private formBuilder:FormBuilder,
-    private vlcService:VlcService){}
+    private vlcService:VlcService){
+      this.userId = sessionStorage.getItem('userId')
+    }
 
   ngOnInit(): void {
     this.breadCrumbItems = [
@@ -70,10 +73,9 @@ export class TotComponent implements OnInit {
   }
 
   onsubmit() {   
-    // this.spinner.show()
     let dataObject = {
         "idNumber":"",
-        "userId": 1,
+        "userId": this.userId,
         "image": this.registerForm.get('image')?.value,
         "recipientType": this.registerForm.get('recipientType')?.value,
         "distributor": this.registerForm.get('distributor')?.value,
@@ -83,10 +85,8 @@ export class TotComponent implements OnInit {
 
     this.vlcService.createSeedDistribution(dataObject).subscribe((res) => {
        if(res.statusCode == 417) {
-        // this.spinner.hide()
         // this.toastr.success("User does not Exist", "Error")
        } else {
-        // this.spinner.hide()
        }
     })
     
@@ -101,10 +101,8 @@ export class TotComponent implements OnInit {
   }
 
   getValueChains() {
-    // this.spinner.show()
     this.vlcService.getValueChains().subscribe((res) => {
         if(res.statusCode == 200) {
-          // this.spinner.hide()
           this.valueChains = res.message
         }
     })

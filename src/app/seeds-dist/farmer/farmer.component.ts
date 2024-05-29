@@ -26,10 +26,13 @@ export class FarmerComponent implements OnInit {
   valueChains=[]
   seedVarieties=[]
   selectedVcs : any[]=[]
+  userId!: any
 
   constructor(
     private formBuilder:FormBuilder,
-    private vlcService:VlcService){}
+    private vlcService:VlcService){
+      this.userId = sessionStorage.getItem('userId')
+    }
 
 
   ngOnInit(): void {
@@ -66,7 +69,7 @@ export class FarmerComponent implements OnInit {
   onsubmit() {
     let dataObject = {
       "idNumber": this.registerForm.get('idNumber')?.value,
-      "userId": 1,
+      "userId": this.userId,
       "image": this.registerForm.get('image')?.value,
       "recipientType": "Farmer",
       "distributor": "TOT",
@@ -128,13 +131,11 @@ export class FarmerComponent implements OnInit {
 
  filterWards(event: any) {
    let ids = this.registerForm.get('subCountyId')?.value 
-   console.log(ids)
    let filtered_array = this.sub_counties.filter((obj: any) =>ids.includes(obj.subCountyId))
    filtered_array.forEach(element => {
      this.wards=this.wards.concat(element.wards)
    })
- }
- 
+ } 
 
 }
 

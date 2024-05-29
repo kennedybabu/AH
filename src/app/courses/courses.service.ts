@@ -36,7 +36,7 @@ export class CoursesService {
     }
 
     getTrainings(data: any): Observable<any> {
-      return this.http.get(endpoint+"training/all?page=1&size=15").pipe(
+      return this.http.get(endpoint+"training/all?page="+data+"&size=10").pipe(
         map((this.extractData))
       )
     }

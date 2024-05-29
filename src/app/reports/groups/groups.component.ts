@@ -73,7 +73,7 @@ export class GroupsComponent implements OnInit {
   viewGroupDetails(row: any) {
     console.log(row)
     sessionStorage.setItem('selected',JSON.stringify(row))
-    this.router.navigate(['/groups/details/',row.group_id])
+    this.router.navigate(['/groups/group/',row.group_id])
   }
 
   getGroups() {

@@ -47,7 +47,9 @@ export class AuthfakeauthenticationService {
      */
     logout() {
         // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('username');
+        sessionStorage.removeItem('id');
         this.currentUserSubject.next(null!);
     }
 }
