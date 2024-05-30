@@ -4,6 +4,7 @@
 ></app-pagetitle>
 
 <div>
+<!-- <<<<<<< pagination
   <div class="card">
     <div class="card-body">
       <form [formGroup]="searchForm">
@@ -65,6 +66,73 @@
               <i class="ft-search mr-1"></i>Search
             </button>
           </div>
+======= -->
+    <div class="card">
+        <div class="card-body">
+            <form [formGroup]="searchForm">
+                <div class="row">
+                    <div class="col-xl col-md-6">
+                        <label for="example-datetime-local-input" class="form-label"
+                          >Start Date</label
+                        >
+                        <input
+                          class="form-control"
+                          type="date"
+                          placeholder="Start"
+                          formControlName="startDate"
+                          id="example-datetime-local-input"
+                        />
+                      </div>
+                      <div class="col-xl-2 col-md-6">
+                        <label for="example-datetime-local-input" class="form-label"
+                          >End Date</label
+                        >
+                        <input
+                          class="form-control"
+                          type="date"
+                          placeholder="End"
+                          formControlName="endDate"
+                          id="example-datetime-local-input"
+                        />
+                      </div>
+                    <div class="col-xl col-md-6">
+                        <label>County</label>
+                        <div class="form-group">
+                            <ng-select 
+                            [items]="counties" 
+                            [multiple]="true" 
+                            (change)="subCounties($event)"  
+                            [virtualScroll]="true" 
+                            bindLabel="name" 
+                            bindValue="county_id"
+                            placeholder="Select County" 
+                            formControlName="countyId" 
+                            >
+                            </ng-select>                              
+                            </div>                      
+                    </div>
+                    <div class="col-xl col-md-6">
+                        <label>Sub County</label>
+                        <div class="form-group">
+                            <ng-select 
+                            [items]="sub_counties" [multiple]="true" (change)="filterWards($event)" [virtualScroll]="true" bindLabel="name" bindValue="subCountyId"
+                            placeholder="Select Sub-county" formControlName="subCountyId" >
+                            </ng-select>                            
+                        </div>                    
+                    </div>
+                    <div class="col-xl col-md-6">
+                        <label>Ward</label>
+                        <div class="form-group">
+                            <ng-select [items]="wards" [multiple]="true" [virtualScroll]="true" bindLabel="name" bindValue="wardId"
+                                placeholder="Select Ward" formControlName="wardId" >
+                            </ng-select>                              
+                        </div>                      
+                    </div>                        
+                    <div class="col-xl col-md-6 d-flex h-100 align-items-center">
+                        <button type="button" (click)="onSubmit()" style="margin-top: 25px;color: #e9ecef" class="btn w-100 secondary-color btn-block"> <i class="ft-search mr-1"></i>Search</button>
+                    </div>
+                </div>
+            </form>
         </div>
       </form>
     </div>

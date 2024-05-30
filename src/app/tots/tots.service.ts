@@ -29,5 +29,12 @@ export class TotsService {
     }
 
 
+    getTotsByLocations(data: any): Observable<any> {
+        return this.http.post(endpoint+'/members/by-location?page=1&size=20', data).pipe(
+          map((this.extractData))
+        )
+    }
+
+
     
 }
