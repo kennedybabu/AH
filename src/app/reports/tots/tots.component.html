@@ -1,67 +1,110 @@
-<app-pagetitle title="Reports" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+<app-pagetitle
+  title="Reports"
+  [breadcrumbItems]="breadCrumbItems"
+></app-pagetitle>
 
 <div>
-    <div class="card">
-        <div class="card-body">
-            <form [formGroup]="searchForm">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>County</label>
-                        <div class="form-group">
-                            <ng-select [items]="counties" [multiple]="true" (change)="subCounties($event)"  [virtualScroll]="true" bindLabel="name" bindValue="county_id"
-                                placeholder="Select County" formControlName="countyId" >
-                            </ng-select>                              
-                            </div>                      
-                    </div>
-                    <div class="col-md-3">
-                        <label>Sub County</label>
-                        <div class="form-group">
-                            <ng-select [items]="sub_counties" [multiple]="true" (change)="filterWards($event)" [virtualScroll]="true" bindLabel="name" bindValue="subCountyId"
-                            placeholder="Select Sub-county" formControlName="subCountyId" >
-                            </ng-select>                            
-                        </div>                    
-                    </div>
-                    <div class="col-md-3">
-                        <label>Ward</label>
-                        <div class="form-group">
-                            <ng-select [items]="wards" [multiple]="true" [virtualScroll]="true" bindLabel="name" bindValue="wardId"
-                                placeholder="Select Ward" formControlName="wardId" >
-                            </ng-select>                              
-                        </div>                      
-                    </div>                        
-                    <div class="col-sm-3 d-flex h-100 align-items-center">
-                        <button type="button" (click)="onSubmit()" style="margin-top: 25px;color: #e9ecef" class="btn w-100 secondary-color btn-block"> <i class="ft-search mr-1"></i>Search</button>
-                    </div>
-                </div>
-            </form>
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="searchForm">
+        <div class="row">
+          <div class="col-md-3">
+            <label>County</label>
+            <div class="form-group">
+              <ng-select
+                [items]="counties"
+                [multiple]="true"
+                (change)="subCounties($event)"
+                [virtualScroll]="true"
+                bindLabel="name"
+                bindValue="county_id"
+                placeholder="Select County"
+                formControlName="countyId"
+              >
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label>Sub County</label>
+            <div class="form-group">
+              <ng-select
+                [items]="sub_counties"
+                [multiple]="true"
+                (change)="filterWards($event)"
+                [virtualScroll]="true"
+                bindLabel="name"
+                bindValue="subCountyId"
+                placeholder="Select Sub-county"
+                formControlName="subCountyId"
+              >
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label>Ward</label>
+            <div class="form-group">
+              <ng-select
+                [items]="wards"
+                [multiple]="true"
+                [virtualScroll]="true"
+                bindLabel="name"
+                bindValue="wardId"
+                placeholder="Select Ward"
+                formControlName="wardId"
+              >
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-sm-3 d-flex h-100 align-items-center">
+            <button
+              type="button"
+              (click)="onSubmit()"
+              style="margin-top: 25px; color: #e9ecef"
+              class="btn w-100 secondary-color btn-block"
+            >
+              <i class="ft-search mr-1"></i>Search
+            </button>
+          </div>
         </div>
+      </form>
     </div>
+  </div>
 
-    <div class="card">
-        <ngx-datatable 
-            [rows]="rows" 
-            [rowHeight]="50" 
-            class="bootstrap core-bootstrap" 
-            [columnMode]="ColumnMode.force" 
-            [headerHeight]="50" 
-            [footerHeight]="50" 
-            [externalPaging]="true"
-            [count]="rows.length"
-            [offset]="dataParams.page_num" 
-            [limit]="dataParams.page_size"
-            (page)="setPage($event)">
-        <ngx-datatable-column name="Name" >
-            <ng-template let-row="row" ngx-datatable-cell-template >
-            {{row.firstName }} {{row.lastName }}
-            </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Mobile"  prop="msisdn" ></ngx-datatable-column>
-        <ngx-datatable-column name="ID Number"  prop="idNumber" ></ngx-datatable-column>
-        <ngx-datatable-column name="Details"  prop="more">
-            <ng-template let-row="row" ngx-datatable-cell-template >
-            <button (click)="view(row)" class="round" class="btn btn-sm btn-success"> <i class="fa-solid fa-user-group"></i> View Member</button>
-              </ng-template>
-          </ngx-datatable-column>
-        </ngx-datatable>
-    </div>
+  <div class="card">
+    <ngx-datatable
+      [rows]="rows"
+      [rowHeight]="50"
+      class="bootstrap core-bootstrap"
+      [columnMode]="ColumnMode.force"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [externalPaging]="true"
+      [count]="rows.length"
+      [offset]="dataParams.page_num"
+      [limit]="dataParams.page_size"
+      (page)="setPage($event)"
+    >
+      <ngx-datatable-column name="Name">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.firstName }} {{ row.lastName }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Mobile" prop="msisdn"></ngx-datatable-column>
+      <ngx-datatable-column
+        name="ID Number"
+        prop="idNumber"
+      ></ngx-datatable-column>
+      <ngx-datatable-column name="Details" prop="more">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <button
+            (click)="view(row)"
+            class="round"
+            class="btn btn-sm btn-success"
+          >
+            <i class="fa-solid fa-user-group"></i> View Member
+          </button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
 </div>
