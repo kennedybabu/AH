@@ -55,7 +55,7 @@ export const MENU: MenuItem[] = [
   {
     id: 9,
     label: 'Groups',
-    icon: 'file-text',
+    icon: 'users',
     subItems: [
       {
         id: 10,
@@ -63,12 +63,12 @@ export const MENU: MenuItem[] = [
         link: '/groups/add-group',
         parentId: 9,
       },
-      {
-        id: 11,
-        label: 'Groups',
-        link: '/groups/group-list',
-        parentId: 9,
-      },
+      // {
+      //   id: 11,
+      //   label: 'Groups',
+      //   link: '/groups/group-list',
+      //   parentId: 9,
+      // },
     ],
   },
   {

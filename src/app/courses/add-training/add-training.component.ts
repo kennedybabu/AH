@@ -36,17 +36,19 @@ export class AddTrainingComponent implements OnInit {
   sub_counties: SubCounty[]=[]
   counties: County[]=[]
   members=[]
+  userId!: any
 
   constructor(
     private formBuilder:FormBuilder,
     private coursesService:CoursesService,
     private vlcService:VlcService,
     private groupsService:GroupsService,
-    private totsService:TotsService){}
+    private totsService:TotsService){
+      this.userId = sessionStorage.getItem('userId')
+    }
 
   ngOnInit(): void {
     this.counties = counties
-
 
     this.breadCrumbItems = [
       { label: 'Courses' },
@@ -56,7 +58,7 @@ export class AddTrainingComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       trainingType: ['', Validators.required],
       venue: ['', Validators.required],
-      userId: 1,
+      userId: this.userId,
       courseId: ['', Validators.required],
       courseModuleId: 1,
       valueChainId:['', Validators.required],
@@ -92,7 +94,6 @@ subCounties(event: Event) {
 
 getWards(event:Event){
   let ids = this.searchForm.get('subCountyId')?.value 
-  console.log(ids)
   let filtered_array = this.sub_counties.filter((obj: any) =>ids.includes(obj.subCountyId))
   filtered_array.forEach(element => {
     this.wards=this.wards.concat(element.wards)
@@ -143,7 +144,6 @@ onSubmit(){
   getCourseModules(event:any) {
     if(event != undefined) {
         this.coursesService.getCourseModules(event.course_id).subscribe((res) => {
-          console.log(res)
             if(res.message) {
                 this.courseModules = res.message 
             }
@@ -183,7 +183,6 @@ onSubmit(){
     this.groupsService.getGroupMembers(data).subscribe((res) => {
         if(res.statusCode == 200) {
             this.members = res.message.members    
-            console.log(this.members)
         }
     })
   }

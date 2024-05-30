@@ -28,6 +28,7 @@ export class TopbarComponent implements OnInit {
   cookieValue: any;
   countryName: any;
   valueset: any;
+  username!: any
 
   constructor(
     private router: Router,
@@ -37,7 +38,9 @@ export class TopbarComponent implements OnInit {
     public _cookiesService: CookieService,
     public translate: TranslateService,
     private eventService: EventService
-  ) { }
+  ) {
+    this.username = sessionStorage.getItem('username')
+   }
 
   /**
    * Language Listing
@@ -103,17 +106,11 @@ export class TopbarComponent implements OnInit {
   toggleRightSidebar() {
     this.settingsButtonClicked.emit();
   }
-
   /**
    * Logout the user
    */
   logout() {
-    if (environment.defaultauth === 'firebase') {
-      this.authService.logout();
-    } else {
-      this.authFackservice.logout();
-    }
-    this.router.navigate(['/account/login']);
+    this.authService.logout()
   }
 
 }

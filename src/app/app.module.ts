@@ -38,7 +38,6 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PaginationModule } from './pagination/pagination.module';
 
-// import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);

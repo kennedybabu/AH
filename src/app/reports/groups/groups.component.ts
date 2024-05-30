@@ -42,6 +42,9 @@ export class GroupsComponent implements OnInit {
 
 
   ngOnInit(): void {
+    const date = new Date()
+    const startDate = new Date()
+    startDate.setMonth(startDate.getMonth() - 1)
     this.dataParams.page_num = 0
     this.dataParams.page_size = 10
 
@@ -52,8 +55,8 @@ export class GroupsComponent implements OnInit {
     ];
 
     this.searchForm = this.formBuilder.group({
-      start_date:['', Validators.required],
-      end_date:['', Validators.required],
+      start_date: [this.formatDate(startDate), Validators.required],
+      end_date:[this.formatDate(date), Validators.required],
       countyId:[[],Validators.required],
       subCountyId:[[], Validators.required],
       wardId:[[], Validators.required],
@@ -65,15 +68,24 @@ export class GroupsComponent implements OnInit {
 
   edit(row: any){
     console.log(row)
-    // sessionStorage.setItem('selected',JSON.stringify(row))
-    // this.router.navigate(['/groups/details/',row.group_id])
   }
 
+  private formatDate(date: Date): string {
+    let d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
 
   viewGroupDetails(row: any) {
     console.log(row)
     sessionStorage.setItem('selected',JSON.stringify(row))
-    this.router.navigate(['/groups/details/',row.group_id])
+    this.router.navigate(['/groups/group/',row.group_id])
   }
 
   getGroups() {
