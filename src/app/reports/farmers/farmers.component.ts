@@ -53,10 +53,22 @@ export class FarmersComponent implements OnInit {
     private farmersService: FarmersService
   ) {}
 
+  private formatDate(date: Date): string {
+    let d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
+
   ngOnInit(): void {
-    const date = new Date()
-    const startDate = new Date()
-    startDate.setMonth(startDate.getMonth() - 1)
+    const date = new Date();
+    const startDate = new Date();
+    startDate.setMonth(startDate.getMonth() - 1);
     this.dataParams.page_num = 0;
     this.dataParams.page_size = 10;
 
