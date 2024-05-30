@@ -10,6 +10,7 @@ import { CoursesService } from '../courses.service';
 import { VlcService } from 'src/app/vlc/vlc.service';
 import { GroupsService } from 'src/app/core/services/groups.service';
 import { TotsService } from 'src/app/tots/tots.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-add-training',
@@ -43,7 +44,8 @@ export class AddTrainingComponent implements OnInit {
     private coursesService:CoursesService,
     private vlcService:VlcService,
     private groupsService:GroupsService,
-    private totsService:TotsService){
+    private totsService:TotsService,
+    private toastr:ToastrService){
       this.userId = sessionStorage.getItem('userId')
     }
 
@@ -111,7 +113,10 @@ onSubmit(){
   this.coursesService.addTraining(this.registerForm.value).subscribe((res) => {
     if(res.statusCode == 201) {
       this.registerForm.reset()
-    } 
+      this.toastr.success("Success", "Training Added")
+    } else {
+      this.toastr.warning("Error", res.message)
+    }
   })
 }
 

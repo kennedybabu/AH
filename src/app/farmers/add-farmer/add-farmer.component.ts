@@ -15,6 +15,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { GroupsService } from '../../groups/groups.services';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { VlcService } from '../../vlc/vlc.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-farmer',
@@ -43,7 +44,8 @@ export class AddFarmerComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private farmersService: FarmersService,
     private groupsService: GroupsService,
-    private vlcService: VlcService
+    private vlcService: VlcService,
+    private toastr:ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -142,6 +144,7 @@ export class AddFarmerComponent implements OnInit {
       // this.spinner.hide();
       // this.toastr.success('Added Successfully','Success');
       this.registerForm.reset();
+      this.toastr.success("Success", "Farmer Added")
     });
   }
 

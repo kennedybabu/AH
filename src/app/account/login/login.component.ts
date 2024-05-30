@@ -76,6 +76,8 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem("username", res.message.user_info.firstname)
         sessionStorage.setItem("id", res.message.user_info.userId)
         this.router.navigate(['/'])
+      } else {
+        this.toastr.error(res.message,"Error")
       }
     })
 

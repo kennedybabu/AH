@@ -1,7 +1,3 @@
-// // Import Tailwind CSS
-// @import 'tailwindcss/base';
-// @import 'tailwindcss/components';
-// @import 'tailwindcss/utilities';
 
 @import "node_modules/@swimlane/ngx-datatable/index.css";
 @import "node_modules/@swimlane/ngx-datatable/themes/dark.css";
@@ -10,7 +6,6 @@
 @import "node_modules/@swimlane/ngx-datatable/assets/icons.css";
 
 @import 'ngx-toastr/toastr';
-// @import 'ngx-toastr/toastr-bs5-alert';
 
   
 .ngx-datatable.bootstrap {  
@@ -143,9 +138,9 @@ ng-select {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-// @media (max-width: 2000px) {
-//     button {
-//       margin-top: 1rem!important;
-//     }
-// }
+@media (max-width: 2000px) {
+    .mt-medium {
+      margin-top: 1rem!important;
+    }
+}
 
