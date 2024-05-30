@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { WidgetModule } from './widget/widget.module';
 import { PagetitleComponent } from './pagetitle/pagetitle.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ToastrModule } from 'ngx-toastr';
 
 // import { MatPaginatorModule} from '@angular/material/paginator';
 // import { MatSortModule} from '@angular/material/sort';
@@ -19,7 +20,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
   imports: [
     CommonModule,
     WidgetModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    ToastrModule.forRoot()
     // MatFormFieldModule,
     // MatPaginatorModule,
     // MatPaginatorModule,

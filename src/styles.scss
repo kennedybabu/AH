@@ -8,6 +8,10 @@
 @import "node_modules/@swimlane/ngx-datatable/themes/bootstrap.css";
 @import "node_modules/@swimlane/ngx-datatable/themes/material.css";
 @import "node_modules/@swimlane/ngx-datatable/assets/icons.css";
+
+@import 'ngx-toastr/toastr';
+// @import 'ngx-toastr/toastr-bs5-alert';
+
   
 .ngx-datatable.bootstrap {  
   background-color: transparent;  
