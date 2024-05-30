@@ -1,4 +1,4 @@
-# Minia - Angular 12 Minia - Minimal Admin & Dashboard Template
+# Africa Harvest - Dashboard
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.2.
 
