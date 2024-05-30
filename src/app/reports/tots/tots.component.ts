@@ -8,6 +8,8 @@ import { County } from 'src/app/shared/data/county.model';
 import { SubCounty } from 'src/app/shared/data/subCounty.model';
 import { Ward } from 'src/app/shared/data/ward.model';
 import { counties } from 'src/app/shared/data/Counties';
+import { Route, Router } from '@angular/router';
+import { Tot } from 'src/app/core/models/tot.model';
 
 @Component({
   selector: 'app-tots',
@@ -35,7 +37,8 @@ export class TotsComponent implements OnInit {
   constructor(
     private formBuilder:FormBuilder,
     private cdr:ChangeDetectorRef,
-    private totsService:TotsService
+    private totsService:TotsService,
+    private router:Router
   ){}
   ngOnInit(): void {
     const date = new Date()
@@ -118,8 +121,8 @@ export class TotsComponent implements OnInit {
     })
   }
 
-  view(row: any){
-
+  view(row: Tot){
+    this.router.navigate([`tots/profile/${row.userId}`])
   }
 
 }

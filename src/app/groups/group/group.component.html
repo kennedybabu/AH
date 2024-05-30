@@ -1,11 +1,21 @@
-<app-pagetitle title="Reports" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
+<app-pagetitle [title]="group.group_name" [breadcrumbItems]="breadCrumbItems"></app-pagetitle>
 
 
 <div>
     <div class="card">
         <div class="card-body">
-            <h5 class="font-size-16 mb-1">{{ group.group_admin.name }}</h5>
-            <p class="text-muted font-size-13 mb-0">{{ group.group_admin.msisdn }}</p>
+            <p style="font-weight: bold; color: #fbab3d">Group Admin</p>
+            <div class="d-flex" style="gap: 10px;">
+                <img
+                class="rounded-circle header-profile-user"
+                src="assets/images/users/avatar-1.jpg"
+                alt="Header Avatar"
+                />
+                <div class="d-flex flex-column">
+                    <h5 class="font-size-16 mb-1">Name: {{ group.group_admin.name }}</h5>
+                    <p class="text-muted font-size-13 mb-0">Phone no: {{ group.group_admin.msisdn }}</p>
+                </div>
+            </div>
         </div>
     </div>
 
