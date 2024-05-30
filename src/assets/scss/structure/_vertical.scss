@@ -261,12 +261,22 @@ body[data-sidebar-size="sm"] {
             overflow: visible !important;
         }
 
+        .simplebar-content-wrapper {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+        }
+
         .simplebar-scrollbar {
             display: none !important;
         }
 
         .simplebar-offset {
+            position: fixed;
+            left: 0;
             bottom: 0 !important;
+            top: 0;
         }
 
         // Sidebar Menu

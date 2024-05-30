@@ -38,6 +38,9 @@ export class TotsComponent implements OnInit {
     private totsService:TotsService
   ){}
   ngOnInit(): void {
+    const date = new Date()
+    const startDate = new Date()
+    startDate.setMonth(startDate.getMonth() - 1)
     this.dataParams.page_num = 0
     this.dataParams.page_size = 10
 
@@ -48,8 +51,8 @@ export class TotsComponent implements OnInit {
     ];
 
     this.searchForm = this.formBuilder.group({
-      //   start_date:['', Validators.required],
-      //   end_date:['', Validators.required],
+        startDate:[this.formatDate(startDate), Validators.required],
+        endDate:[this.formatDate(date), Validators.required],
         countyId: [[], Validators.required],
         subCountyId: [[], Validators.required],
         wardId: [[], Validators.required]
@@ -58,38 +61,44 @@ export class TotsComponent implements OnInit {
     this.getUsers()
   }
 
+  private formatDate(date: Date): string {
+    let d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
+
+
   onSubmit(){
-    // this.spinner.show()
-    // this.totsService.getMembersByLocations(this.searchForm.value).subscribe((res) => {
-    //     if(res.statusCode == 200) {
-    //         this.rows = res.message
-    //         console.log(this.rows)
-    //         this.cdr.markForCheck()
-    //         this.spinner.hide()
-    //     }
-    // })
+    this.totsService.getTotsByLocations(this.searchForm.value).subscribe((res) => {
+        if(res.statusCode == 200) {
+            this.rows = res.message
+            this.cdr.markForCheck()
+        }
+    })
   }
 
   setPage(pageInfo: any) {
     this.dataParams.page_num = pageInfo.offset + 1;
-    // let data = {
-    //   page: this.dataParams.page_num,
-    //   dataObj: this.searchForm.value
-    // }
     this.totsService.getAllToTs(this.dataParams.page_num).subscribe((res) => {
       this.rows = res.message;
     })
   }
 
   getUsers(){
-    // this.spinner.show()
     this.totsService.getAllToTs(this.dataParams.page_num).subscribe((res)=> {
       console.log(res)
+      if(res.statusCode == 200) {
         this.rows = res.message;
         // this.filteredArray = this.rows
         this.cdr.markForCheck();
-        // this.spinner.hide()
         // console.log(this.rows)
+      }
     })
   }
 
@@ -107,15 +116,6 @@ export class TotsComponent implements OnInit {
     filtered_array.forEach(element => {
       this.wards=this.wards.concat(element.wards)
     })
-  }
-
-  filterSubCounties(id: number) {
-    // this.service.getCountySubCounties(id).subscribe((res) => {
-    //     if(res.statusCode == 200) {
-    //       this.allSubCounties = res.message.sub_counties
-    //       }
-    //     })
-    // }
   }
 
   view(row: any){
