@@ -4,6 +4,7 @@ import { endpoint } from '../core/services/auth.service';
 import { Observable, map } from 'rxjs';
 import { end } from '@popperjs/core';
 import { UserInfo } from '../core/models/auth.models';
+import { Tot } from '../core/models/tot.model';
 
 @Injectable({
     providedIn:'root'
@@ -49,6 +50,9 @@ export class TotsService {
         .pipe(map((response) => response?.message));
     }
 
-
-    
+    updateTot(data: any): Observable<any> {
+      return this.http.put(endpoint+'', data).pipe(
+        map((this.extractData))
+      )
+    }    
 }
