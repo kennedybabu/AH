@@ -16,6 +16,7 @@ import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { County } from '../shared/data/county.model';
 import { SubCounty } from '../shared/data/subCounty.model';
 import { Ward } from '../shared/data/ward.model';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-users',
@@ -27,6 +28,7 @@ import { Ward } from '../shared/data/ward.model';
     PaginationModule,
     FormsModule,
     ReactiveFormsModule,
+    NgSelectModule,
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
@@ -38,7 +40,7 @@ export class UsersComponent implements OnInit {
   public size: number = 1;
   public limit: number = 10;
   public totalUsers: number = 0;
-
+  public selectedExportOption: string = 'CSV';
   public searchText: string = '';
 
   counties: County[] = [];

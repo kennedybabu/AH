@@ -84,6 +84,14 @@
           />
         </svg>
       </div>
+      <ng-select
+        name="export"
+        [(ngModel)]="selectedExportOption"
+        style="width: 120px;"
+      >
+        <ng-option value="CSV"> CSV </ng-option>
+        <ng-option value="PDF"> PDF </ng-option>
+      </ng-select>
       <button
         (click)="navigateToAddUser()"
         style="
