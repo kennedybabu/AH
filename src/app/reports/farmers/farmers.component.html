@@ -142,13 +142,317 @@
       <ngx-datatable-column name="Ward" prop="ward_name"></ngx-datatable-column>
       <ngx-datatable-column name="Details" prop="more">
         <ng-template let-row="row" ngx-datatable-cell-template>
-          <button
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
             (click)="view(row)"
-            class="round"
-            class="btn btn-sm btn-success"
+            style="cursor: pointer; margin-right: 10px"
           >
-            <i class="fa-solid fa-user-group"></i> View Member
-          </button>
+            <g fill="none" stroke="#000">
+              <circle cx="12" cy="12" r="3.5" />
+              <path
+                d="M20.188 10.934c.388.472.582.707.582 1.066c0 .359-.194.594-.582 1.066C18.768 14.79 15.636 18 12 18c-3.636 0-6.768-3.21-8.188-4.934c-.388-.472-.582-.707-.582-1.066c0-.359.194-.594.582-1.066C5.232 9.21 8.364 6 12 6c3.636 0 6.768 3.21 8.188 4.934Z"
+              />
+            </g>
+          </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            style="cursor: pointer"
+            (click)="centerModal(userModal, row)"
+          >
+            <path
+              fill="none"
+              stroke="#000"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m14.304 4.844l2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565l6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"
+            />
+          </svg>
+          <div>
+            <ng-template #userModal let-modal>
+              <div>
+                <div class="modal-header">
+                  <h5 class="modal-title mt-0">Edit Farmer</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    (click)="modal.dismiss('Cross click')"
+                    aria-hidden="true"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <form
+                    [formGroup]="updateFarmerForm"
+                    (ngSubmit)="handleSubmit($event)"
+                    style="width: 100%"
+                  >
+                    <div style="width: 100%; display: flex; gap: 20px">
+                      <div class="d-flex flex-column" style="width: 50%">
+                        <div
+                          class="d-flex flex-column"
+                          style="margin-bottom: 10px"
+                        >
+                          <label for="firstname" style="margin-bottom: 0px"
+                            >First Name</label
+                          >
+                          <input
+                            type="text"
+                            formControlName="first_name"
+                            id="firstname"
+                            placeholder="Enter First Name"
+                            style="
+                              height: 50px;
+                              width: 100%;
+                              padding-left: 10px;
+                              padding-right: 10px;
+                              border: 1px solid #e9e9ef;
+                              border-radius: 5px;
+                            "
+                          />
+                        </div>
+                        <div
+                          class="d-flex flex-column"
+                          style="margin-bottom: 10px"
+                        >
+                          <label for="lastname" style="margin-bottom: 0px"
+                            >Last Name</label
+                          >
+                          <input
+                            type="text"
+                            formControlName="last_name"
+                            id="lastname"
+                            placeholder="Enter Last Name"
+                            style="
+                              height: 50px;
+                              width: 100%;
+                              padding-left: 10px;
+                              padding-right: 10px;
+                              border: 1px solid #e9e9ef;
+                              border-radius: 5px;
+                            "
+                          />
+                        </div>
+                        <div
+                          class="d-flex flex-column"
+                          style="margin-bottom: 10px"
+                        >
+                          <label for="idnumber" style="margin-bottom: 0px"
+                            >ID Number</label
+                          >
+                          <input
+                            type="text"
+                            formControlName="id_number"
+                            id="idnumber"
+                            placeholder="Enter Id Number"
+                            style="
+                              height: 50px;
+                              width: 100%;
+                              padding-left: 10px;
+                              padding-right: 10px;
+                              border: 1px solid #e9e9ef;
+                              border-radius: 5px;
+                            "
+                          />
+                        </div>
+                        <div
+                          class="d-flex flex-column"
+                          style="margin-bottom: 10px"
+                        >
+                          <label for="dateOfBirth" style="margin-bottom: 0px"
+                            >Date of Birth</label
+                          >
+                          <input
+                            type="date"
+                            formControlName="dob"
+                            id="dateOfBirth"
+                            placeholder="Enter date of birth"
+                            style="
+                              height: 50px;
+                              width: 100%;
+                              padding-left: 10px;
+                              padding-right: 10px;
+                              border: 1px solid #e9e9ef;
+                              border-radius: 5px;
+                            "
+                          />
+                        </div>
+                      </div>
+                      <div class="d-flex flex-column" style="width: 50%">
+                        <div
+                          class="d-flex flex-column"
+                          style="margin-bottom: 10px"
+                        >
+                          <label for="phonenumber" style="margin-bottom: 0px"
+                            >Phone Number</label
+                          >
+                          <input
+                            type="text"
+                            formControlName="msisdn"
+                            id="phonenumber"
+                            placeholder="Enter phone number"
+                            style="
+                              height: 50px;
+                              width: 100%;
+                              padding-left: 10px;
+                              padding-right: 10px;
+                              border: 1px solid #e9e9ef;
+                              border-radius: 5px;
+                            "
+                          />
+                        </div>
+                        <div
+                          class="d-flex flex-column"
+                          style="margin-bottom: 10px"
+                        >
+                          <label for="gender" style="margin-bottom: 0px"
+                            >Gender</label
+                          >
+                          <select
+                            formControlName="gender"
+                            id="gender"
+                            placeholder="Select gender"
+                            style="
+                              height: 50px;
+                              width: 100%;
+                              border: 1px solid #e9e9ef;
+                              border-radius: 5px;
+                              padding-left: 10px;
+                              padding-right: 10px;
+                            "
+                          >
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                          </select>
+                        </div>
+                        <div
+                          style="
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                          "
+                        >
+                          <div
+                            class="d-flex flex-column"
+                            style="margin-bottom: 10px; width: 30%"
+                          >
+                            <label for="county" style="margin-bottom: 0px"
+                              >County</label
+                            >
+                            <select
+                              formControlName="county_title"
+                              placeholder="Enter county"
+                              id="county"
+                              style="
+                                height: 50px;
+                                width: 100%;
+                                border: 1px solid #e9e9ef;
+                                border-radius: 5px;
+                                padding-left: 10px;
+                                padding-right: 10px;
+                              "
+                            >
+                              <option value="">Select county</option>
+                              <option
+                                *ngFor="let county of updateCounties"
+                                [value]="county.county_id"
+                              >
+                                {{ county.name }}
+                              </option>
+                            </select>
+                          </div>
+                          <div
+                            class="d-flex flex-column"
+                            style="margin-bottom: 10px; width: 30%"
+                          >
+                            <label for="subcounty" style="margin-bottom: 0px"
+                              >Subcounty</label
+                            >
+                            <select
+                              formControlName="sub_county_title"
+                              id="subcounty"
+                              style="
+                                height: 50px;
+                                width: 100%;
+                                border: 1px solid #e9e9ef;
+                                border-radius: 5px;
+                                padding-left: 10px;
+                                padding-right: 10px;
+                              "
+                            >
+                              <option value="">Select subcounty</option>
+                              <option
+                                *ngFor="let subCounty of updateSubcounties"
+                                [value]="subCounty.subCountyId"
+                              >
+                                {{ subCounty.name }}
+                              </option>
+                            </select>
+                          </div>
+                          <div
+                            class="d-flex flex-column"
+                            style="margin-bottom: 10px; width: 30%"
+                          >
+                            <label for="ward" style="margin-bottom: 0px"
+                              >Ward</label
+                            >
+                            <select
+                              formControlName="ward_name"
+                              id="ward"
+                              style="
+                                height: 50px;
+                                width: 100%;
+                                border: 1px solid #e9e9ef;
+                                border-radius: 5px;
+                                padding-left: 10px;
+                                padding-right: 10px;
+                              "
+                            >
+                              <option value="">Select ward</option>
+                              <option
+                                *ngFor="let subCounty of updateWards"
+                                [value]="subCounty.wardId"
+                              >
+                                {{ subCounty.name }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      style="
+                        width: 100%;
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                        display: flex;
+                        justify-content: end;
+                      "
+                    >
+                      <button
+                        type="submit"
+                        style="
+                          height: 50px;
+                          background-color: #1f6e50;
+                          border: none;
+                          border-radius: 5px;
+                          color: white;
+                          width: 20%;
+                        "
+                      >
+                        Update Farmer
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </ng-template>
+          </div>
         </ng-template>
       </ngx-datatable-column>
     </ngx-datatable>

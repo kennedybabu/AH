@@ -34,7 +34,7 @@ import { BackendInterceptor } from './backend.interceptor';
 import { CoursesModule } from './courses/courses.module';
 import { VlcModule } from './vlc/vlc.module';
 import { UsersService } from './users/users.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PaginationModule } from './pagination/pagination.module';
 import { HttpRequestInterceptor } from './http.interceptor';
@@ -75,7 +75,7 @@ export function createTranslateLoader(http: HttpClient): any {
     NgxSpinnerModule,
     CoursesModule,
     VlcModule,
-    // ReactiveFormsModule,
+    ReactiveFormsModule,
     FormsModule,
     CommonModule,
     PaginationModule,

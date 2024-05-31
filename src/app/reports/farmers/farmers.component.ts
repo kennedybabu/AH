@@ -15,6 +15,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { GroupsService } from 'src/app/groups/groups.services';
 import { FarmersService } from 'src/app/farmers/farmers.service';
 import { ColumnMode, NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UsersService } from 'src/app/users/users.service';
+import { CommonModule } from '@angular/common';
+import { Farmer } from 'src/app/core/models/user.model';
 
 @Component({
   selector: 'app-farmers',
@@ -25,6 +29,7 @@ import { ColumnMode, NgxDatatableModule } from '@swimlane/ngx-datatable';
     NgSelectModule,
     NgxDatatableModule,
     FormsModule,
+    CommonModule,
   ],
   templateUrl: './farmers.component.html',
   styleUrl: './farmers.component.scss',
@@ -40,6 +45,13 @@ export class FarmersComponent implements OnInit {
   rows = [];
   filteredArray = [];
   public currentPage: number = 1;
+  public updateFarmerForm!: FormGroup;
+
+  public updateCounties: County[] = [];
+  public updateSubcounties: SubCounty[] = [];
+  public updateWards: Ward[] = [];
+
+  public selectedFarmer!: Farmer;
 
   dataParams: any = {
     page_num: '',
@@ -50,7 +62,9 @@ export class FarmersComponent implements OnInit {
     private formBuilder: FormBuilder,
     private cdr: ChangeDetectorRef,
     private groupsService: GroupsService,
-    private farmersService: FarmersService
+    private farmersService: FarmersService,
+    private usersService: UsersService,
+    private modalService: NgbModal
   ) {}
 
   private formatDate(date: Date): string {
@@ -86,7 +100,37 @@ export class FarmersComponent implements OnInit {
       wardId: [[], Validators.required],
       groupId: [[], Validators.required],
     });
+
+    this.updateFarmerForm = this.formBuilder.group({
+      dob: [this.formatDate(new Date()), Validators.required],
+      gender: ['', Validators.required],
+      is_tot: null,
+      msisdn: ['', Validators.required],
+      id_number: ['', Validators.required],
+      last_name: ['', Validators.required],
+      ward_name: ['', Validators.required],
+      first_name: ['', Validators.required],
+      county_title: ['', Validators.required],
+      sub_county_title: ['', Validators.required],
+    });
     this.getUsers();
+
+    const countyControl = this.updateFarmerForm.get('county');
+    const subcountyControl = this.updateFarmerForm.get('subcounty');
+
+    if (countyControl) {
+      countyControl.valueChanges.subscribe((countyId) => {
+        this.updateSubcounties = this.usersService.fetchSubCounties(
+          Number(countyId)
+        );
+      });
+    }
+
+    if (subcountyControl) {
+      subcountyControl.valueChanges.subscribe((subcountyId) => {
+        this.updateWards = this.usersService.getWards(Number(subcountyId));
+      });
+    }
   }
   subCounties(event: Event) {
     if (this.searchForm) {
@@ -100,6 +144,28 @@ export class FarmersComponent implements OnInit {
     }
   }
 
+  centerModal(userModal: any, farmer: Farmer) {
+    this.selectedFarmer = farmer;
+
+    this.updateFarmerForm.patchValue({
+      dob: this.formatDate(new Date(this.selectedFarmer.dob)),
+      gender: this.selectedFarmer.gender,
+      is_tot: null,
+      msisdn: this.selectedFarmer.msisdn,
+      id_number: this.selectedFarmer.id_number,
+      last_name: this.selectedFarmer.last_name,
+      ward_name: this.selectedFarmer.ward_name,
+      first_name: this.selectedFarmer.first_name,
+      county_title: this.selectedFarmer.county_title,
+      sub_county_title: this.selectedFarmer.sub_county_title,
+    });
+    this.modalService.open(userModal, {
+      centered: true,
+      windowClass: 'modal-user-holder',
+      size: 'lg',
+    });
+  }
+
   // private formatDate(date: Date): string {
   //   let d = new Date(date),
   //       month = '' + (d.getMonth() + 1),
@@ -111,6 +177,7 @@ export class FarmersComponent implements OnInit {
 
   //   return [year, month, day].join('-');
   // }
+  handleSubmit(event: Event) {}
 
   onSubmit() {
     // this.spinner.show()
@@ -183,6 +250,9 @@ export class FarmersComponent implements OnInit {
         // this.spinner.hide()
       }
     });
+  }
+  getCounties(): void {
+    this.updateCounties = this.usersService.fetchCounties();
   }
 
   setPage(pageInfo: any) {
