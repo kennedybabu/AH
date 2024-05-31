@@ -16,7 +16,7 @@
                             <div class="flex-grow-1">
                                 <div>
                                     <h5 class="font-size-16 mb-1">Phyllis Gatlin</h5>
-                                    <p class="text-muted font-size-13">Full Stack Developer</p>
+                                    <p class="text-muted font-size-13">ToT</p>
 
                                     <div class="d-flex flex-wrap align-items-start gap-2 gap-lg-3 text-muted font-size-13">
                                         <div><i class="mdi mdi-circle-medium me-1 text-success align-middle"></i>Meru
@@ -30,8 +30,13 @@
                     </div>
                     <div class="col-sm-auto order-1 order-sm-2">
                         <div class="d-flex align-items-start justify-content-end gap-2">
-                            <div>
-                                <button type="button" class="btn btn-soft-light"><i class="me-1"></i> Message</button>
+                            <div class="gap-2 d-flex">
+                                <button type="button" class="btn btn-soft-light">
+                                    <i class="me-1"></i> Message
+                                </button>
+                                <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
+                                    data-bs-target=".bs-example-modal-center" (click)="centerModal(centerDataModal)">Update Profile
+                                </button>
                             </div>
                             <div>
                                 <div class="dropdown" ngbDropdown>
@@ -48,32 +53,153 @@
                                     <div class="card-body">
                                         <div>
                                             <!-- center modal -->
-                                            <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
+                                            <!-- <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
                                                 data-bs-target=".bs-example-modal-center" (click)="centerModal(centerDataModal)">Center
-                                                modal</button>
+                                                modal
+                                            </button> -->
                         
                                             <!--  Center modal example -->
-                                            <ng-template #centerDataModal let-modal>
+                                            <ng-template #centerDataModal let-modal class="container-fluid">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title mt-0">Center modal</h5>
+                                                    <h5 class="modal-title mt-0">Update Profile</h5>
                                                     <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"
                                                         aria-hidden="true"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>Cras mattis consectetur purus sit amet fermentum.
-                                                        Cras justo odio, dapibus ac facilisis in,
-                                                        egestas eget quam. Morbi leo risus, porta ac
-                                                        consectetur ac, vestibulum at eros.</p>
-                                                    <p>Praesent commodo cursus magna, vel scelerisque
-                                                        nisl consectetur et. Vivamus sagittis lacus vel
-                                                        augue laoreet rutrum faucibus dolor auctor.</p>
-                                                    <p class="mb-0">Aenean lacinia bibendum nulla sed consectetur.
-                                                        Praesent commodo cursus magna, vel scelerisque
-                                                        nisl consectetur et. Donec sed odio dui. Donec
-                                                        ullamcorper nulla non metus auctor
-                                                        fringilla.</p>
+                                                    <div class="card-body">
+                                                        <!-- <form> -->
+                                                          <div class="row">
+                                                        </div>
+                                                        <!-- </form>   -->
+                                                        <!-- <form> -->
+                                                            <div class="row">
+                                                                <!-- <div class="col-md-6">
+                                                                    <label for="example-datetime-local-input" class="form-label"
+                                                                      >End Date</label
+                                                                    >
+                                                                    <input
+                                                                      class="form-control"
+                                                                      type="date"
+                                                                      placeholder="End"
+                                                                      formControlName="end_date"
+                                                                      id="example-datetime-local-input"
+                                                                    />
+                                                                  </div> -->
+                                                                  <div class="col-md-6">
+                                                                    <label for="county">County</label>
+                                                                    <ng-select
+                                                                      id="county"
+                                                                      [items]="counties"
+                                                                      [multiple]="true"
+                                                                      (change)="subCounties($event)"
+                                                                      [virtualScroll]="true"
+                                                                      bindLabel="name"
+                                                                      bindValue="county_id"
+                                                                      placeholder="County"
+                                                                      formControlName="countyId"
+                                                                    >
+                                                                    </ng-select>
+                                                                  </div>
+                                                                  <div class="col-md-6">
+                                                                    <label for="county">Sub County</label>
+                                                                    <ng-select
+                                                                      id="county"
+                                                                      [items]="sub_counties"
+                                                                      [multiple]="true"
+                                                                      (change)="getWards($event)"
+                                                                      [virtualScroll]="true"
+                                                                      bindLabel="name"
+                                                                      bindValue="subCountyId"
+                                                                      placeholder="Sub County"
+                                                                      formControlName="subCountyId"
+                                                                    >
+                                                                    </ng-select>
+                                                                  </div>
+                                                                  <div class="col-md-6">
+                                                                    <label for="county">Ward</label>
+                                                                    <ng-select
+                                                                      id="county"
+                                                                      [items]="wards"
+                                                                      [multiple]="true"
+                                                                      [virtualScroll]="true"
+                                                                      bindLabel="name"
+                                                                      bindValue="wardId"
+                                                                      placeholder="Ward"
+                                                                      formControlName="wardId"
+                                                                    >
+                                                                    </ng-select>
+                                                                  </div>
+                                                                <div class="col-md-6">
+                                                                    <label>First Name</label>
+                                                                    <fieldset class="form-group position-relative">
+                                                                        <input type="text" class="form-control" name="first_name"  placeholder="First Name" [(ngModel)]="userObject.first_name">
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label>Last Name</label>
+                                                                    <fieldset class="form-group position-relative">
+                                                                        <input type="text" class="form-control"  placeholder="Last Name" name="lastName" [(ngModel)]="userObject.last_name"> 
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="col-md-6" *ngIf="userObject.email">
+                                                                  <label>Username</label>
+                                                                  <fieldset class="form-group position-relative">
+                                                                      <input type="text" class="form-control"  placeholder="Username" name="username" > 
+                                                                  </fieldset>
+                                                              </div>
+                                                                <div class="col-md-6" *ngIf="userObject.email">
+                                                                  <label>Email Address</label>
+                                                                  <fieldset class="form-group position-relative">
+                                                                      <input type="text" class="form-control"  placeholder="Email Address" name="email">                      
+                                                                  </fieldset>
+                                                              </div>
+                                                                <div class="col-md-6">
+                                                                    <label>ID NO</label>
+                                                                    <fieldset class="form-group position-relative">
+                                                                        <input type="text" class="form-control"  placeholder="National ID" name="idNumber" [(ngModel)]="userObject.id_number">                            
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label>Mobile No</label>
+                                                                    <fieldset class="form-group position-relative">
+                                                                        <input type="text" class="form-control"  placeholder="Primary Mobile No" name="msisdn" [(ngModel)]="userObject.msisdn">                            
+                                                                    </fieldset>
+                                                                </div>  
+                                                
+                                                                <div class="col-md-6">
+                                                                  <label>Gender</label>
+                                                                  <div class="form-group">
+                                                                    <ng-select [items]="genders" [virtualScroll]="true" bindLabel="name" bindValue="name" [(ngModel)]="userObject.gender"
+                                                                      placeholder="Select Gender" name="gender">
+                                                                    </ng-select>                                   
+                                                                  </div>
+                                                                </div>    
+                                                                <div class="col-md-6">
+                                                                  <label>DOB</label>
+                                                                  <div class="input-group">
+                                                                      <input class="form-control" placeholder="Date of Birth" ngbDatepicker name="dp" name="dob" [(ngModel)]="userObject.dob"
+                                                                          #d1="ngbDatepicker">
+                                                                      <div class="input-group-append">
+                                                                        <div class="input-group-text" (click)="d1.toggle()">
+                                                                          <i class="fa fa-calendar" style="cursor: pointer;"></i>
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                                </div>                         
+                                                                <div class="col-sm-1 d-flex" >
+                                                                    <button type="button"  type="submit" class="btn btn-warning mr-2" style="margin-top:25px" (click)="cancel()">Cancel</button>
+                                                                    <button type="button"  type="submit" class="btn btn-primary mr-2" style="margin-top:25px" (click)="update()">Update</button>
+                                                                </div>
+                                                            </div>
+                                                        <!-- </form>					 -->
+                                                      </div>
                                                 </div>
-                                            </ng-template><!-- /.modal -->
+                                                <!-- <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary waves-effect waves-light">Cancel</button>
+                                                    <button type="button" class="btn btn-primary waves-effect waves-light">Save</button>
+                                                </div> -->
+                                            </ng-template
+                                            ><!-- /.modal -->
                                         </div>
                                     </div>
                                 </div>
