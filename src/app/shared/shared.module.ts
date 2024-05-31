@@ -5,6 +5,7 @@ import { WidgetModule } from './widget/widget.module';
 import { PagetitleComponent } from './pagetitle/pagetitle.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ToastrModule } from 'ngx-toastr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // import { MatPaginatorModule} from '@angular/material/paginator';
 // import { MatSortModule} from '@angular/material/sort';
@@ -21,7 +22,8 @@ import { ToastrModule } from 'ngx-toastr';
     CommonModule,
     WidgetModule,
     NgxDatatableModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgbModule
     // MatFormFieldModule,
     // MatPaginatorModule,
     // MatPaginatorModule,
