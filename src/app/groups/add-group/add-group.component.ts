@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { GroupsService } from '../groups.services';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { counties } from 'src/app/shared/data/Counties';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -31,7 +32,8 @@ export class AddGroupComponent  implements OnInit {
   constructor(
     private groupsService:GroupsService,
     private cdr:ChangeDetectorRef,
-    private formBuilder:FormBuilder) {
+    private formBuilder:FormBuilder,
+    private toastr:ToastrService) {
       this.userId = sessionStorage.getItem('userId')
     }
 
@@ -65,6 +67,7 @@ export class AddGroupComponent  implements OnInit {
     this.groupsService.addGroup(data).subscribe(
       (res) => {
         if(res.statusCode == 201) {
+          this.toastr.success("Group Added", "Success")
           this.registerForm.reset()
           this.searchForm.reset() 
         }

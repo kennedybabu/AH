@@ -37,6 +37,7 @@ import { UsersService } from './users/users.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PaginationModule } from './pagination/pagination.module';
+import { HttpRequestInterceptor } from './http.interceptor';
 
 
 if (environment.defaultauth === 'firebase') {
@@ -80,6 +81,10 @@ export function createTranslateLoader(http: HttpClient): any {
     PaginationModule,
   ],
   providers: [
+    {provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true
+    },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     {

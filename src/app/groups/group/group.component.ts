@@ -47,12 +47,6 @@ export class GroupComponent implements OnInit {
     console.log(this.groupId)
 
     this.getGroupDetails()
-    this.breadCrumbItems = [
-      { label: 'Group' },
-      { label: `${this.group?.group_name}`, active: true }
-    ];
-
-    console.log(this.group)
     this.getGroupMembers()      
   }
 
@@ -63,7 +57,6 @@ export class GroupComponent implements OnInit {
         this.updateBreadcrumbs() 
         this.cdr.markForCheck()
       }
-      console.log(this.group.group_name)
     })
   }
 
@@ -90,8 +83,8 @@ export class GroupComponent implements OnInit {
 
   updateBreadcrumbs(){
     this.breadCrumbItems = [
-      { label: 'Group' },
-      { label: `${this.group?.group_name}`, active: true }
+      { label: 'Reports' },
+      { label: `Group`, active: true }
     ];
   }
 

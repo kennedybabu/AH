@@ -7,6 +7,7 @@ import { AuthenticationService } from '../../core/services/auth.service';
 import { AuthfakeauthenticationService } from '../../core/services/authfake.service';
 import { environment } from '../../../environments/environment';
 import { LAYOUT_MODE } from '../../layouts/layouts.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -30,11 +31,13 @@ export class LoginComponent implements OnInit {
   layout_mode!: string;
   fieldTextType!: boolean;
 
-  constructor(private formBuilder: UntypedFormBuilder,
+  constructor(
+    private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
     private authService: AuthfakeauthenticationService,
+    private toastr:ToastrService
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
@@ -68,10 +71,13 @@ export class LoginComponent implements OnInit {
 
     this.authenticationService.login(this.loginForm.value).subscribe((res) => {
       if(res.statusCode == 200) {
+        this.toastr.success('Success', 'Logged Succesfully')
         sessionStorage.setItem("token", res.message.access_token)
         sessionStorage.setItem("username", res.message.user_info.firstname)
         sessionStorage.setItem("id", res.message.user_info.userId)
         this.router.navigate(['/'])
+      } else {
+        this.toastr.error(res.message,"Error")
       }
     })
 

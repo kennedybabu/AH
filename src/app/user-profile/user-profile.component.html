@@ -43,11 +43,11 @@
           />
           <div class="d-flex flex-column">
             <p class="lh-sm" style="margin-bottom: 0px">
-              {{ user?.firstName }} {{ user?.lastName }}
+              {{ user.firstName }} {{ user.lastName }}
             </p>
-            <p class="lh-sm" style="margin-bottom: 20px">{{ user?.email }}</p>
+            <p class="lh-sm" style="margin-bottom: 20px">{{ user.email }}</p>
             <p class="lh-sm" style="margin-bottom: 0px">
-              #id: {{ user?.username }}
+              #id: {{ user.username }}
             </p>
           </div>
         </div>
@@ -140,27 +140,27 @@
             <div class="d-flex flex-column gap-3">
               <div class="d-flex flex-row align-items-center gap-2">
                 <p style="margin-bottom: 0px">First Name:</p>
-                <p style="margin-bottom: 0px">{{ user?.firstName }}</p>
+                <p style="margin-bottom: 0px">{{ user.firstName }}</p>
               </div>
               <div class="d-flex flex-row align-items-center gap-2">
                 <p style="margin-bottom: 0px">Last Name:</p>
-                <p style="margin-bottom: 0px">{{ user?.lastName }}</p>
+                <p style="margin-bottom: 0px">{{ user.lastName }}</p>
               </div>
               <div class="d-flex flex-row align-items-center gap-2">
                 <p style="margin-bottom: 0px">Gender:</p>
-                <p style="margin-bottom: 0px">{{ user?.gender }}</p>
+                <p style="margin-bottom: 0px">{{ user.gender }}</p>
               </div>
               <div class="d-flex flex-row align-items-center gap-2">
                 <p style="margin-bottom: 0px">ID Number:</p>
-                <p style="margin-bottom: 0px">{{ user?.idNumber }}</p>
+                <p style="margin-bottom: 0px">{{ user.idNumber }}</p>
               </div>
               <div class="d-flex flex-row align-items-center gap-2">
                 <p style="margin-bottom: 0px">Date of Birth:</p>
-                <p style="margin-bottom: 0px">{{ user?.dob }}</p>
+                <p style="margin-bottom: 0px">{{ user.dob }}</p>
               </div>
               <div class="d-flex flex-row align-items-center gap-2">
                 <p style="margin-bottom: 0px">Phone Number:</p>
-                <p style="margin-bottom: 0px">{{ user?.msisdn }}</p>
+                <p style="margin-bottom: 0px">{{ user.msisdn }}</p>
               </div>
               <div class="d-flex flex-row align-items-center gap-2">
                 <p style="margin-bottom: 0px">Status</p>
@@ -181,18 +181,18 @@
               <div class="d-flex flex-row align-items-center gap-2">
                 <p style="margin-bottom: 0px">County</p>
                 <p style="margin-bottom: 0px">
-                  {{ user?.countyTitle || "N/A" }}
+                  {{ user.countyTitle || "N/A" }}
                 </p>
               </div>
               <div class="d-flex flex-row align-items-center gap-2">
                 <p style="margin-bottom: 0px">Sub County:</p>
                 <p style="margin-bottom: 0px">
-                  {{ user?.subcountyTitle || "N/A" }}
+                  {{ user.subcountyTitle || "N/A" }}
                 </p>
               </div>
               <div class="d-flex flex-row align-items-center gap-2">
                 <p style="margin-bottom: 0px">Ward</p>
-                <p style="margin-bottom: 0px">{{ user?.wardTitle || "N/A" }}</p>
+                <p style="margin-bottom: 0px">{{ user.wardTitle || "N/A" }}</p>
               </div>
             </div>
           </div>

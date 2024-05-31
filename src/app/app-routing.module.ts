@@ -71,6 +71,13 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'tots',
+    component: LayoutComponent,
+    loadChildren: () =>
+      import('./tots/tots.module').then((m) => m.TotsModule),
+    canActivate: [AuthGuard],
+  },
+  {
     path: '**',
     component: PageNotFoundComponent,
   },
