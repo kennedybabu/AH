@@ -47,6 +47,8 @@ export class AddUserComponent implements OnInit {
       county: ['', Validators.required],
       subcounty: ['', Validators.required],
       ward: ['', Validators.required],
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
     });
   }
   private formatDate(date: Date): string {
@@ -91,7 +93,7 @@ export class AddUserComponent implements OnInit {
         lastName: this.userForm.value.lastName,
         gender: this.userForm.value.gender,
         idNumber: this.userForm.value.idNumber,
-        dob: this.userForm.value.dob,
+        dob: this.userForm.value.dateOfBirth,
         email: this.userForm.value.email,
         msisdn: this.userForm.value.phoneNumber,
         username: this.userForm.value.username,
@@ -100,14 +102,10 @@ export class AddUserComponent implements OnInit {
         wardId: this.userForm.value.ward,
       };
       console.log(formData);
-      try {
-        await this.usersService.createUser(formData);
+      await this.usersService.createUser(formData).subscribe((res) => {
         this.userForm.reset();
         this.toastr.success('Success', 'User added successfully');
-      } catch (error) {
-        console.error('Error creating user:', error);
-        this.toastr.error('Error', 'Failed to create user');
-      }
+      });
     }
   }
 

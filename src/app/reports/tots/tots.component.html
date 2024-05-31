@@ -66,112 +66,147 @@
             </button>
           </div> -->
 
-    <div class="card">
-        <div class="card-body">
-            <form [formGroup]="searchForm">
-                <div class="row">
-                    <div class="col-xl col-md-6">
-                        <label for="example-datetime-local-input" class="form-label"
-                          >Start Date</label
-                        >
-                        <input
-                          class="form-control"
-                          type="date"
-                          placeholder="Start"
-                          formControlName="startDate"
-                          id="example-datetime-local-input"
-                        />
-                      </div>
-                      <div class="col-xl-2 col-md-6">
-                        <label for="example-datetime-local-input" class="form-label"
-                          >End Date</label
-                        >
-                        <input
-                          class="form-control"
-                          type="date"
-                          placeholder="End"
-                          formControlName="endDate"
-                          id="example-datetime-local-input"
-                        />
-                      </div>
-                    <div class="col-xl col-md-6">
-                        <label>County</label>
-                        <div class="form-group">
-                            <ng-select 
-                            [items]="counties" 
-                            [multiple]="true" 
-                            (change)="subCounties($event)"  
-                            [virtualScroll]="true" 
-                            bindLabel="name" 
-                            bindValue="county_id"
-                            placeholder="Select County" 
-                            formControlName="countyId" 
-                            >
-                            </ng-select>                              
-                            </div>                      
-                    </div>
-                    <div class="col-xl col-md-6">
-                        <label>Sub County</label>
-                        <div class="form-group">
-                            <ng-select 
-                            [items]="sub_counties" [multiple]="true" (change)="filterWards($event)" [virtualScroll]="true" bindLabel="name" bindValue="subCountyId"
-                            placeholder="Select Sub-county" formControlName="subCountyId" >
-                            </ng-select>                            
-                        </div>                    
-                    </div>
-                    <div class="col-xl col-md-6">
-                        <label>Ward</label>
-                        <div class="form-group">
-                            <ng-select [items]="wards" [multiple]="true" [virtualScroll]="true" bindLabel="name" bindValue="wardId"
-                                placeholder="Select Ward" formControlName="wardId" >
-                            </ng-select>                              
-                        </div>                      
-                    </div>                        
-                    <div class="col-xl col-md-6 d-flex h-100 align-items-center">
-                        <button type="button" (click)="onSubmit()" style="margin-top: 25px;color: #e9ecef" class="btn w-100 secondary-color btn-block mt-medium"> <i class="ft-search mr-1"></i>Search</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-      <!-- </form> -->
-    </div>
-  </div>
-
   <div class="card">
-    <ngx-datatable
-      [rows]="rows"
-      [rowHeight]="50"
-      class="bootstrap core-bootstrap"
-      [columnMode]="ColumnMode.force"
-      [headerHeight]="50"
-      [footerHeight]="50"
-      [externalPaging]="true"
-      [count]="rows.length"
-      [offset]="dataParams.page_num"
-      [limit]="dataParams.page_size"
-      (page)="setPage($event)"
-    >
-      <ngx-datatable-column name="Name">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          {{ row.firstName }} {{ row.lastName }}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Mobile" prop="msisdn"></ngx-datatable-column>
-      <ngx-datatable-column
-        name="ID Number"
-        prop="idNumber"
-      ></ngx-datatable-column>
-      <ngx-datatable-column name="Details" prop="more">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          <button
-            (click)="view(row)"
-            class="round"
-            class="btn btn-sm btn-success"
-          >
-            <i class="fa-solid fa-user-group"></i> View Member
-          </button>
-        </ng-template>
-      </ngx-datatable-column>
-    </ngx-datatable>
+    <div class="card-body">
+      <form [formGroup]="searchForm">
+        <div class="d-flex align-items-center gap-1 row">
+          <div class="col-xl col-md-6">
+            <label for="example-datetime-local-input" class="form-label"
+              >Start Date</label
+            >
+            <input
+              class="form-control"
+              type="date"
+              placeholder="Start"
+              formControlName="startDate"
+              id="example-datetime-local-input"
+            />
+          </div>
+          <div class="col-xl-2 col-md-6">
+            <label for="example-datetime-local-input" class="form-label"
+              >End Date</label
+            >
+            <input
+              class="form-control"
+              type="date"
+              placeholder="End"
+              formControlName="endDate"
+              id="example-datetime-local-input"
+            />
+          </div>
+          <div class="col-xl col-md-6">
+            <label>County</label>
+            <div class="form-group">
+              <ng-select
+                [items]="counties"
+                [multiple]="true"
+                (change)="subCounties($event)"
+                [virtualScroll]="true"
+                bindLabel="name"
+                bindValue="county_id"
+                placeholder="Select County"
+                formControlName="countyId"
+              >
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-xl col-md-6">
+            <label>Sub County</label>
+            <div class="form-group">
+              <ng-select
+                [items]="sub_counties"
+                [multiple]="true"
+                (change)="filterWards($event)"
+                [virtualScroll]="true"
+                bindLabel="name"
+                bindValue="subCountyId"
+                placeholder="Select Sub-county"
+                formControlName="subCountyId"
+              >
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-xl col-md-6">
+            <label>Ward</label>
+            <div class="form-group">
+              <ng-select
+                [items]="wards"
+                [multiple]="true"
+                [virtualScroll]="true"
+                bindLabel="name"
+                bindValue="wardId"
+                placeholder="Select Ward"
+                formControlName="wardId"
+              >
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-xl col-md-6 d-flex h-100 align-items-center">
+            <button
+              type="button"
+              (click)="onSubmit()"
+              style="margin-top: 25px; color: #e9ecef"
+              class="btn w-100 secondary-color btn-block"
+            >
+              <i class="ft-search mr-1"></i>Search
+            </button>
+          </div>
+        </div>
+      </form>
+      <div style="margin-top: 20px; margin-bottom: 10px; width: 100%">
+        <input
+          type="text"
+          placeholder="Search a farmer id, name and email"
+          style="
+            border: 1px solid #e9e9ef;
+            border-radius: 5px;
+            width: 100%;
+            height: 40px;
+            padding-left: 10px;
+            padding-right: 10px;
+          "
+        />
+      </div>
+    </div>
+    <!-- </form> -->
   </div>
+</div>
+
+<div class="card">
+  <ngx-datatable
+    [rows]="rows"
+    [rowHeight]="50"
+    class="bootstrap core-bootstrap"
+    [columnMode]="ColumnMode.force"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [externalPaging]="true"
+    [count]="rows.length"
+    [offset]="dataParams.page_num"
+    [limit]="dataParams.page_size"
+    (page)="setPage($event)"
+  >
+    <ngx-datatable-column name="Name">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{ row.firstName }} {{ row.lastName }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Mobile" prop="msisdn"></ngx-datatable-column>
+    <ngx-datatable-column
+      name="ID Number"
+      prop="idNumber"
+    ></ngx-datatable-column>
+    <ngx-datatable-column name="Details" prop="more">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <button
+          (click)="view(row)"
+          class="round"
+          class="btn btn-sm btn-success"
+        >
+          <i class="fa-solid fa-user-group"></i> View Member
+        </button>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>
 <!-- </div> -->
