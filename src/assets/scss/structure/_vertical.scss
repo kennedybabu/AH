@@ -92,7 +92,7 @@
         padding: 0.62rem 1.5rem;
         color: $sidebar-menu-item-color;
         position: relative;
-        font-size: 1rem;
+        font-size: 1.1rem;
         transition: all 0.4s;
         font-weight: $font-weight-medium;
 
@@ -165,7 +165,7 @@
   padding: 12px 20px !important;
   pointer-events: none;
   cursor: default;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--#{$prefix}sidebar-menu-item-icon-color);
   font-weight: $font-weight-medium;
 }
