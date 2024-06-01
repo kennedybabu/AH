@@ -135,6 +135,11 @@
       [limit]="dataParams.page_size"
       (page)="setPage($event)"
     >
+      <ngx-datatable-column name="Export">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <input type="checkbox" name="export" id="export" />
+        </ng-template>
+      </ngx-datatable-column>
       <ngx-datatable-column name="Name">
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row.first_name }} {{ row.last_name }}
