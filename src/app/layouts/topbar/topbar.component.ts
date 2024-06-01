@@ -91,7 +91,6 @@ export class TopbarComponent implements OnInit {
     this.mode = mode;
     this.eventService.broadcast('changeMode', mode);
   }
-
   /**
    * Toggle the menu bar when having mobile screen
    */
@@ -99,7 +98,6 @@ export class TopbarComponent implements OnInit {
     event.preventDefault();
     this.mobileMenuButtonClicked.emit();
   }
-
   /**
    * Toggles the right sidebar
    */

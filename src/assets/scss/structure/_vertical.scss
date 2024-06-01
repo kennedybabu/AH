@@ -35,10 +35,14 @@
 .vertical-menu {
   width: $sidebar-width;
   z-index: 1001;
-  background: var(--#{$prefix}sidebar-bg);
-  // background: linear-gradient(to bottom, rgba(243, 192, 111, 0.5), rgba(106, 114, 65, 0.5)),
-  //   url("https://cdn.pixabay.com/photo/2017/07/01/19/48/background-2462431_1280.jpg")
-  //     repeat center top;
+  background: linear-gradient(
+      135deg,
+      rgba(250, 195, 106, 0.95),
+      rgba(24, 73, 41, 0.95)
+    ),
+    url("https://ah.egroup.co.ke/admin/assets/img/sidebar-bg/02.jpg") repeat-x
+      center top;
+  background-size: cover;
   bottom: 0;
   margin-top: 0;
   position: fixed;
@@ -82,12 +86,13 @@
 
   ul {
     li {
+      margin-bottom: 10px;
       a {
         display: block;
         padding: 0.62rem 1.5rem;
         color: $sidebar-menu-item-color;
         position: relative;
-        font-size: 0.9rem;
+        font-size: 1rem;
         transition: all 0.4s;
         font-weight: $font-weight-medium;
 
@@ -101,23 +106,20 @@
           color: var(--#{$prefix}sidebar-menu-item-icon-color);
           transition: all 0.4s;
         }
-
         svg {
-          height: 16px;
-          width: 16px;
+          height: 20px;
+          width: 20px;
           color: var(--#{$prefix}sidebar-menu-item-icon-color);
           fill: var(--#{$prefix}sidebar-menu-item-icon-effact-color);
           margin-right: 10px;
           margin-top: -3px;
         }
-
         &:hover {
           color: var(--#{$prefix}sidebar-menu-item-hover-color);
 
           i {
             color: var(--#{$prefix}sidebar-menu-item-hover-color);
           }
-
           svg {
             color: var(--#{$prefix}sidebar-menu-item-hover-color);
             fill: var(--#{$prefix}sidebar-menu-item-hover-effact-color);

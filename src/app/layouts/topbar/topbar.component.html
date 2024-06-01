@@ -27,7 +27,6 @@
         class="btn btn-sm px-3 font-size-16 header-item"
         id="vertical-menu-btn"
         (click)="toggleMobileMenu($event)"
-        style="display: flex; align-items: center;"
       >
         <i class="fa fa-fw fa-bars"></i>
       </button>
@@ -269,47 +268,37 @@
                     <i-feather name="settings" class="icon-lg"></i-feather>
                 </button>
             </div> -->
-
-      <div class="dropdown d-inline-block" ngbDropdown>
-        <button
-          type="button"
-          class="btn header-item topbar-light bg-light-subtle border-start border-end"
-          id="page-header-user-dropdown"
-          data-bs-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-          ngbDropdownToggle
-        >
-          <img
-            class="rounded-circle header-profile-user"
-            src="assets/images/users/avatar-1.jpg"
-            alt="Header Avatar"
-          />
-          <span class="d-none d-xl-inline-block ms-1 fw-medium">{{ username }}</span>
-          <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
-        </button>
-        <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
-          <!-- item-->
-          <a class="dropdown-item" routerLink="/apps/profile"
-            ><i class="mdi mdi-face-man font-size-16 align-middle me-1"></i>
-            Profile</a
-          >
-          <a class="dropdown-item" routerLink="/account/lock-screen"
-            ><i class="mdi mdi-lock font-size-16 align-middle me-1"></i> Lock
-            screen</a
-          >
-          <div class="dropdown-divider"></div>
-          <a
-            class="dropdown-item"
-            href="javascript: void(0);"
-            (click)="logout()"
-            ><i
-              class="mdi mdi-logout text-muted font-size-16 align-middle me-1"
-            ></i>
-            <span class="align-middle" key="t-logout">{{
-              "MENUITEMS.AUTHENTICATION.LIST.LOGOUT" | translate
-            }}</span></a
-          >
+      <div class="row">
+        <div class="col">
+          <div ngbDropdown class="d-inline-block h-100" style="border: none">
+            <button
+              style="border: none; width: 200px"
+              class="h-100"
+              id="dropdownBasic1"
+              ngbDropdownToggle
+            >
+              <img
+                class="rounded-circle header-profile-user"
+                src="https://e7.pngegg.com/pngimages/84/165/png-clipart-united-states-avatar-organization-information-user-avatar-service-computer-wallpaper-thumbnail.png"
+                alt="Header Avatar"
+                style="margin-right: 10px"
+              />
+              {{ username }}
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button style="width: 190px" ngbDropdownItem>
+                <a class="dropdown-item" routerLink="/apps/profile">Profile</a>
+              </button>
+              <button style="width: 190px" ngbDropdownItem>
+                <a class="dropdown-item" routerLink="/account/lock-screen"
+                  >Lock Screen</a
+                >
+              </button>
+              <button style="width: 190px" (click)="logout()" ngbDropdownItem>
+                <span class="dropdown-item">Logout</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,5 +1,10 @@
-
-import { Component, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 import { MENU } from './menu';
@@ -13,7 +18,7 @@ import { EventService } from '../../core/services/event.service';
 import { environment } from '../../../environments/environment';
 import { AuthenticationService } from '../../core/services/auth.service';
 import { AuthfakeauthenticationService } from '../../core/services/authfake.service';
-import { LAYOUT_MODE } from "../layouts.model";
+import { LAYOUT_MODE } from '../layouts.model';
 
 @Component({
   selector: 'app-horizontaltopbar',
@@ -25,7 +30,6 @@ import { LAYOUT_MODE } from "../layouts.model";
  * Horizontal-Topbar Component
  */
 export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
-  
   mode: string | undefined;
   layoutMode!: string;
 
@@ -39,7 +43,7 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
   /**
    * Language Listing
    */
-   listLang = [
+  listLang = [
     { text: 'English', flag: 'assets/images/flags/us.jpg', lang: 'en' },
     { text: 'Spanish', flag: 'assets/images/flags/spain.jpg', lang: 'es' },
     { text: 'German', flag: 'assets/images/flags/germany.jpg', lang: 'de' },
@@ -57,7 +61,7 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
     public _cookiesService: CookieService,
     private eventService: EventService,
     private authService: AuthenticationService,
-    private authFackservice: AuthfakeauthenticationService,
+    private authFackservice: AuthfakeauthenticationService
   ) {
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -69,7 +73,7 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
   /***
    * Language Value Set
    */
-   setLanguage(text: string, lang: string, flag: string) {
+  setLanguage(text: string, lang: string, flag: string) {
     this.countryName = text;
     this.flagvalue = flag;
     this.cookieValue = lang;
@@ -84,12 +88,14 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
      * Language value cookies wise set
      */
     this.cookieValue = this._cookiesService.get('lang');
-    const val = this.listLang.filter(x => x.lang === this.cookieValue);
-    this.countryName = val.map(element => element.text);
+    const val = this.listLang.filter((x) => x.lang === this.cookieValue);
+    this.countryName = val.map((element) => element.text);
     if (val.length === 0) {
-      if (this.flagvalue === undefined) { this.valueset = 'assets/images/flags/us.jpg'; }
+      if (this.flagvalue === undefined) {
+        this.valueset = 'assets/images/flags/us.jpg';
+      }
     } else {
-      this.flagvalue = val.map(element => element.flag);
+      this.flagvalue = val.map((element) => element.flag);
     }
   }
 
@@ -146,13 +152,13 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
   /**
    * Topbar Light-Dark Mode Change
    */
-   changeMode(mode: string) {
+  changeMode(mode: string) {
     this.mode = mode;
     this.layoutMode = mode;
     this.eventService.broadcast('changeMode', mode);
   }
 
- /**
+  /**
    * Toggle the menu bar when having mobile screen
    */
   toggleMobileMenu(event: any) {
@@ -252,7 +258,7 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
   /**
    * Logout the user
    */
-   logout() {
+  logout() {
     if (environment.defaultauth === 'firebase') {
       this.authService.logout();
     } else {
@@ -260,6 +266,4 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
     }
     this.router.navigate(['/account/login']);
   }
-
-
 }
