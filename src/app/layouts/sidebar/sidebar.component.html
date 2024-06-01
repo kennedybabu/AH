@@ -8,7 +8,9 @@
         @for (item of menuItems; track $index) {
         <ng-container>
           @if(item.isTitle){
-          <li class="menu-title">{{ item.label | translate }}</li>
+          <li class="menu-title">
+            {{ item.label | translate }}
+          </li>
           }@else if (!item.isTitle && !item.isLayout) {
           <li>
             @if(hasItems(item)){

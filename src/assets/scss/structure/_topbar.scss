@@ -9,6 +9,14 @@
   left: 0;
   z-index: 1054;
   background-color: var(--#{$prefix}header-bg);
+  // background: linear-gradient(
+  //   to right,
+  //   rgba(243, 192, 111, 0.5),
+  //   rgba(106, 114, 65, 0.5)
+  // ) !important;
+  // background: linear-gradient(rgba(251, 171, 61, 0.5), rgba(251, 171, 61, 0.2)),
+  //   url("https://cdn.pixabay.com/photo/2017/07/01/19/48/background-2462431_1280.jpg")
+  //     repeat center top;
   border-bottom: 1px solid var(--#{$prefix}border-color);
 }
 
@@ -31,9 +39,10 @@
 .navbar-brand-box {
   padding: 0 1.5rem;
   width: $navbar-brand-box-width;
-  background: var(--#{$prefix}sidebar-bg);
+  // background: var(--#{$prefix}sidebar-bg);
+  background: rgba(243, 192, 111, 0.5),;
   border-right: 1px solid $sidebar-border-color;
-  box-shadow: 0px 2px 2px var(--#{$prefix}sidebar-bg);
+  // box-shadow: 0px 2px 2px var(--#{$prefix}sidebar-bg);
 }
 
 .logo {
