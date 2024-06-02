@@ -39,7 +39,7 @@ export class UsersComponent implements OnInit {
 
   public users: UserInfo[] = [];
   public size: number = 1;
-  public limit: number = 20;
+  public limit: number = 10;
   public totalUsers: number = 0;
   public selectedExportOption: string = 'CSV';
   public searchText: string = '';

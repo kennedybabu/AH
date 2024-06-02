@@ -470,12 +470,19 @@
     >
       <p>Showing 1 to {{ limit }} of 11 entries</p>
       <div>
-        <app-pagination
+        <!-- <app-pagination
           [currentPage]="size"
           [itemsPerPage]="limit"
           [totalItems]="totalUsers"
           (pageChange)="onPageChange($event)"
-        ></app-pagination>
+        ></app-pagination> -->
+        <ngb-pagination
+          (pageChange)="onPageChange($event)"
+          [collectionSize]="totalUsers"
+          [(page)]="size"
+          [maxSize]="5"
+          [boundaryLinks]="true"
+        />
       </div>
     </div>
   </div>

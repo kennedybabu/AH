@@ -444,7 +444,7 @@ export class DashboardComponent implements OnInit {
         if(res.statusCode == 200) {
             this.searchedStat = res.message.message 
             this.totalMembers = res.message.message.members[0] 
-            this.totalIncome = this.searchedStat.incomes[0]
+            this.totalIncome =  this.searchedStat.incomes[0]
             this.cdr.markForCheck()
         }
     })
