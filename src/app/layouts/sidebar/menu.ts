@@ -55,7 +55,7 @@ export const MENU: MenuItem[] = [
   {
     id: 9,
     label: 'Groups',
-    icon: 'users',
+    icon: 'user-plus',
     subItems: [
       {
         id: 10,
@@ -74,7 +74,7 @@ export const MENU: MenuItem[] = [
   {
     id: 12,
     label: 'Seeds Distribution',
-    icon: 'file-text',
+    icon: 'cpu',
     subItems: [
       {
         id: 13,
