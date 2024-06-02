@@ -43,6 +43,7 @@ export class AddUserComponent implements OnInit {
       idNumber: ['', Validators.required],
       dateOfBirth: [this.formatDate(new Date()), Validators.required],
       phoneNumber: ['', Validators.required],
+      role: ['', Validators.required],
       gender: ['', Validators.required],
       county: ['', Validators.required],
       subcounty: ['', Validators.required],
@@ -98,14 +99,19 @@ export class AddUserComponent implements OnInit {
         msisdn: this.userForm.value.phoneNumber,
         username: this.userForm.value.username,
         password: this.userForm.value.password,
-        userTypeId: this.userForm.value.userTypeId,
+        userTypeId: this.userForm.value.role,
         wardId: this.userForm.value.ward,
       };
-      console.log(formData);
-      await this.usersService.createUser(formData).subscribe((res) => {
-        this.userForm.reset();
-        this.toastr.success('Success', 'User added successfully');
-      });
+      await this.usersService.createUser(formData).subscribe(
+        (res) => {
+          this.userForm.reset();
+          this.toastr.success('Success', 'User added successfully');
+        },
+        (error) => {
+          console.error('Error:', error);
+          this.toastr.error('Error', 'Failed to add user');
+        }
+      );
     }
   }
 
