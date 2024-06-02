@@ -137,7 +137,7 @@ export class UsersComponent implements OnInit {
     }
   }
   navigateToProfile(user: UserInfo) {
-    this.router.navigate(['/users', user?.email]);
+    this.router.navigate(['/users', user?.msisdn]);
   }
   navigateToAddUser() {
     this.router.navigate(['/users/add-user']);

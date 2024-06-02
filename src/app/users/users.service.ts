@@ -28,9 +28,9 @@ export class UsersService {
       .pipe(map((response) => response.message));
   }
 
-  getUserProfile(email: string) {
+  getUserProfile(id: string) {
     return this.http
-      .get<{ message: UserInfo }>(`${endpoint}users/get/${email}`)
+      .get<{ message: UserInfo }>(`${endpoint}users/fetch?msisdn=${id}`)
       .pipe(map((response) => response?.message));
   }
 

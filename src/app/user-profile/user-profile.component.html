@@ -19,7 +19,7 @@
       justify-content: space-between;
     "
   >
-    <div style="height: 200px; border: 1px solid #e9e9ef">
+    <div style="height: 200px; background-color: white">
       <div
         style="
           height: 70%;
@@ -64,18 +64,6 @@
           >
             Message
           </button>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 20 20"
-          >
-            <g fill="#e9e9ef">
-              <circle cx="5" cy="10" r="2" />
-              <circle cx="10" cy="10" r="2" />
-              <circle cx="15" cy="10" r="2" />
-            </g>
-          </svg>
         </div>
       </div>
       <div
@@ -107,7 +95,7 @@
         </p>
       </div>
     </div>
-    <div style="border: 1px solid #e9e9ef; height: 390px">
+    <div style="height: 390px; background-color: white">
       <div
         style="
           height: 10%;
@@ -166,6 +154,12 @@
                 <p style="margin-bottom: 0px">Status</p>
                 <p style="margin-bottom: 0px">Active</p>
               </div>
+              <div class="d-flex flex-row align-items-center gap-2">
+                <p style="margin-bottom: 0px">Role</p>
+                <p style="margin-bottom: 0px">
+                  {{ user?.userTypeId === 1 ? "Admin" : "Tot" }}
+                </p>
+              </div>
             </div>
           </div>
           <div
@@ -203,5 +197,11 @@
       </div>
     </div>
   </div>
-  <div style="width: 28%; border: 1px solid #e9e9ef; height: 600px"></div>
+  <div
+    style="
+      width: 28%;
+      height: 600px;
+      background-color: white;
+    "
+  ></div>
 </div>
