@@ -61,4 +61,8 @@ export class UsersService {
       .get<{ message: Ward }>(`${endpoint}wards/get/id/${id}`)
       .pipe(map((response) => response?.message));
   }
+
+  updateUser(username: string, payload: Partial<NewUser>) {
+    return this.http.put(endpoint + 'users/update/' + username, payload);
+  }
 }

@@ -19,6 +19,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from 'src/app/users/users.service';
 import { CommonModule } from '@angular/common';
 import { Farmer } from 'src/app/core/models/user.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-farmers',
@@ -64,7 +65,8 @@ export class FarmersComponent implements OnInit {
     private groupsService: GroupsService,
     private farmersService: FarmersService,
     private usersService: UsersService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private toastr: ToastrService
   ) {}
 
   private formatDate(date: Date): string {
@@ -104,6 +106,7 @@ export class FarmersComponent implements OnInit {
     this.updateFarmerForm = this.formBuilder.group({
       dob: [this.formatDate(new Date()), Validators.required],
       gender: ['', Validators.required],
+      disabled: ['', Validators.required],
       is_tot: null,
       msisdn: ['', Validators.required],
       id_number: ['', Validators.required],
@@ -150,6 +153,7 @@ export class FarmersComponent implements OnInit {
     this.updateFarmerForm.patchValue({
       dob: this.formatDate(new Date(this.selectedFarmer.dob)),
       gender: this.selectedFarmer.gender,
+      disabled: this.selectedFarmer.is_disabled,
       is_tot: null,
       msisdn: this.selectedFarmer.msisdn,
       id_number: this.selectedFarmer.id_number,
@@ -177,7 +181,34 @@ export class FarmersComponent implements OnInit {
 
   //   return [year, month, day].join('-');
   // }
-  handleSubmit(event: Event) {}
+  async handleSubmit(event: Event) {
+    event.preventDefault();
+    if (this.updateFarmerForm.valid) {
+      const formData = {
+        firstName: this.updateFarmerForm.value.firstName,
+        lastName: this.updateFarmerForm.value.lastName,
+        gender: this.updateFarmerForm.value.gender,
+        idNumber: this.updateFarmerForm.value.idNumber,
+        dob: this.updateFarmerForm.value.dateOfBirth,
+        email: this.updateFarmerForm.value.email,
+        msisdn: this.updateFarmerForm.value.phoneNumber,
+        username: this.updateFarmerForm.value.username,
+        userTypeId: this.updateFarmerForm.value.role,
+      };
+      await this.usersService
+        .updateUser(this.selectedFarmer?.id_number, formData)
+        .subscribe(
+          (res) => {
+            this.updateFarmerForm.reset();
+            this.toastr.success('Success', 'User updated successfully');
+          },
+          (error) => {
+            console.error('Error:', error);
+            this.toastr.error('Error', 'Failed to update user');
+          }
+        );
+    }
+  }
 
   onSubmit() {
     // this.spinner.show()

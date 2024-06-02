@@ -17,6 +17,7 @@ import { County } from '../shared/data/county.model';
 import { SubCounty } from '../shared/data/subCounty.model';
 import { Ward } from '../shared/data/ward.model';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-users',
@@ -54,7 +55,8 @@ export class UsersComponent implements OnInit {
     private fb: FormBuilder,
     private usersService: UsersService,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private toastr: ToastrService
   ) {
     this.updateUserForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -68,6 +70,7 @@ export class UsersComponent implements OnInit {
       countyTitle: ['', Validators.required],
       subcountyTitle: ['', Validators.required],
       wardTitle: ['', Validators.required],
+      role: ['', Validators.required],
     });
   }
 
@@ -108,6 +111,7 @@ export class UsersComponent implements OnInit {
       countyTitle: user.countyTitle,
       subcountyTitle: user.subcountyTitle,
       wardTitle: user?.wardTitle,
+      role: user?.userTypeId,
     });
     this.modalService.open(userModal, {
       centered: true,
@@ -138,8 +142,33 @@ export class UsersComponent implements OnInit {
   navigateToAddUser() {
     this.router.navigate(['/users/add-user']);
   }
-  handleSubmit(event: Event) {
+  async handleSubmit(event: Event) {
     event.preventDefault();
+    if (this.updateUserForm.valid) {
+      const formData = {
+        firstName: this.updateUserForm.value.firstName,
+        lastName: this.updateUserForm.value.lastName,
+        gender: this.updateUserForm.value.gender,
+        idNumber: this.updateUserForm.value.idNumber,
+        dob: this.updateUserForm.value.dateOfBirth,
+        email: this.updateUserForm.value.email,
+        msisdn: this.updateUserForm.value.phoneNumber,
+        username: this.updateUserForm.value.username,
+        userTypeId: this.updateUserForm.value.role,
+      };
+      await this.usersService
+        .updateUser(this.selectedUser?.username, formData)
+        .subscribe(
+          (res) => {
+            this.updateUserForm.reset();
+            this.toastr.success('Success', 'User updated successfully');
+          },
+          (error) => {
+            console.error('Error:', error);
+            this.toastr.error('Error', 'Failed to update user');
+          }
+        );
+    }
   }
   fetchUsers() {
     this.usersService.getUsers(this.size, this.limit).subscribe(
