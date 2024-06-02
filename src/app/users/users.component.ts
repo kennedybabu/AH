@@ -174,7 +174,7 @@ export class UsersComponent implements OnInit {
     this.usersService.getUsers(this.size, this.limit).subscribe(
       (data: UserInfo[]) => {
         this.users = data;
-        this.totalUsers = 200;
+        this.totalUsers = 350;
       },
       (error) => {
         console.error('Error fetching users:', error);
