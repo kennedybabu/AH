@@ -38,7 +38,7 @@ export class UsersComponent implements OnInit {
 
   public users: UserInfo[] = [];
   public size: number = 1;
-  public limit: number = 10;
+  public limit: number = 20;
   public totalUsers: number = 0;
   public selectedExportOption: string = 'CSV';
   public searchText: string = '';
@@ -145,7 +145,7 @@ export class UsersComponent implements OnInit {
     this.usersService.getUsers(this.size, this.limit).subscribe(
       (data: UserInfo[]) => {
         this.users = data;
-        this.totalUsers = data.length;
+        this.totalUsers = 200;
       },
       (error) => {
         console.error('Error fetching users:', error);
