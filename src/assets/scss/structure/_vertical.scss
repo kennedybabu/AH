@@ -53,8 +53,8 @@
 .main-content {
   margin-left: $sidebar-width;
   background-color: #E5E4E2;
+  min-height: 100vh;
   overflow: hidden;
-
   .content {
     padding: 0 15px 10px 15px;
     margin-top: $header-height;
