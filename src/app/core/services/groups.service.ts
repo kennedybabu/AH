@@ -60,4 +60,13 @@ export class GroupsService {
       .get(endpoint + 'members/' + data + '?page=1&size=15')
       .pipe(map(this.extractData));
   }
+
+  getSeedDistributionReport(page_number: any, page_size: any, payload: any) {
+    const params = new HttpParams()
+      .set('page', page_number.toString())
+      .set('size', page_size.toString());
+    return this.http
+      .post(endpoint + 'reports/seed-distribution-overview', payload)
+      .pipe(map(this.extractData));
+  }
 }
