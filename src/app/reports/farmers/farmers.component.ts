@@ -265,7 +265,9 @@ export class FarmersComponent implements OnInit {
     }
   }
 
-  view(row: any) {}
+  view(row: any) {
+    
+  }
 
   getUsers() {
     // this.spinner.show()
