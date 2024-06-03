@@ -89,29 +89,42 @@ export class AddUserComponent implements OnInit {
   async handleSubmit(event: Event): Promise<void> {
     event.preventDefault();
     if (this.userForm.valid) {
-      const formData = {
-        firstName: this.userForm.value.firstName,
-        lastName: this.userForm.value.lastName,
-        gender: this.userForm.value.gender,
-        idNumber: this.userForm.value.idNumber,
-        dob: this.userForm.value.dateOfBirth,
-        email: this.userForm.value.email,
-        msisdn: this.userForm.value.phoneNumber,
-        username: this.userForm.value.username,
-        password: this.userForm.value.password,
-        userTypeId: this.userForm.value.role,
-        wardId: this.userForm.value.ward,
-      };
-      await this.usersService.createUser(formData).subscribe(
-        (res) => {
-          this.userForm.reset();
-          this.toastr.success('Success', 'User added successfully');
-        },
-        (error) => {
-          console.error('Error:', error);
-          this.toastr.error('Error', 'Failed to add user');
-        }
-      );
+      if (
+        this.userForm.value.password === this.userForm.value.confirmPassword
+      ) {
+        const formData = {
+          firstName: this.userForm.value.firstName,
+          lastName: this.userForm.value.lastName,
+          gender: this.userForm.value.gender,
+          idNumber: this.userForm.value.idNumber,
+          dob: this.userForm.value.dateOfBirth,
+          email: this.userForm.value.email,
+          msisdn: this.userForm.value.phoneNumber,
+          username: this.userForm.value.username,
+          password: this.userForm.value.password,
+          userTypeId: this.userForm.value.role,
+          wardId: this.userForm.value.ward,
+        };
+        await this.usersService.createUser(formData).subscribe(
+          (res: any) => {
+            console.log(res);
+            if (res?.statusCode === 200) {
+              this.userForm.reset();
+              this.toastr.success('Success', 'User added successfully');
+            } else {
+              this.toastr.error('Error', res.message);
+            }
+          },
+          (error) => {
+            console.error('Error:', error);
+            this.toastr.error('Error', 'Failed to add user');
+          }
+        );
+      } else {
+        this.toastr.error('Error', 'Passwords do not match');
+      }
+    } else {
+      this.toastr.error('Error', 'Fill all the field values');
     }
   }
 

@@ -45,7 +45,7 @@ export class AddFarmerComponent implements OnInit {
     private farmersService: FarmersService,
     private groupsService: GroupsService,
     private vlcService: VlcService,
-    private toastr:ToastrService
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -63,7 +63,7 @@ export class AddFarmerComponent implements OnInit {
       lastName: ['', Validators.required],
       groupId: ['', Validators.required],
       idNumber: ['', Validators.required],
-      dob: ['', Validators.required],
+      dob: [this.formatDate(new Date()), Validators.required],
       gender: ['', Validators.required],
       valueChains: ['', Validators.required],
       disabled: ['', Validators.required],
@@ -81,6 +81,17 @@ export class AddFarmerComponent implements OnInit {
     //     })
     // }
     this.getWardGroups();
+  }
+  private formatDate(date: Date): string {
+    let d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
   }
 
   getWardGroups() {
@@ -144,7 +155,7 @@ export class AddFarmerComponent implements OnInit {
       // this.spinner.hide();
       // this.toastr.success('Added Successfully','Success');
       this.registerForm.reset();
-      this.toastr.success("Success", "Farmer Added")
+      this.toastr.success('Success', 'Farmer Added');
     });
   }
 
