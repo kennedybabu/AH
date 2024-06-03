@@ -115,7 +115,7 @@ export const MENU: MenuItem[] = [
       },
       {
         id: 19,
-        label: 'Seeds Distribution',
+        label: 'Seeds Distribution Report',
         link: '/reports/seeds-distribution',
         parentId: 13,
       },

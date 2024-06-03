@@ -15,7 +15,10 @@ import { SubCounty } from 'src/app/shared/data/subCounty.model';
 import { Ward } from 'src/app/shared/data/ward.model';
 import { counties } from 'src/app/shared/data/Counties';
 import { Route, Router } from '@angular/router';
-import { Tot } from 'src/app/core/models/tot.model';
+import { Tot, Trainer } from 'src/app/core/models/tot.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
+import { UsersService } from 'src/app/users/users.service';
 
 @Component({
   selector: 'app-tots',
@@ -26,6 +29,7 @@ import { Tot } from 'src/app/core/models/tot.model';
     NgSelectModule,
     NgxDatatableModule,
     FormsModule,
+    CommonModule,
   ],
   templateUrl: './tots.component.html',
   styleUrl: './tots.component.scss',
@@ -39,6 +43,9 @@ export class TotsComponent implements OnInit {
   wards: Ward[] = [];
   ColumnMode = ColumnMode;
   rows = [];
+  public selectedTrainer: Partial<Trainer> = {};
+
+  updateForm!: FormGroup;
 
   dataParams: any = {
     page_num: '',
@@ -49,7 +56,9 @@ export class TotsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private cdr: ChangeDetectorRef,
     private totsService: TotsService,
-    private router: Router
+    private usersService: UsersService,
+    private router: Router,
+    private modalService: NgbModal
   ) {}
   ngOnInit(): void {
     const date = new Date();
@@ -72,7 +81,55 @@ export class TotsComponent implements OnInit {
       wardId: [[], Validators.required],
     });
 
+    this.updateForm = this.formBuilder.group({
+      dob: ['', Validators.required],
+      email: ['', Validators.required],
+      gender: ['', Validators.required],
+      msisdn: ['', Validators.required],
+      idNumber: ['', Validators.required],
+      lastName: ['', Validators.required],
+      firstName: ['', Validators.required],
+      wardTitle: ['', Validators.required],
+      countyTitle: ['', Validators.required],
+      subCountyTitle: ['', Validators.required],
+    });
+
     this.getUsers();
+  }
+
+  handleSubmit(event: Event) {}
+
+  centerModal(userModal: any, trainer: Trainer) {
+    this.selectedTrainer = trainer;
+
+    if (this.selectedTrainer.countyId !== undefined) {
+      this.sub_counties = this.fetchSubcounties(this.selectedTrainer.countyId);
+    }
+
+    if (this.selectedTrainer.subCountyId !== undefined) {
+      this.wards = this.fetchWards(this.selectedTrainer.subCountyId);
+    }
+
+    this.updateForm.patchValue({
+      firstName: this.selectedTrainer.firstName,
+      lastName: this.selectedTrainer.lastName,
+      email: this.selectedTrainer.email,
+      idNumber: this.selectedTrainer.idNumber,
+      dob: this.selectedTrainer.dob
+        ? this.formatDate(new Date(this.selectedTrainer.dob))
+        : null,
+      msisdn: this.selectedTrainer.msisdn,
+      gender: this.selectedTrainer.gender,
+      countyTitle: this.selectedTrainer.countyTitle,
+      subCountyTitle: this.selectedTrainer.subCountyTitle,
+      wardTitle: this.selectedTrainer?.wardTitle,
+    });
+
+    this.modalService.open(userModal, {
+      centered: true,
+      windowClass: 'modal-user-holder',
+      size: 'lg',
+    });
   }
 
   private formatDate(date: Date): string {
@@ -142,5 +199,12 @@ export class TotsComponent implements OnInit {
 
   view(row: Tot) {
     this.router.navigate([`tots/profile/${row.userId}`]);
+  }
+
+  fetchSubcounties(countyId: number) {
+    return this.usersService.fetchSubCounties(countyId);
+  }
+  fetchWards(subCountyId: number) {
+    return this.usersService.getWards(subCountyId);
   }
 }

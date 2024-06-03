@@ -150,6 +150,14 @@ export class FarmersComponent implements OnInit {
   centerModal(userModal: any, farmer: Farmer) {
     this.selectedFarmer = farmer;
 
+    if (this.selectedFarmer.county_id !== undefined) {
+      this.sub_counties = this.fetchSubcounties(this.selectedFarmer.county_id);
+    }
+
+    if (this.selectedFarmer.sub_county_id !== undefined) {
+      this.wards = this.fetchWards(this.selectedFarmer.sub_county_id);
+    }
+
     this.updateFarmerForm.patchValue({
       dob: this.formatDate(new Date(this.selectedFarmer.dob)),
       gender: this.selectedFarmer.gender,
@@ -169,18 +177,6 @@ export class FarmersComponent implements OnInit {
       size: 'lg',
     });
   }
-
-  // private formatDate(date: Date): string {
-  //   let d = new Date(date),
-  //       month = '' + (d.getMonth() + 1),
-  //       day = '' + d.getDate(),
-  //       year = d.getFullYear();
-
-  //   if (month.length < 2) month = '0' + month;
-  //   if (day.length < 2) day = '0' + day;
-
-  //   return [year, month, day].join('-');
-  // }
   async handleSubmit(event: Event) {
     event.preventDefault();
     if (this.updateFarmerForm.valid) {
@@ -265,9 +261,7 @@ export class FarmersComponent implements OnInit {
     }
   }
 
-  view(row: any) {
-    
-  }
+  view(row: any) {}
 
   getUsers() {
     // this.spinner.show()
@@ -303,5 +297,12 @@ export class FarmersComponent implements OnInit {
         // this.spinner.hide()
       }
     });
+  }
+
+  fetchSubcounties(countyId: number) {
+    return this.usersService.fetchSubCounties(countyId);
+  }
+  fetchWards(subCountyId: number) {
+    return this.usersService.getWards(subCountyId);
   }
 }

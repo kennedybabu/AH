@@ -200,4 +200,11 @@ export class UsersComponent implements OnInit {
   getCounties(): void {
     this.counties = this.usersService.fetchCounties();
   }
+
+  fetchSubcounties(countyId: number) {
+    return this.usersService.fetchSubCounties(countyId);
+  }
+  fetchWards(subCountyId: number) {
+    return this.usersService.getWards(subCountyId);
+  }
 }

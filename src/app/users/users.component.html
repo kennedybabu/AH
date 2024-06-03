@@ -501,6 +501,84 @@
                               <option value="2">Tot</option>
                             </select>
                           </div>
+                          <!-- <div
+                            style="
+                              width: 100%;
+                              display: flex;
+                              align-items: center;
+                              justify-content: space-between;
+                            "
+                          >
+                            <div
+                              class="d-flex flex-column"
+                              style="margin-bottom: 10px; width: 30%"
+                            >
+                              <label for="county" style="margin-bottom: 0px"
+                                >County</label
+                              >
+                              <select
+                                formControlName="countyTitle"
+                                id="county"
+                                placeholder="Select county"
+                                class="form-select"
+                                style="height: 50px !important"
+                                aria-label="Default select example"
+                              >
+                                <option
+                                  *ngFor="let county of counties"
+                                  value="county?.name"
+                                >
+                                  {{ county.name }}
+                                </option>
+                              </select>
+                            </div>
+                            <div
+                              class="d-flex flex-column"
+                              style="margin-bottom: 10px; width: 30%"
+                            >
+                              <label for="subcounty" style="margin-bottom: 0px"
+                                >Sub County</label
+                              >
+                              <select
+                                formControlName="subCountyTitle"
+                                id="subcounty"
+                                placeholder="Select subcounty"
+                                class="form-select"
+                                style="height: 50px !important"
+                                aria-label="Default select example"
+                              >
+                                <option
+                                  *ngFor="let subcounty of subCounties"
+                                  value="subcounty?.name"
+                                >
+                                  {{ subcounty.name }}
+                                </option>
+                              </select>
+                            </div>
+                            <div
+                              class="d-flex flex-column"
+                              style="margin-bottom: 10px; width: 30%"
+                            >
+                              <label for="ward" style="margin-bottom: 0px"
+                                >Ward</label
+                              >
+                              <select
+                                formControlName="wardTitle"
+                                id="ward"
+                                placeholder="Select ward"
+                                class="form-select"
+                                style="height: 50px !important"
+                                aria-label="Default select example"
+                              >
+                                <option
+                                  *ngFor="let ward of wards"
+                                  value="ward?.name"
+                                >
+                                  {{ ward.name }}
+                                </option>
+                              </select>
+                            </div>
+                          </div> -->
                         </div>
                       </div>
                       <div style="width: 100%; margin-left: 10px">
@@ -540,8 +618,8 @@
       "
     >
       <p>
-        Showing {{ size === 1 ? 1 : limit * size - 10 }} to {{ limit * size }} of
-        {{ totalUsers }} entries
+        Showing {{ size === 1 ? 1 : limit * size - 10 }} to
+        {{ limit * size }} of {{ totalUsers }} entries
       </p>
       <div>
         <!-- <app-pagination
