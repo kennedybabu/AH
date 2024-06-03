@@ -107,7 +107,6 @@ export class AddUserComponent implements OnInit {
         };
         await this.usersService.createUser(formData).subscribe(
           (res: any) => {
-            console.log(res);
             if (res?.statusCode === 200) {
               this.userForm.reset();
               this.toastr.success('Success', 'User added successfully');
