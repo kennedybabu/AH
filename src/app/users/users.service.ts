@@ -65,4 +65,8 @@ export class UsersService {
   updateUser(username: string, payload: Partial<NewUser>) {
     return this.http.put(endpoint + 'users/update/' + username, payload);
   }
+
+  updateMember(memberId: number, payload: Partial<NewUser>) {
+    return this.http.put(endpoint + 'member/update/' + memberId, payload);
+  }
 }

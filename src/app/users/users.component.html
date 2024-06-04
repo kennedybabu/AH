@@ -26,20 +26,39 @@
         Users List <span>({{ users.length }})</span>
       </p>
       <div style="display: flex; align-items: center; gap: 10px; height: 100%">
-        <input
-          type="text"
-          placeholder="Search a user"
-          style="
-            border: 1px solid #e9e9ef;
-            border-radius: 5px;
-            width: 300px;
-            height: 40px;
-            padding-left: 10px;
-            padding-right: 10px;
-          "
-          [(ngModel)]="searchText"
-          (input)="filterUsers()"
-        />
+        <div>
+          <input
+            type="text"
+            placeholder="Search a user with id, msisdn, phone number"
+            style="
+              border: 1px solid #e9e9ef;
+              border-top-left-radius: 5px;
+              border-bottom-left-radius: 5px;
+              width: 500px;
+              height: 40px;
+              padding-left: 10px;
+              padding-right: 10px;
+            "
+            [(ngModel)]="searchText"
+            (input)="filterUsers()"
+          />
+
+          <button
+            (click)="findUser()"
+            style="
+              height: 41px;
+              border: none;
+              background-color: #fbb43c;
+              color: black;
+              border-top-right-radius: 5px;
+              border-bottom-right-radius: 5px;
+              padding-left: 10px;
+              padding-right: 10px;
+            "
+          >
+            Search
+          </button>
+        </div>
         <div
           style="
             background-color: #fbb43c;

@@ -181,22 +181,23 @@ export class FarmersComponent implements OnInit {
     event.preventDefault();
     if (this.updateFarmerForm.valid) {
       const formData = {
-        firstName: this.updateFarmerForm.value.firstName,
-        lastName: this.updateFarmerForm.value.lastName,
+        firstName: this.updateFarmerForm.value.first_name,
+        lastName: this.updateFarmerForm.value.last_name,
         gender: this.updateFarmerForm.value.gender,
-        idNumber: this.updateFarmerForm.value.idNumber,
-        dob: this.updateFarmerForm.value.dateOfBirth,
+        idNumber: this.updateFarmerForm.value.id_number,
+        dob: this.updateFarmerForm.value.dob,
         email: this.updateFarmerForm.value.email,
-        msisdn: this.updateFarmerForm.value.phoneNumber,
+        msisdn: this.updateFarmerForm.value.msisdn,
         username: this.updateFarmerForm.value.username,
         userTypeId: this.updateFarmerForm.value.role,
       };
       await this.usersService
-        .updateUser(this.selectedFarmer?.id_number, formData)
+        .updateMember(this.selectedFarmer?.member_id, formData)
         .subscribe(
           (res) => {
-            this.updateFarmerForm.reset();
             this.toastr.success('Success', 'User updated successfully');
+            this.modalService.dismissAll();
+            this.getUsers();
           },
           (error) => {
             console.error('Error:', error);

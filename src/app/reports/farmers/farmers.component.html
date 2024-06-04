@@ -147,10 +147,7 @@
       [limit]="dataParams.page_size"
       (page)="setPage($event)"
     >
-      <ngx-datatable-column name="Export">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          <input type="checkbox" name="export" id="export" />
-        </ng-template>
+      <ngx-datatable-column name="Member Id" prop="member_id">
       </ngx-datatable-column>
       <ngx-datatable-column name="Name">
         <ng-template let-row="row" ngx-datatable-cell-template>
@@ -158,7 +155,6 @@
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Mobile" prop="msisdn"></ngx-datatable-column>
-
       <ngx-datatable-column
         name="ID Number"
         prop="id_number"

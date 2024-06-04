@@ -114,7 +114,7 @@ export class SeedsDistributionComponent implements OnInit {
       endDate: this.searchForm.get('end_date')?.value,
     };
     this.groupsService
-      .getSeedDistributionReport(this.size, this.limit, object)
+      .getSeedDistributionReport()
       .subscribe((res) => {
         if (res.statusCode == 200) {
           this.totalSeedDistributionReports = 200;

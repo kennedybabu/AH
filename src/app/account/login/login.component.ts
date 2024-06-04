@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 
@@ -12,14 +16,13 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 
 /**
  * Login Component
  */
 export class LoginComponent implements OnInit {
-
   // set the currenr year
   year: number = new Date().getFullYear();
   // Carousel navigation arrow show
@@ -37,7 +40,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private authService: AuthfakeauthenticationService,
-    private toastr:ToastrService
+    private toastr: ToastrService
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
@@ -46,13 +49,13 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.layout_mode = LAYOUT_MODE
+    this.layout_mode = LAYOUT_MODE;
     if (this.layout_mode === 'dark') {
-      document.body.setAttribute("data-bs-theme", "dark");
+      document.body.setAttribute('data-bs-theme', 'dark');
     }
     //Validation Set
     this.loginForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
     // get return url from route parameters or default to '/'
@@ -61,31 +64,37 @@ export class LoginComponent implements OnInit {
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.loginForm.controls; }
+  get f() {
+    return this.loginForm.controls;
+  }
 
   /**
    * Form submit
    */
   onSubmit() {
-    this.submitted = true;
-
-    this.authenticationService.login(this.loginForm.value).subscribe((res) => {
-      if(res.statusCode == 200) {
-        this.toastr.success('Success', 'Logged Succesfully')
-        sessionStorage.setItem("token", res.message.access_token)
-        sessionStorage.setItem("username", res.message.user_info.firstname)
-        sessionStorage.setItem("id", res.message.user_info.userId)
-        this.router.navigate(['/'])
-      } else {
-        this.toastr.error(res.message,"Error")
-      }
-    })
-
-
-
+    if (this.loginForm.valid) {
+      this.submitted = true;
+      this.authenticationService
+        .login(this.loginForm.value)
+        .subscribe((res) => {
+          if (res.statusCode == 200) {
+            console.log(res);
+            this.toastr.success('Success', 'Logged Succesfully');
+            sessionStorage.setItem('token', res.message.access_token);
+            sessionStorage.setItem('username', res.message.user_info.firstname);
+            sessionStorage.setItem('id', res.message.user_info.userId);
+            sessionStorage.setItem('roles', res.message.user_info.roles);
+            this.router.navigate(['/']);
+          } else {
+            this.toastr.error(res.message, 'Error');
+          }
+        });
+    } else {
+      this.toastr.error('Provide all login credentials', 'Error');
+    }
 
     // stop here if form is invalid
-    
+
     // if (this.loginForm.invalid) {
     //   return;
     // } else {
@@ -94,19 +103,16 @@ export class LoginComponent implements OnInit {
     //     sessionStorage.setItem("username", res.message.user_info.firstname)
     //     this.router.navigate(['/'])
     //   })
-    
+
     //   console.log(this.loginForm.value,'empty or not')
     // }
   }
 
-
-
   logout() {
-      sessionStorage.removeItem('token');
-      sessionStorage.removeItem('username');
-      sessionStorage.removeItem('id');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('id');
   }
-
 
   /**
    * Password Hide/Show
@@ -114,5 +120,4 @@ export class LoginComponent implements OnInit {
   toggleFieldTextType() {
     this.fieldTextType = !this.fieldTextType;
   }
-
 }

@@ -136,6 +136,8 @@ export class UsersComponent implements OnInit {
       });
     }
   }
+
+  findUser() {}
   navigateToProfile(user: UserInfo) {
     this.router.navigate(['/users', user?.msisdn]);
   }
