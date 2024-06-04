@@ -43,6 +43,7 @@ export class UsersComponent implements OnInit {
   public totalUsers: number = 0;
   public selectedExportOption: string = 'CSV';
   public searchText: string = '';
+  roles: string | null = null;
 
   counties: County[] = [];
   subCounties: SubCounty[] = [];
@@ -92,6 +93,9 @@ export class UsersComponent implements OnInit {
       { label: 'Userslist', active: true },
     ];
     this.fetchUsers();
+
+    const roles = localStorage.getItem('roles');
+    this.roles = roles ? JSON.parse(roles) : '';
   }
   onParamsChange() {
     this.fetchUsers();
@@ -146,30 +150,34 @@ export class UsersComponent implements OnInit {
   }
   async handleSubmit(event: Event) {
     event.preventDefault();
-    if (this.updateUserForm.valid) {
-      const formData = {
-        firstName: this.updateUserForm.value.firstName,
-        lastName: this.updateUserForm.value.lastName,
-        gender: this.updateUserForm.value.gender,
-        idNumber: this.updateUserForm.value.idNumber,
-        dob: this.updateUserForm.value.dateOfBirth,
-        email: this.updateUserForm.value.email,
-        msisdn: this.updateUserForm.value.phoneNumber,
-        username: this.updateUserForm.value.username,
-        userTypeId: this.updateUserForm.value.role,
-      };
-      await this.usersService
-        .updateUser(this.selectedUser?.username, formData)
-        .subscribe(
-          (res) => {
-            this.updateUserForm.reset();
-            this.toastr.success('Success', 'User updated successfully');
-          },
-          (error) => {
-            console.error('Error:', error);
-            this.toastr.error('Error', 'Failed to update user');
-          }
-        );
+    if (this.roles?.includes('Admin') || this.roles?.includes('CIO')) {
+      if (this.updateUserForm.valid) {
+        const formData = {
+          firstName: this.updateUserForm.value.firstName,
+          lastName: this.updateUserForm.value.lastName,
+          gender: this.updateUserForm.value.gender,
+          idNumber: this.updateUserForm.value.idNumber,
+          dob: this.updateUserForm.value.dateOfBirth,
+          email: this.updateUserForm.value.email,
+          msisdn: this.updateUserForm.value.phoneNumber,
+          username: this.updateUserForm.value.username,
+          userTypeId: this.updateUserForm.value.role,
+        };
+        await this.usersService
+          .updateUser(this.selectedUser?.username, formData)
+          .subscribe(
+            (res) => {
+              this.updateUserForm.reset();
+              this.toastr.success('Success', 'User updated successfully');
+            },
+            (error) => {
+              console.error('Error:', error);
+              this.toastr.error('Error', 'Failed to update user');
+            }
+          );
+      }
+    } else {
+      this.toastr.error('You do not have permission to update a user');
     }
   }
   fetchUsers() {
