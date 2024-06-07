@@ -25,11 +25,15 @@ import { ToastrService } from 'ngx-toastr';
 export class AddUserComponent implements OnInit {
   public breadCrumbItems!: Array<{}>;
   userForm: FormGroup;
+  isCIO: boolean = false;
+  isDisabled: boolean = true;
 
   counties: County[] = [];
   subCounties: SubCounty[] = [];
   wards: Ward[] = [];
   public roles: string | null = null;
+  public cio_county: any = null;
+  public cio_county_id: any = null;
 
   constructor(
     private fb: FormBuilder,
@@ -89,7 +93,33 @@ export class AddUserComponent implements OnInit {
 
     const roles = localStorage.getItem('roles');
     this.roles = roles ? JSON.parse(roles) : '';
-    console.log(this.roles);
+    const user = localStorage.getItem('user_info');
+    let user_info = user ? JSON.parse(user) : '';
+    this.cio_county = user_info?.countyTitle;
+
+    let county = this.counties.find(
+      (c) => c?.name === this.cio_county.toUpperCase()
+    );
+    this.cio_county_id = county?.county_id;
+    this.isCIO = this.roles ? this.roles.includes('CIO') : false;
+    console.log(this.isCIO);
+
+    this.userForm.patchValue({
+      firstName: '',
+      lastName: '',
+      username: '',
+      email: '',
+      idNumber: '',
+      dateOfBirth: this.formatDate(new Date()),
+      phoneNumber: '',
+      role: '',
+      gender: '',
+      county: this.cio_county_id,
+      subcounty: '',
+      ward: '',
+      password: '',
+      confirmPassword: '',
+    });
   }
   async handleSubmit(event: Event): Promise<void> {
     event.preventDefault();

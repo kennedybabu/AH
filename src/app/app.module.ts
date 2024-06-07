@@ -38,7 +38,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PaginationModule } from './pagination/pagination.module';
 import { HttpRequestInterceptor } from './http.interceptor';
-
+import { MultiSelectModule } from 'primeng-lts/multiselect';
 
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
@@ -79,11 +79,13 @@ export function createTranslateLoader(http: HttpClient): any {
     FormsModule,
     CommonModule,
     PaginationModule,
+    MultiSelectModule,
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS,
+    {
+      provide: HTTP_INTERCEPTORS,
       useClass: HttpRequestInterceptor,
-      multi: true
+      multi: true,
     },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

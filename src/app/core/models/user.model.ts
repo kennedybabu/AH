@@ -30,3 +30,8 @@ export interface Farmer {
   sub_county_id: number; // ID of the sub-county
   sub_county_title: string; // Title of the sub-county
 }
+
+export interface City {
+  name: string,
+  code: string
+}

@@ -18,8 +18,9 @@ import { ColumnMode, NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from 'src/app/users/users.service';
 import { CommonModule } from '@angular/common';
-import { Farmer } from 'src/app/core/models/user.model';
+import { City, Farmer } from 'src/app/core/models/user.model';
 import { ToastrService } from 'ngx-toastr';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @Component({
   selector: 'app-farmers',
@@ -31,6 +32,7 @@ import { ToastrService } from 'ngx-toastr';
     NgxDatatableModule,
     FormsModule,
     CommonModule,
+    MultiSelectModule,
   ],
   templateUrl: './farmers.component.html',
   styleUrl: './farmers.component.scss',
