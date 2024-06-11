@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { endpoint } from '../core/services/auth.service';
 import { Observable, map } from 'rxjs';
+import { end } from '@popperjs/core';
 
 @Injectable({
     providedIn:'root'
@@ -41,4 +42,9 @@ export class FarmersService {
         map(this.extractData));
     }
     
+    getTotalMembersTrainedByLocation(data: any): Observable<any>{
+      return this.http.post(endpoint+'training/get-courses-and-members-trained-by-location', data).pipe(
+        map((this.extractData))
+      )
+    }
  }

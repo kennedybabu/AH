@@ -20,7 +20,7 @@ import { UsersService } from 'src/app/users/users.service';
 import { CommonModule } from '@angular/common';
 import { City, Farmer } from 'src/app/core/models/user.model';
 import { ToastrService } from 'ngx-toastr';
-import { MultiSelectModule } from 'primeng/multiselect';
+// import { MultiSelectModule } from 'primeng/multiselect';
 
 @Component({
   selector: 'app-farmers',
@@ -32,7 +32,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     NgxDatatableModule,
     FormsModule,
     CommonModule,
-    MultiSelectModule,
+    // MultiSelectModule,
   ],
   templateUrl: './farmers.component.html',
   styleUrl: './farmers.component.scss',

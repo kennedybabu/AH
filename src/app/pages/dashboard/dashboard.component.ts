@@ -26,6 +26,7 @@ import {
 import { MembersService } from 'src/app/core/services/members.service';
 import { EChartsOption } from 'echarts';
 import { VlcService } from 'src/app/vlc/vlc.service';
+import { FarmersService } from 'src/app/farmers/farmers.service';
 
 export type countyOptions = {
   series: ApexAxisChartSeries;
@@ -117,7 +118,8 @@ export class DashboardComponent implements OnInit {
     private cdr:ChangeDetectorRef,
     private summaryService:SummaryService,
     private membersService:MembersService,
-    private vlcService:VlcService) {}
+    private vlcService:VlcService,
+    private farmersService:FarmersService) {}
 
   option = {
     startVal: this.num,
@@ -412,6 +414,7 @@ export class DashboardComponent implements OnInit {
     }
 
     this.search()
+    this.getTrainingsByLocationAndDate()
   }
 
   fetchGroups(event:Event) {
@@ -428,6 +431,7 @@ export class DashboardComponent implements OnInit {
     }
 
     this.search()
+    this.getTrainingsByLocationAndDate()
   }
 
   search(){
@@ -436,6 +440,7 @@ export class DashboardComponent implements OnInit {
     this.filterVLCSummaryByLocation(this.searchForm.value)
     this.filterGroups(this.searchForm.value)
     this.filterCount(this.searchForm.value)
+    // this.getCourseSummary()
   }
 
   getIncomeSummary(data: any) {
@@ -482,6 +487,7 @@ export class DashboardComponent implements OnInit {
               this.cdr.markForCheck()
           }
       })
+      this.getTrainingsByLocationAndDate()
     }
   }
 
@@ -542,7 +548,16 @@ export class DashboardComponent implements OnInit {
   getCourseSummary() {
     this.membersService.getCoursesTrainedMembers().subscribe((res) => {
       if(res.statusCode == 200) {
-        console.log(res.message)
+        this.updateTrainedChart(res.message)
+        this.cdr.markForCheck()
+      }
+    })
+  }
+
+  getTrainingsByLocationAndDate(){
+    console.log(this.searchForm.value, 'double')
+    this.farmersService.getTotalMembersTrainedByLocation(this.searchForm.value).subscribe((res) => {
+      if(res.statusCode == 200) {
         this.updateTrainedChart(res.message)
         this.cdr.markForCheck()
       }
@@ -562,6 +577,7 @@ export class DashboardComponent implements OnInit {
   }
 
   updateTrainedChart(data: any) {
+    console.log('data', data)
     this.trainingChartCategories = data.map((row: any) => row.title)
     this.totalTrained = data.map((row:any) => row.total_members_trained)    
 
