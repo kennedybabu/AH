@@ -181,14 +181,14 @@
     [headerHeight]="50"
     [footerHeight]="50"
     [externalPaging]="true"
-    [count]="400"
+    [count]="500"
     [offset]="dataParams.page_num"
     [limit]="dataParams.page_size"
     (page)="setPage($event)"
   >
     <ngx-datatable-column name="Name">
       <ng-template let-row="row" ngx-datatable-cell-template>
-        {{ row.firstName }} {{ row.lastName }}
+        {{ row.first_name }} {{ row.last_name }}
       </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column name="Mobile" prop="msisdn"></ngx-datatable-column>
@@ -204,15 +204,15 @@
     </ngx-datatable-column>
     <ngx-datatable-column
       name="County"
-      prop="countyTitle"
+      prop="county_title"
     ></ngx-datatable-column>
     <ngx-datatable-column
       name="Sub County"
-      prop="subCountyTitle"
+      prop="sub_county_title"
     ></ngx-datatable-column>
     <ngx-datatable-column
       name="ID Number"
-      prop="idNumber"
+      prop="id_number"
     ></ngx-datatable-column>
     <ngx-datatable-column name="Details" prop="more">
       <ng-template let-row="row" ngx-datatable-cell-template>

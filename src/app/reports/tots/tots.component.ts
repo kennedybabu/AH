@@ -19,6 +19,7 @@ import { Tot, Trainer } from 'src/app/core/models/tot.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { UsersService } from 'src/app/users/users.service';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-tots',
@@ -94,7 +95,13 @@ export class TotsComponent implements OnInit {
       subCountyTitle: ['', Validators.required],
     });
 
-    this.getUsers();
+    // this.getUsers();
+    this.onSubmit();
+
+    // Trigger fetch when form changes or on initialization
+    this.searchForm.valueChanges
+      .pipe(switchMap(async () => this.onSubmit()))
+      .subscribe();
   }
 
   handleSubmit(event: Event) {}
