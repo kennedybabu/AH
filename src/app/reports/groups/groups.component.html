@@ -49,11 +49,12 @@
                 bindValue="wardId"
                 placeholder="Select Ward"
                 formControlName="wardId"
+                (change)="onGroupSelect()"
               >
               </ng-select>
             </div>
           </div>
-          <div class="col-xl col-sm-3">
+          <!-- <div class="col-xl col-sm-3">
             <button
               style="color: #3fc057"
               type="button"
@@ -62,7 +63,7 @@
             >
               <i class="ft-search mr-1"></i>Search
             </button>
-          </div>
+          </div> -->
         </div>
       </form>
       <div style="margin-top: 20px; margin-bottom: 10px; width: 100%">

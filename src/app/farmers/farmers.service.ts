@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { endpoint } from '../core/services/auth.service';
 import { Observable, map } from 'rxjs';
+import { end } from '@popperjs/core';
 
 @Injectable({
   providedIn: 'root',

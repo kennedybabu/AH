@@ -151,20 +151,13 @@ export class GroupsComponent implements OnInit {
   }
 
   filterGroups(data: any) {
-    console.log('called');
-    // this.spinner.show()
+    console.log(data)
     this.groupsService.getGroupsByLocation(data).subscribe((res) => {
       if (res.statusCode == 200) {
-        console.log(res);
         this.groups = res.message;
         this.cdr.markForCheck();
-        // this.spinner.hide
-      }
-      if (res.statusCode == 417) {
-        // this.spinner.hide()
       }
     });
-    // this.spinner.hide()
   }
 
   search() {
@@ -175,7 +168,6 @@ export class GroupsComponent implements OnInit {
       startDate: '',
       endDate: '',
     };
-    console.log(obj);
     this.filterGroups(obj);
   }
 
@@ -187,6 +179,7 @@ export class GroupsComponent implements OnInit {
     filtered_array.forEach((element) => {
       this.sub_counties = this.sub_counties.concat(element.sub_counties);
     });
+    this.search()
   }
 
   filterWards(event: Event) {
@@ -197,6 +190,8 @@ export class GroupsComponent implements OnInit {
     filtered_array.forEach((element) => {
       this.wards = this.wards.concat(element.wards);
     });
+
+    this.search()
   }
 
   getWards() {
@@ -207,6 +202,11 @@ export class GroupsComponent implements OnInit {
     filtered_array.forEach((element) => {
       this.wards = this.wards.concat(element.wards);
     });
+    this.search()
+  }
+
+  onGroupSelect() {
+    this.search()
   }
 
   setPage(pageInfo: any) {
@@ -216,7 +216,6 @@ export class GroupsComponent implements OnInit {
       .getDynamicGroups(this.dataParams.page_num)
       .subscribe((res) => {
         this.groups = res.message;
-        // this.spinner.hide()
         this.cdr.markForCheck();
       });
   }

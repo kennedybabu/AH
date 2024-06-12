@@ -81,6 +81,7 @@
             <label for="county">Group</label>
             <ng-select
               id="county"
+              (change)="selectedGroup()"
               [items]="groups"
               [multiple]="true"
               [virtualScroll]="true"
@@ -91,7 +92,7 @@
             >
             </ng-select>
           </div>
-          <div class="col-xl col-md-6 d-flex align-items-end">
+          <!-- <div class="col-xl col-md-6 d-flex align-items-end">
             <button
               (click)="onSubmit()"
               style="
@@ -104,7 +105,7 @@
             >
               search
             </button>
-          </div>
+          </div> -->
         </div>
       </form>
       <div
@@ -118,7 +119,7 @@
       >
         <input
           type="text"
-          placeholder="Search a farmer id, name and email"
+          placeholder="Search a farmer by id, name or email"
           style="
             border: 1px solid #e9e9ef;
             border-radius: 5px;
@@ -163,7 +164,11 @@
       <ngx-datatable-column
         name="Disability Status"
         prop="is_disabled"
-      ></ngx-datatable-column>
+      >
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{ row.is_disabled == 'True' ? 'YES' :'NO' }}
+    </ng-template>
+      </ngx-datatable-column>
       <ngx-datatable-column
         name="County"
         prop="county_title"

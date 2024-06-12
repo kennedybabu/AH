@@ -20,8 +20,12 @@ import { UsersService } from 'src/app/users/users.service';
 import { CommonModule } from '@angular/common';
 import { City, Farmer } from 'src/app/core/models/user.model';
 import { ToastrService } from 'ngx-toastr';
+<<<<<<< HEAD
 import { MultiSelectModule } from 'primeng/multiselect';
 import { switchMap } from 'rxjs';
+=======
+// import { MultiSelectModule } from 'primeng/multiselect';
+>>>>>>> b5082ad053e01f4d64ce725e5a335a74fbcd9e1b
 
 @Component({
   selector: 'app-farmers',
@@ -33,7 +37,7 @@ import { switchMap } from 'rxjs';
     NgxDatatableModule,
     FormsModule,
     CommonModule,
-    MultiSelectModule,
+    // MultiSelectModule,
   ],
   templateUrl: './farmers.component.html',
   styleUrl: './farmers.component.scss',
@@ -153,6 +157,8 @@ export class FarmersComponent implements OnInit {
         this.sub_counties = this.sub_counties.concat(element.sub_counties);
       });
     }
+
+    this.onSubmit()
   }
 
   centerModal(userModal: any, farmer: Farmer) {
@@ -216,7 +222,6 @@ export class FarmersComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.spinner.show()
     let data = this.searchForm.value;
     if (data.wardId.length > 0) {
       data.subCountyId = [];
@@ -229,9 +234,7 @@ export class FarmersComponent implements OnInit {
     this.farmersService.getMembersByLocations(data).subscribe((res) => {
       if (res.statusCode == 200) {
         this.rows = res.message;
-        // console.log(this.rows)
         this.cdr.markForCheck();
-        // this.spinner.hide()
       }
     });
   }
@@ -246,6 +249,7 @@ export class FarmersComponent implements OnInit {
         this.wards = this.wards.concat(element.wards);
       });
     }
+    this.onSubmit()
   }
 
   filterGroups(data: any) {
@@ -268,12 +272,18 @@ export class FarmersComponent implements OnInit {
         }
       });
     }
+
+    this.onSubmit()
   }
 
   view(row: any) {}
 
+  selectedGroup(){
+    this.onSubmit()
+  }  
+
+
   getUsers() {
-    // this.spinner.show()
     let data = {
       page: this.dataParams.page_num,
       dataObj: this.searchForm.value,
@@ -282,9 +292,7 @@ export class FarmersComponent implements OnInit {
     this.farmersService.getClients(data).subscribe((res) => {
       if (res.statusCode == 200) {
         this.rows = res.message;
-        // this.filteredArray = this.rows
         this.cdr.markForCheck();
-        // this.spinner.hide()
       }
     });
   }
@@ -303,9 +311,7 @@ export class FarmersComponent implements OnInit {
     this.farmersService.getClients(data).subscribe((res) => {
       if (res.statusCode == 200) {
         this.rows = res.message;
-        // this.filteredArray = this.rows
         this.cdr.markForCheck();
-        // this.spinner.hide()
       }
     });
   }

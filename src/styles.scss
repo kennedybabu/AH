@@ -1,12 +1,13 @@
+// // Import Tailwind CSS
+// @import 'tailwindcss/base';
+// @import 'tailwindcss/components';
+// @import 'tailwindcss/utilities';
 
 @import "node_modules/@swimlane/ngx-datatable/index.css";
 @import "node_modules/@swimlane/ngx-datatable/themes/dark.css";
 @import "node_modules/@swimlane/ngx-datatable/themes/bootstrap.css";
 @import "node_modules/@swimlane/ngx-datatable/themes/material.css";
 @import "node_modules/@swimlane/ngx-datatable/assets/icons.css";
-
-@import 'ngx-toastr/toastr';
-
   
 .ngx-datatable.bootstrap {  
   background-color: transparent;  
@@ -136,10 +137,14 @@
 ng-select {
   background-color: transparent!important;
 }
+
+.ng-select .ng-select-container {
+  max-height: 36px!important;
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-@media (max-width: 2000px) {
-    .mt-medium {
+@media (max-width: 500px) {
+    .btn-primary {
       margin-top: 1rem!important;
     }
 }

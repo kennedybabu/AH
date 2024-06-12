@@ -39,4 +39,10 @@ export class MembersService {
           map((this.extractData))
         )
     }
+
+    getTrainingByLocationAndDate(data: any): Observable<any> {
+      return this.http.post(endpoint+'training/trains', data).pipe(
+        map((this.extractData))
+      )
+    }
 }
