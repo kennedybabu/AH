@@ -147,6 +147,8 @@ export class FarmersComponent implements OnInit {
         this.sub_counties = this.sub_counties.concat(element.sub_counties);
       });
     }
+
+    this.onSubmit()
   }
 
   centerModal(userModal: any, farmer: Farmer) {
@@ -210,7 +212,6 @@ export class FarmersComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.spinner.show()
     let data = this.searchForm.value;
     if (data.wardId.length > 0) {
       data.subCountyId = [];
@@ -223,9 +224,7 @@ export class FarmersComponent implements OnInit {
     this.farmersService.getMembersByLocations(data).subscribe((res) => {
       if (res.statusCode == 200) {
         this.rows = res.message;
-        // console.log(this.rows)
         this.cdr.markForCheck();
-        // this.spinner.hide()
       }
     });
   }
@@ -240,6 +239,7 @@ export class FarmersComponent implements OnInit {
         this.wards = this.wards.concat(element.wards);
       });
     }
+    this.onSubmit()
   }
 
   filterGroups(data: any) {
@@ -262,12 +262,18 @@ export class FarmersComponent implements OnInit {
         }
       });
     }
+
+    this.onSubmit()
   }
 
   view(row: any) {}
 
+  selectedGroup(){
+    this.onSubmit()
+  }  
+
+
   getUsers() {
-    // this.spinner.show()
     let data = {
       page: this.dataParams.page_num,
       dataObj: this.searchForm.value,
@@ -275,9 +281,7 @@ export class FarmersComponent implements OnInit {
     this.farmersService.getClients(data).subscribe((res) => {
       if (res.statusCode == 200) {
         this.rows = res.message;
-        // this.filteredArray = this.rows
         this.cdr.markForCheck();
-        // this.spinner.hide()
       }
     });
   }
@@ -286,7 +290,6 @@ export class FarmersComponent implements OnInit {
   }
 
   setPage(pageInfo: any) {
-    // console.log(pageInfo)
     this.dataParams.page_num = pageInfo.offset + 1;
     let data = {
       page: this.dataParams.page_num,
@@ -295,9 +298,7 @@ export class FarmersComponent implements OnInit {
     this.farmersService.getClients(data).subscribe((res) => {
       if (res.statusCode == 200) {
         this.rows = res.message;
-        // this.filteredArray = this.rows
         this.cdr.markForCheck();
-        // this.spinner.hide()
       }
     });
   }
