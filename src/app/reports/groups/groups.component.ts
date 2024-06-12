@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ColumnMode, NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-groups',
@@ -26,7 +27,7 @@ import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     NgSelectModule,
     NgxDatatableModule,
-    NgbPagination
+    NgbPagination,
   ],
   templateUrl: './groups.component.html',
   styleUrl: './groups.component.scss',
@@ -76,6 +77,11 @@ export class GroupsComponent implements OnInit {
       wardId: [[], Validators.required],
       groupId: [[], Validators.required],
     });
+
+    // Trigger fetch when form changes or on initialization
+    this.searchForm.valueChanges
+      .pipe(switchMap(async () => this.getGroups()))
+      .subscribe();
 
     this.getGroups();
   }
@@ -135,7 +141,12 @@ export class GroupsComponent implements OnInit {
       endDate: '',
     };
     this.groupsService.getGroupsByLocation(object).subscribe((res) => {
-      console.log(res);
+      if (res.statusCode == 200) {
+        console.log(res);
+        this.groups = res.message;
+        this.cdr.markForCheck();
+        // this.spinner.hide
+      }
     });
   }
 

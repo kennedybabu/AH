@@ -21,6 +21,7 @@ import { CommonModule } from '@angular/common';
 import { City, Farmer } from 'src/app/core/models/user.model';
 import { ToastrService } from 'ngx-toastr';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-farmers',
@@ -57,8 +58,8 @@ export class FarmersComponent implements OnInit {
   public selectedFarmer!: Farmer;
 
   dataParams: any = {
-    page_num: '',
-    page_size: '',
+    page_num: 1,
+    page_size: 10,
   };
 
   constructor(
@@ -87,7 +88,7 @@ export class FarmersComponent implements OnInit {
     const date = new Date();
     const startDate = new Date();
     startDate.setMonth(startDate.getMonth() - 1);
-    this.dataParams.page_num = 0;
+    this.dataParams.page_num = 1;
     this.dataParams.page_size = 10;
 
     this.counties = counties;
@@ -119,6 +120,11 @@ export class FarmersComponent implements OnInit {
       sub_county_title: ['', Validators.required],
     });
     this.getUsers();
+
+    // Trigger fetch when form changes or on initialization
+    this.searchForm.valueChanges
+      .pipe(switchMap(async () => this.getUsers()))
+      .subscribe();
 
     const countyControl = this.updateFarmerForm.get('county');
     const subcountyControl = this.updateFarmerForm.get('subcounty');
@@ -271,6 +277,7 @@ export class FarmersComponent implements OnInit {
     let data = {
       page: this.dataParams.page_num,
       dataObj: this.searchForm.value,
+      size: this.dataParams.page_size,
     };
     this.farmersService.getClients(data).subscribe((res) => {
       if (res.statusCode == 200) {
@@ -287,10 +294,11 @@ export class FarmersComponent implements OnInit {
 
   setPage(pageInfo: any) {
     // console.log(pageInfo)
-    this.dataParams.page_num = pageInfo.offset + 1;
+    this.dataParams.page_num = pageInfo.offset;
     let data = {
       page: this.dataParams.page_num,
       dataObj: this.searchForm.value,
+      size: this.dataParams.page_size,
     };
     this.farmersService.getClients(data).subscribe((res) => {
       if (res.statusCode == 200) {
