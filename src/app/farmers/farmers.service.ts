@@ -38,11 +38,37 @@ export class FarmersService {
   }
 
   getClients(data: any): Observable<any> {
-    console.log(data);
     return this.http
       .post(
         endpoint + 'members?page=' + data.page + '&size=' + data?.size,
         data.dataObj
+      )
+      .pipe(map(this.extractData));
+  }
+  getTotalMembersTrainedByLocation(data: any): Observable<any> {
+    return this.http
+      .post(
+        endpoint + 'training/get-courses-and-members-trained-by-location',
+        data
+      )
+      .pipe(map(this.extractData));
+  }
+
+  exportMembers(data: any) {
+    return this.http
+      .post(
+        endpoint + 'members/xlsx?page=' + data.page + '&size=' + data?.size,
+        data.dataObj,
+        { responseType: 'blob' }
+      )
+      .pipe(map(this.extractData));
+  }
+  exportAllMembers(data: any) {
+    return this.http
+      .post(
+        endpoint + 'members/xlsx?page=' + data.page + '&size=' + data?.size,
+        data.dataObj,
+        { responseType: 'blob' }
       )
       .pipe(map(this.extractData));
   }

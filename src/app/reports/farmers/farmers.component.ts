@@ -155,7 +155,7 @@ export class FarmersComponent implements OnInit {
       });
     }
 
-    this.onSubmit()
+    this.onSubmit();
   }
 
   centerModal(userModal: any, farmer: Farmer) {
@@ -246,7 +246,7 @@ export class FarmersComponent implements OnInit {
         this.wards = this.wards.concat(element.wards);
       });
     }
-    this.onSubmit()
+    this.onSubmit();
   }
 
   filterGroups(data: any) {
@@ -270,15 +270,14 @@ export class FarmersComponent implements OnInit {
       });
     }
 
-    this.onSubmit()
+    this.onSubmit();
   }
 
   view(row: any) {}
 
-  selectedGroup(){
-    this.onSubmit()
-  }  
-
+  selectedGroup() {
+    this.onSubmit();
+  }
 
   getUsers() {
     let data = {
@@ -291,6 +290,40 @@ export class FarmersComponent implements OnInit {
         this.rows = res.message;
         this.cdr.markForCheck();
       }
+    });
+  }
+  exportSelectedMembers() {
+    let data = {
+      page: this.dataParams.page_num,
+      dataObj: this.searchForm.value,
+      size: this.dataParams.page_size,
+    };
+    this.farmersService.exportMembers(data).subscribe((res) => {
+      const a = document.createElement('a');
+      const objectUrl = URL.createObjectURL(res);
+      a.href = objectUrl;
+      a.download = 'members.xlsx';
+      a.click();
+      URL.revokeObjectURL(objectUrl);
+      this.cdr.markForCheck();
+      this.cdr.markForCheck();
+    });
+  }
+  exportEntireMembersReport() {
+    let data = {
+      page: 1,
+      dataObj: this.searchForm.value,
+      size: 50,
+    };
+    this.farmersService.exportAllMembers(data).subscribe((res) => {
+      const a = document.createElement('a');
+      const objectUrl = URL.createObjectURL(res);
+      a.href = objectUrl;
+      a.download = 'members.xlsx';
+      a.click();
+      URL.revokeObjectURL(objectUrl);
+      this.cdr.markForCheck();
+      this.cdr.markForCheck();
     });
   }
   getCounties(): void {
