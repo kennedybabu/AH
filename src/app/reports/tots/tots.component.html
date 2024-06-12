@@ -137,11 +137,12 @@
                 bindValue="wardId"
                 placeholder="Select Ward"
                 formControlName="wardId"
+                (change)="onWardSelect()"
               >
               </ng-select>
             </div>
           </div>
-          <div class="col-xl col-md-6 d-flex h-100 align-items-center">
+          <!-- <div class="col-xl col-md-6 d-flex h-100 align-items-center">
             <button
               type="button"
               (click)="onSubmit()"
@@ -150,7 +151,7 @@
             >
               <i class="ft-search mr-1"></i>Search
             </button>
-          </div>
+          </div> -->
         </div>
       </form>
       <div style="margin-top: 20px; margin-bottom: 10px; width: 100%">

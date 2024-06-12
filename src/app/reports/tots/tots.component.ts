@@ -192,6 +192,7 @@ export class TotsComponent implements OnInit {
     filtered_array.forEach((element) => {
       this.sub_counties = this.sub_counties.concat(element.sub_counties);
     });
+    this.onSubmit()
   }
 
   filterWards(event: Event) {
@@ -202,6 +203,10 @@ export class TotsComponent implements OnInit {
     filtered_array.forEach((element) => {
       this.wards = this.wards.concat(element.wards);
     });
+    this.onSubmit()
+  }
+  onWardSelect(){
+    this.onSubmit()
   }
 
   view(row: Tot) {
