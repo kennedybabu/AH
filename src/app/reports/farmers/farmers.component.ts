@@ -20,12 +20,9 @@ import { UsersService } from 'src/app/users/users.service';
 import { CommonModule } from '@angular/common';
 import { City, Farmer } from 'src/app/core/models/user.model';
 import { ToastrService } from 'ngx-toastr';
-<<<<<<< HEAD
 import { MultiSelectModule } from 'primeng/multiselect';
 import { switchMap } from 'rxjs';
-=======
 // import { MultiSelectModule } from 'primeng/multiselect';
->>>>>>> b5082ad053e01f4d64ce725e5a335a74fbcd9e1b
 
 @Component({
   selector: 'app-farmers',
