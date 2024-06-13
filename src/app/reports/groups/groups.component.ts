@@ -17,6 +17,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ColumnMode, NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { switchMap } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-groups',
@@ -28,6 +29,7 @@ import { switchMap } from 'rxjs';
     NgSelectModule,
     NgxDatatableModule,
     NgbPagination,
+    CommonModule,
   ],
   templateUrl: './groups.component.html',
   styleUrl: './groups.component.scss',
@@ -38,7 +40,7 @@ export class GroupsComponent implements OnInit {
   counties: County[] = [];
   sub_counties: SubCounty[] = [];
   wards: Ward[] = [];
-  groups = [];
+  groups: any = [];
   ColumnMode = ColumnMode;
   public columns = [];
   dataParams: any = {
@@ -151,7 +153,7 @@ export class GroupsComponent implements OnInit {
   }
 
   filterGroups(data: any) {
-    console.log(data)
+    console.log(data);
     this.groupsService.getGroupsByLocation(data).subscribe((res) => {
       if (res.statusCode == 200) {
         this.groups = res.message;
@@ -179,7 +181,7 @@ export class GroupsComponent implements OnInit {
     filtered_array.forEach((element) => {
       this.sub_counties = this.sub_counties.concat(element.sub_counties);
     });
-    this.search()
+    this.search();
   }
 
   filterWards(event: Event) {
@@ -191,7 +193,7 @@ export class GroupsComponent implements OnInit {
       this.wards = this.wards.concat(element.wards);
     });
 
-    this.search()
+    this.search();
   }
 
   getWards() {
@@ -202,16 +204,17 @@ export class GroupsComponent implements OnInit {
     filtered_array.forEach((element) => {
       this.wards = this.wards.concat(element.wards);
     });
-    this.search()
+    this.search();
   }
 
   onGroupSelect() {
-    this.search()
+    this.search();
   }
 
   setPage(pageInfo: any) {
     console.log(pageInfo);
-    this.dataParams.page_num = pageInfo.offset + 1;
+    // this.dataParams.page_num = pageInfo.offset + 1;
+    this.dataParams.page_num = pageInfo;
     this.groupsService
       .getDynamicGroups(this.dataParams.page_num)
       .subscribe((res) => {

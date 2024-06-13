@@ -172,344 +172,354 @@
     <!-- </form> -->
   </div>
 </div>
-
-<div class="card">
-  <ngx-datatable
-    [rows]="rows"
-    [rowHeight]="50"
-    class="bootstrap core-bootstrap"
-    [columnMode]="ColumnMode.force"
-    [headerHeight]="50"
-    [footerHeight]="50"
-    [externalPaging]="true"
-    [count]="500"
-    [offset]="dataParams.page_num"
-    [limit]="dataParams.page_size"
-    (page)="setPage($event)"
+<div
+  style="
+    background-color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  "
+>
+  <div
+    class="d-flex align-items-center"
+    style="
+      width: 100%;
+      height: 50px;
+      border-bottom: 1px solid #e9e9ef;
+      font-weight: bold;
+    "
   >
-    <ngx-datatable-column name="Name">
-      <ng-template let-row="row" ngx-datatable-cell-template>
-        {{ row.first_name }} {{ row.last_name }}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Mobile" prop="msisdn"></ngx-datatable-column>
-    <ngx-datatable-column name="Gender" prop="gender"></ngx-datatable-column>
-    <ngx-datatable-column
-      name="Date of Birth"
-      prop="dob"
-    ></ngx-datatable-column>
-    <ngx-datatable-column name="Status">
-      <ng-template let-row="row" ngx-datatable-cell-template>
-        {{ row.isActive === 1 ? "Active" : "Inactive" }}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column
-      name="County"
-      prop="county_title"
-    ></ngx-datatable-column>
-    <ngx-datatable-column
-      name="Sub County"
-      prop="sub_county_title"
-    ></ngx-datatable-column>
-    <ngx-datatable-column
-      name="ID Number"
-      prop="id_number"
-    ></ngx-datatable-column>
-    <ngx-datatable-column name="Details" prop="more">
-      <ng-template let-row="row" ngx-datatable-cell-template>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          (click)="view(row)"
-          style="cursor: pointer; margin-right: 10px"
-        >
-          <g fill="none" stroke="#000">
-            <circle cx="12" cy="12" r="3.5" />
-            <path
-              d="M20.188 10.934c.388.472.582.707.582 1.066c0 .359-.194.594-.582 1.066C18.768 14.79 15.636 18 12 18c-3.636 0-6.768-3.21-8.188-4.934c-.388-.472-.582-.707-.582-1.066c0-.359.194-.594.582-1.066C5.232 9.21 8.364 6 12 6c3.636 0 6.768 3.21 8.188 4.934Z"
-            />
-          </g>
-        </svg>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          style="cursor: pointer"
-          (click)="centerModal(userModal, row)"
-        >
+    <div style="width: 10%">#Id</div>
+    <div style="width: 20%">Name</div>
+    <div style="width: 10%">Mobile</div>
+    <div style="width: 10%">Gender</div>
+    <div style="width: 10%">Date of Birth</div>
+    <div style="width: 10%">Status</div>
+    <div style="width: 15%">County</div>
+    <div style="width: 15%">Sub County</div>
+    <div style="width: 10%">ID Number</div>
+    <div style="width: 10%">Actions</div>
+  </div>
+  <div
+    *ngFor="let row of rows"
+    class="d-flex flex-row align-items-center"
+    style="height: 50px; border-bottom: 1px solid #e9e9ef"
+  >
+    <div style="width: 10%">{{ row.member_id }}</div>
+    <div style="width: 20%">{{ row.first_name }} {{ row.last_name }}</div>
+    <div style="width: 10%">{{ row.msisdn }}</div>
+    <div style="width: 10%">{{ row.gender }}</div>
+    <div style="width: 10%">{{ row.dob }}</div>
+    <div style="width: 10%">
+      {{ row.isActive === 1 ? "Active" : "Inactive" }}
+    </div>
+    <div style="width: 15%">{{ row.county_title }}</div>
+    <div style="width: 15%">{{ row.sub_county_title }}</div>
+    <div style="width: 10%">{{ row.id_number }}</div>
+    <div style="width: 10%">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        (click)="view(row)"
+        style="cursor: pointer; margin-right: 10px"
+      >
+        <g fill="none" stroke="#000">
+          <circle cx="12" cy="12" r="3.5" />
           <path
-            fill="none"
-            stroke="#000"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="m14.304 4.844l2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565l6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"
+            d="M20.188 10.934c.388.472.582.707.582 1.066c0 .359-.194.594-.582 1.066C18.768 14.79 15.636 18 12 18c-3.636 0-6.768-3.21-8.188-4.934c-.388-.472-.582-.707-.582-1.066c0-.359.194-.594.582-1.066C5.232 9.21 8.364 6 12 6c3.636 0 6.768 3.21 8.188 4.934Z"
           />
-        </svg>
-        <div>
-          <ng-template #userModal let-modal>
-            <div>
-              <div class="modal-header">
-                <h5 class="modal-title mt-0">Edit Tot</h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  (click)="modal.dismiss('Cross click')"
-                  aria-hidden="true"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <form
-                  [formGroup]="updateForm"
-                  (ngSubmit)="handleSubmit($event)"
-                  style="width: 100%"
-                >
-                  <div style="width: 100%; display: flex; gap: 20px">
-                    <div class="d-flex flex-column" style="width: 50%">
-                      <div
-                        class="d-flex flex-column"
-                        style="margin-bottom: 10px"
+        </g>
+      </svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        style="cursor: pointer"
+        (click)="centerModal(userModal, row)"
+      >
+        <path
+          fill="none"
+          stroke="#000"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="m14.304 4.844l2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565l6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"
+        />
+      </svg>
+      <div>
+        <ng-template #userModal let-modal>
+          <div>
+            <div class="modal-header">
+              <h5 class="modal-title mt-0">Edit Tot</h5>
+              <button
+                type="button"
+                class="btn-close"
+                (click)="modal.dismiss('Cross click')"
+                aria-hidden="true"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form
+                [formGroup]="updateForm"
+                (ngSubmit)="handleSubmit($event)"
+                style="width: 100%"
+              >
+                <div style="width: 100%; display: flex; gap: 20px">
+                  <div class="d-flex flex-column" style="width: 50%">
+                    <div class="d-flex flex-column" style="margin-bottom: 10px">
+                      <label for="firstname" style="margin-bottom: 0px"
+                        >First Name</label
                       >
-                        <label for="firstname" style="margin-bottom: 0px"
-                          >First Name</label
-                        >
-                        <input
-                          type="text"
-                          formControlName="firstName"
-                          id="firstname"
-                          placeholder="Enter First Name"
-                          style="
-                            height: 50px;
-                            width: 100%;
-                            padding-left: 10px;
-                            padding-right: 10px;
-                            border: 1px solid #e9e9ef;
-                            border-radius: 5px;
-                          "
-                        />
-                      </div>
-                      <div
-                        class="d-flex flex-column"
-                        style="margin-bottom: 10px"
-                      >
-                        <label for="lastname" style="margin-bottom: 0px"
-                          >Last Name</label
-                        >
-                        <input
-                          type="text"
-                          formControlName="lastName"
-                          id="lastname"
-                          placeholder="Enter Last Name"
-                          style="
-                            height: 50px;
-                            width: 100%;
-                            padding-left: 10px;
-                            padding-right: 10px;
-                            border: 1px solid #e9e9ef;
-                            border-radius: 5px;
-                          "
-                        />
-                      </div>
-                      <div
-                        class="d-flex flex-column"
-                        style="margin-bottom: 10px"
-                      >
-                        <label for="idnumber" style="margin-bottom: 0px"
-                          >ID Number</label
-                        >
-                        <input
-                          type="text"
-                          formControlName="idNumber"
-                          id="idnumber"
-                          placeholder="Enter Id Number"
-                          style="
-                            height: 50px;
-                            width: 100%;
-                            padding-left: 10px;
-                            padding-right: 10px;
-                            border: 1px solid #e9e9ef;
-                            border-radius: 5px;
-                          "
-                        />
-                      </div>
-                      <div
-                        class="d-flex flex-column"
-                        style="margin-bottom: 10px"
-                      >
-                        <label for="dateOfBirth" style="margin-bottom: 0px"
-                          >Date of Birth</label
-                        >
-                        <input
-                          type="date"
-                          formControlName="dob"
-                          id="dateOfBirth"
-                          placeholder="Enter date of birth"
-                          style="
-                            height: 50px;
-                            width: 100%;
-                            padding-left: 10px;
-                            padding-right: 10px;
-                            border: 1px solid #e9e9ef;
-                            border-radius: 5px;
-                          "
-                        />
-                      </div>
+                      <input
+                        type="text"
+                        formControlName="firstName"
+                        id="firstname"
+                        placeholder="Enter First Name"
+                        style="
+                          height: 50px;
+                          width: 100%;
+                          padding-left: 10px;
+                          padding-right: 10px;
+                          border: 1px solid #e9e9ef;
+                          border-radius: 5px;
+                        "
+                      />
                     </div>
-                    <div class="d-flex flex-column" style="width: 50%">
+                    <div class="d-flex flex-column" style="margin-bottom: 10px">
+                      <label for="lastname" style="margin-bottom: 0px"
+                        >Last Name</label
+                      >
+                      <input
+                        type="text"
+                        formControlName="lastName"
+                        id="lastname"
+                        placeholder="Enter Last Name"
+                        style="
+                          height: 50px;
+                          width: 100%;
+                          padding-left: 10px;
+                          padding-right: 10px;
+                          border: 1px solid #e9e9ef;
+                          border-radius: 5px;
+                        "
+                      />
+                    </div>
+                    <div class="d-flex flex-column" style="margin-bottom: 10px">
+                      <label for="idnumber" style="margin-bottom: 0px"
+                        >ID Number</label
+                      >
+                      <input
+                        type="text"
+                        formControlName="idNumber"
+                        id="idnumber"
+                        placeholder="Enter Id Number"
+                        style="
+                          height: 50px;
+                          width: 100%;
+                          padding-left: 10px;
+                          padding-right: 10px;
+                          border: 1px solid #e9e9ef;
+                          border-radius: 5px;
+                        "
+                      />
+                    </div>
+                    <div class="d-flex flex-column" style="margin-bottom: 10px">
+                      <label for="dateOfBirth" style="margin-bottom: 0px"
+                        >Date of Birth</label
+                      >
+                      <input
+                        type="date"
+                        formControlName="dob"
+                        id="dateOfBirth"
+                        placeholder="Enter date of birth"
+                        style="
+                          height: 50px;
+                          width: 100%;
+                          padding-left: 10px;
+                          padding-right: 10px;
+                          border: 1px solid #e9e9ef;
+                          border-radius: 5px;
+                        "
+                      />
+                    </div>
+                  </div>
+                  <div class="d-flex flex-column" style="width: 50%">
+                    <div class="d-flex flex-column" style="margin-bottom: 10px">
+                      <label for="phonenumber" style="margin-bottom: 0px"
+                        >Phone Number</label
+                      >
+                      <input
+                        type="text"
+                        formControlName="msisdn"
+                        id="phonenumber"
+                        placeholder="Enter phone number"
+                        style="
+                          height: 50px;
+                          width: 100%;
+                          padding-left: 10px;
+                          padding-right: 10px;
+                          border: 1px solid #e9e9ef;
+                          border-radius: 5px;
+                        "
+                      />
+                    </div>
+                    <div class="d-flex flex-column" style="margin-bottom: 10px">
+                      <label for="gender" style="margin-bottom: 0px"
+                        >Gender</label
+                      >
+                      <select
+                        formControlName="gender"
+                        id="gender"
+                        placeholder="Select gender"
+                        class="form-select"
+                        style="height: 50px !important"
+                        aria-label="Default select example"
+                      >
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                      </select>
+                    </div>
+                    <div
+                      style="
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                      "
+                    >
                       <div
                         class="d-flex flex-column"
-                        style="margin-bottom: 10px"
+                        style="margin-bottom: 10px; width: 30%"
                       >
-                        <label for="phonenumber" style="margin-bottom: 0px"
-                          >Phone Number</label
-                        >
-                        <input
-                          type="text"
-                          formControlName="msisdn"
-                          id="phonenumber"
-                          placeholder="Enter phone number"
-                          style="
-                            height: 50px;
-                            width: 100%;
-                            padding-left: 10px;
-                            padding-right: 10px;
-                            border: 1px solid #e9e9ef;
-                            border-radius: 5px;
-                          "
-                        />
-                      </div>
-                      <div
-                        class="d-flex flex-column"
-                        style="margin-bottom: 10px"
-                      >
-                        <label for="gender" style="margin-bottom: 0px"
-                          >Gender</label
+                        <label for="county" style="margin-bottom: 0px"
+                          >County</label
                         >
                         <select
-                          formControlName="gender"
-                          id="gender"
-                          placeholder="Select gender"
+                          formControlName="countyTitle"
+                          id="county"
+                          placeholder="Select county"
                           class="form-select"
                           style="height: 50px !important"
                           aria-label="Default select example"
                         >
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
+                          <option
+                            *ngFor="let county of counties"
+                            value="county?.name"
+                          >
+                            {{ county.name }}
+                          </option>
                         </select>
                       </div>
                       <div
-                        style="
-                          width: 100%;
-                          display: flex;
-                          align-items: center;
-                          justify-content: space-between;
-                        "
+                        class="d-flex flex-column"
+                        style="margin-bottom: 10px; width: 30%"
                       >
-                        <div
-                          class="d-flex flex-column"
-                          style="margin-bottom: 10px; width: 30%"
+                        <label for="subcounty" style="margin-bottom: 0px"
+                          >Sub County</label
                         >
-                          <label for="county" style="margin-bottom: 0px"
-                            >County</label
-                          >
-                          <select
-                            formControlName="countyTitle"
-                            id="county"
-                            placeholder="Select county"
-                            class="form-select"
-                            style="height: 50px !important"
-                            aria-label="Default select example"
-                          >
-                            <option
-                              *ngFor="let county of counties"
-                              value="county?.name"
-                            >
-                              {{ county.name }}
-                            </option>
-                          </select>
-                        </div>
-                        <div
-                          class="d-flex flex-column"
-                          style="margin-bottom: 10px; width: 30%"
+                        <select
+                          formControlName="subCountyTitle"
+                          id="subcounty"
+                          placeholder="Select subcounty"
+                          class="form-select"
+                          style="height: 50px !important"
+                          aria-label="Default select example"
                         >
-                          <label for="subcounty" style="margin-bottom: 0px"
-                            >Sub County</label
+                          <option
+                            *ngFor="let subcounty of sub_counties"
+                            value="subcounty?.name"
                           >
-                          <select
-                            formControlName="subCountyTitle"
-                            id="subcounty"
-                            placeholder="Select subcounty"
-                            class="form-select"
-                            style="height: 50px !important"
-                            aria-label="Default select example"
-                          >
-                            <option
-                              *ngFor="let subcounty of sub_counties"
-                              value="subcounty?.name"
-                            >
-                              {{ subcounty.name }}
-                            </option>
-                          </select>
-                        </div>
-                        <div
-                          class="d-flex flex-column"
-                          style="margin-bottom: 10px; width: 30%"
+                            {{ subcounty.name }}
+                          </option>
+                        </select>
+                      </div>
+                      <div
+                        class="d-flex flex-column"
+                        style="margin-bottom: 10px; width: 30%"
+                      >
+                        <label for="ward" style="margin-bottom: 0px"
+                          >Ward</label
                         >
-                          <label for="ward" style="margin-bottom: 0px"
-                            >Ward</label
-                          >
-                          <select
-                            formControlName="wardTitle"
-                            id="ward"
-                            placeholder="Select ward"
-                            class="form-select"
-                            style="height: 50px !important"
-                            aria-label="Default select example"
-                          >
-                            <option
-                              *ngFor="let ward of wards"
-                              value="ward?.name"
-                            >
-                              {{ ward.name }}
-                            </option>
-                          </select>
-                        </div>
+                        <select
+                          formControlName="wardTitle"
+                          id="ward"
+                          placeholder="Select ward"
+                          class="form-select"
+                          style="height: 50px !important"
+                          aria-label="Default select example"
+                        >
+                          <option *ngFor="let ward of wards" value="ward?.name">
+                            {{ ward.name }}
+                          </option>
+                        </select>
                       </div>
                     </div>
                   </div>
-                  <div
+                </div>
+                <div
+                  style="
+                    width: 100%;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    display: flex;
+                    justify-content: end;
+                  "
+                >
+                  <button
+                    type="submit"
                     style="
-                      width: 100%;
-                      margin-top: 10px;
-                      margin-bottom: 10px;
-                      display: flex;
-                      justify-content: end;
+                      height: 50px;
+                      background-color: #1f6e50;
+                      border: none;
+                      border-radius: 5px;
+                      color: white;
+                      width: 20%;
                     "
                   >
-                    <button
-                      type="submit"
-                      style="
-                        height: 50px;
-                        background-color: #1f6e50;
-                        border: none;
-                        border-radius: 5px;
-                        color: white;
-                        width: 20%;
-                      "
-                    >
-                      Update Tot
-                    </button>
-                  </div>
-                </form>
-              </div>
+                    Update Tot
+                  </button>
+                </div>
+              </form>
             </div>
-          </ng-template>
-        </div>
-      </ng-template>
-    </ngx-datatable-column>
-  </ngx-datatable>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div
+    style="
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 80px;
+      margin-top: 20px;
+    "
+  >
+    <p>
+      Showing
+      {{
+        dataParams.page_size === 1
+          ? 1
+          : dataParams.page_num * dataParams.page_size - 10
+      }}
+      to {{ dataParams.page_num * dataParams.page_size }} of {{ 200 }} entries
+    </p>
+    <div>
+      <ngb-pagination
+        (pageChange)="setPage($event)"
+        [collectionSize]="200"
+        [(page)]="dataParams.page_num"
+        [maxSize]="5"
+        [boundaryLinks]="true"
+      />
+    </div>
+  </div>
 </div>
+
 <!-- </div> -->

@@ -132,60 +132,106 @@
       </div>
     </div>
   </div>
-
-  <div class="card">
-    <ngx-datatable
-      #table
-      class="bootstrap no-detail-row"
-      [rows]="trainings"
-      [rowHeight]="50"
-      class="bootstrap core-bootstrap"
-      [columnMode]="ColumnMode.force"
-      [headerHeight]="50"
-      [footerHeight]="50"
-      [externalPaging]="true"
-      [count]="200"
-      [offset]="dataParams.page_num"
-      [limit]="dataParams.page_size"
-      (page)="setPage($event)"
+  <div
+    style="
+      background-color: white;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    "
+  >
+    <div
+      class="d-flex align-items-center"
+      style="
+        width: 100%;
+        height: 50px;
+        border-bottom: 1px solid #e9e9ef;
+        font-weight: bold;
+      "
     >
-      <ngx-datatable-column name="Date" prop="created_at">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          {{ value | date }}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column
-        name="Course"
-        prop="course.title"
-      ></ngx-datatable-column>
-      <ngx-datatable-column
-        name="Module"
-        prop="course_module.title"
-      ></ngx-datatable-column>
-      <ngx-datatable-column
-        name="Trainer"
-        prop="trainer.name"
-      ></ngx-datatable-column>
-      <ngx-datatable-column
-        name="VLC"
-        prop="value_chain.value_chain_name"
-      ></ngx-datatable-column>
-      <ngx-datatable-column name="Date" prop="training_date">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          {{ value }}
-        </ng-template>
-      </ngx-datatable-column>
-      <ngx-datatable-column name="Details" prop="details">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          <button
-            (click)="view(row)"
-            class="round"
-            class="btn btn-sm btn-warning"
-          >
-            Details
-          </button>
-        </ng-template>
-      </ngx-datatable-column>
-    </ngx-datatable>
+      <div style="width: 15%">Date</div>
+      <div style="width: 20%">Course</div>
+      <div style="width: 20%">Module</div>
+      <div style="width: 15%">Trainer</div>
+      <div style="width: 15%">VLC</div>
+      <div style="width: 15%">Training Date</div>
+      <div style="width: 10%">Actions</div>
+    </div>
+    <div
+      *ngFor="let row of trainings"
+      class="d-flex flex-row align-items-center"
+      style="height: 50px; border-bottom: 1px solid #e9e9ef"
+    >
+      <div style="width: 15%">{{ row.created_at | date }}</div>
+      <div style="width: 20%">{{ row.course.title }}</div>
+      <div style="width: 20%">{{ row.course_module.title }}</div>
+      <div style="width: 15%">{{ row.trainer.name }}</div>
+      <div style="width: 15%">{{ row.value_chain.value_chain_name }}</div>
+      <div style="width: 15%">{{ row.training_date }}</div>
+      <div style="width: 10%">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          (click)="view(row)"
+          style="cursor: pointer; margin-right: 10px"
+        >
+          <g fill="none" stroke="#000">
+            <circle cx="12" cy="12" r="3.5" />
+            <path
+              d="M20.188 10.934c.388.472.582.707.582 1.066c0 .359-.194.594-.582 1.066C18.768 14.79 15.636 18 12 18c-3.636 0-6.768-3.21-8.188-4.934c-.388-.472-.582-.707-.582-1.066c0-.359.194-.594.582-1.066C5.232 9.21 8.364 6 12 6c3.636 0 6.768 3.21 8.188 4.934Z"
+            />
+          </g>
+        </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          style="cursor: pointer"
+        >
+          <path
+            fill="none"
+            stroke="#000"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="m14.304 4.844l2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565l6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 80px;
+        margin-top: 20px;
+      "
+    >
+      <p>
+        Showing
+        {{
+          dataParams.page_size === 1
+            ? 1
+            : dataParams.page_num * dataParams.page_size - 10
+        }}
+        to {{ dataParams.page_num * dataParams.page_size }} of {{ 200 }} entries
+      </p>
+      <div>
+        <ngb-pagination
+          (pageChange)="setPage($event)"
+          [collectionSize]="200"
+          [(page)]="dataParams.page_num"
+          [maxSize]="5"
+          [boundaryLinks]="true"
+        />
+      </div>
+    </div>
   </div>
 </div>

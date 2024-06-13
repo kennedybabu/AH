@@ -17,22 +17,20 @@ export interface Tot {
 
 export interface Trainer {
   dob: string;
-  email: string | null;
   gender: string;
+  is_tot: boolean;
   msisdn: string;
-  userId: number;
-  wardId: number;
-  countyId: number;
-  idNumber: string;
-  isActive: number;
-  lastName: string;
-  username: string;
-  createdAt: string;
-  firstName: string;
-  updatedAt: string;
-  wardTitle: string;
-  userTypeId: number;
-  countyTitle: string;
-  subCountyId: number;
-  subCountyTitle: string;
+  ward_id: number;
+  group_id: number;
+  county_id: number;
+  id_number: string;
+  last_name: string;
+  member_id: number;
+  ward_name: string;
+  first_name: string;
+  is_disabled: string;
+  county_title: string;
+  sub_county_id: number;
+  sub_county_title: string;
+  email: string;
 }

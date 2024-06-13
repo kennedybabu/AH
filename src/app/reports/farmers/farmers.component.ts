@@ -15,7 +15,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { GroupsService } from 'src/app/groups/groups.services';
 import { FarmersService } from 'src/app/farmers/farmers.service';
 import { ColumnMode, NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbModal,
+  NgbModalModule,
+  NgbPaginationModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from 'src/app/users/users.service';
 import { CommonModule } from '@angular/common';
 import { City, Farmer } from 'src/app/core/models/user.model';
@@ -34,6 +38,8 @@ import { switchMap } from 'rxjs';
     NgxDatatableModule,
     FormsModule,
     CommonModule,
+    NgbModalModule,
+    NgbPaginationModule,
     // MultiSelectModule,
   ],
   templateUrl: './farmers.component.html',
@@ -47,7 +53,7 @@ export class FarmersComponent implements OnInit {
   sub_counties: SubCounty[] = [];
   wards: Ward[] = [];
   groups = [];
-  rows = [];
+  rows: any = [];
   filteredArray = [];
   public currentPage: number = 1;
   public updateFarmerForm!: FormGroup;
@@ -332,7 +338,8 @@ export class FarmersComponent implements OnInit {
 
   setPage(pageInfo: any) {
     // console.log(pageInfo)
-    this.dataParams.page_num = pageInfo.offset;
+    this.dataParams.page_num = pageInfo;
+    // this.dataParams.page_num = pageInfo.offset;
     let data = {
       page: this.dataParams.page_num,
       dataObj: this.searchForm.value,

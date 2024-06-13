@@ -16,7 +16,7 @@ import { Ward } from 'src/app/shared/data/ward.model';
 import { counties } from 'src/app/shared/data/Counties';
 import { Route, Router } from '@angular/router';
 import { Tot, Trainer } from 'src/app/core/models/tot.model';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { UsersService } from 'src/app/users/users.service';
 import { switchMap } from 'rxjs';
@@ -31,6 +31,7 @@ import { switchMap } from 'rxjs';
     NgxDatatableModule,
     FormsModule,
     CommonModule,
+    NgbPagination,
   ],
   templateUrl: './tots.component.html',
   styleUrl: './tots.component.scss',
@@ -43,14 +44,14 @@ export class TotsComponent implements OnInit {
   sub_counties: SubCounty[] = [];
   wards: Ward[] = [];
   ColumnMode = ColumnMode;
-  rows = [];
+  rows: any = [];
   public selectedTrainer: Partial<Trainer> = {};
 
   updateForm!: FormGroup;
 
   dataParams: any = {
-    page_num: '',
-    page_size: '',
+    page_num: 1,
+    page_size: 10,
   };
 
   constructor(
@@ -65,7 +66,7 @@ export class TotsComponent implements OnInit {
     const date = new Date();
     const startDate = new Date();
     startDate.setMonth(startDate.getMonth() - 1);
-    this.dataParams.page_num = 0;
+    this.dataParams.page_num = 1;
     this.dataParams.page_size = 10;
 
     this.counties = counties;
@@ -108,28 +109,29 @@ export class TotsComponent implements OnInit {
 
   centerModal(userModal: any, trainer: Trainer) {
     this.selectedTrainer = trainer;
+    console.log(this.selectedTrainer);
 
-    if (this.selectedTrainer.countyId !== undefined) {
-      this.sub_counties = this.fetchSubcounties(this.selectedTrainer.countyId);
+    if (this.selectedTrainer.county_id !== undefined) {
+      this.sub_counties = this.fetchSubcounties(this.selectedTrainer.county_id);
     }
 
-    if (this.selectedTrainer.subCountyId !== undefined) {
-      this.wards = this.fetchWards(this.selectedTrainer.subCountyId);
+    if (this.selectedTrainer.sub_county_id !== undefined) {
+      this.wards = this.fetchWards(this.selectedTrainer.sub_county_id);
     }
 
     this.updateForm.patchValue({
-      firstName: this.selectedTrainer.firstName,
-      lastName: this.selectedTrainer.lastName,
+      firstName: this.selectedTrainer.first_name,
+      lastName: this.selectedTrainer.last_name,
       email: this.selectedTrainer.email,
-      idNumber: this.selectedTrainer.idNumber,
+      idNumber: this.selectedTrainer.id_number,
       dob: this.selectedTrainer.dob
         ? this.formatDate(new Date(this.selectedTrainer.dob))
         : null,
       msisdn: this.selectedTrainer.msisdn,
       gender: this.selectedTrainer.gender,
-      countyTitle: this.selectedTrainer.countyTitle,
-      subCountyTitle: this.selectedTrainer.subCountyTitle,
-      wardTitle: this.selectedTrainer?.wardTitle,
+      countyTitle: this.selectedTrainer.county_title,
+      subCountyTitle: this.selectedTrainer.sub_county_title,
+      wardTitle: this.selectedTrainer?.ward_name,
     });
 
     this.modalService.open(userModal, {
@@ -152,23 +154,30 @@ export class TotsComponent implements OnInit {
   }
 
   onSubmit() {
-    this.totsService
-      .getTotsByLocations(this.searchForm.value)
-      .subscribe((res) => {
-        if (res.statusCode == 200) {
-          this.rows = res.message;
-          this.cdr.markForCheck();
-        }
-      });
+    let data = {
+      page: this.dataParams.page_num,
+      dataObj: this.searchForm.value,
+      size: this.dataParams.page_size,
+    };
+    this.totsService.getTotsByLocations(data).subscribe((res) => {
+      if (res.statusCode == 200) {
+        this.rows = res.message;
+        this.cdr.markForCheck();
+      }
+    });
   }
 
   setPage(pageInfo: any) {
-    this.dataParams.page_num = pageInfo.offset + 1;
-    this.totsService
-      .getAllToTs(this.dataParams.page_num, this.dataParams.page_size)
-      .subscribe((res) => {
-        this.rows = res.message;
-      });
+    // this.dataParams.page_num = pageInfo.offset + 1;
+    this.dataParams.page_num = pageInfo;
+    let data = {
+      page: this.dataParams.page_num,
+      dataObj: this.searchForm.value,
+      size: this.dataParams.page_size,
+    };
+    this.totsService.getTotsByLocations(data).subscribe((res) => {
+      this.rows = res.message;
+    });
   }
 
   getUsers() {
@@ -192,7 +201,7 @@ export class TotsComponent implements OnInit {
     filtered_array.forEach((element) => {
       this.sub_counties = this.sub_counties.concat(element.sub_counties);
     });
-    this.onSubmit()
+    this.onSubmit();
   }
 
   filterWards(event: Event) {
@@ -203,10 +212,10 @@ export class TotsComponent implements OnInit {
     filtered_array.forEach((element) => {
       this.wards = this.wards.concat(element.wards);
     });
-    this.onSubmit()
+    this.onSubmit();
   }
-  onWardSelect(){
-    this.onSubmit()
+  onWardSelect() {
+    this.onSubmit();
   }
 
   view(row: Tot) {
@@ -218,5 +227,39 @@ export class TotsComponent implements OnInit {
   }
   fetchWards(subCountyId: number) {
     return this.usersService.getWards(subCountyId);
+  }
+  exportSelectedMembers() {
+    let data = {
+      page: this.dataParams.page_num,
+      dataObj: this.searchForm.value,
+      size: this.dataParams.page_size,
+    };
+    this.totsService.exportMembers(data).subscribe((res) => {
+      const a = document.createElement('a');
+      const objectUrl = URL.createObjectURL(res);
+      a.href = objectUrl;
+      a.download = 'members.xlsx';
+      a.click();
+      URL.revokeObjectURL(objectUrl);
+      this.cdr.markForCheck();
+      this.cdr.markForCheck();
+    });
+  }
+  exportEntireMembersReport() {
+    let data = {
+      page: 1,
+      dataObj: this.searchForm.value,
+      size: 50,
+    };
+    this.totsService.exportAllMembers(data).subscribe((res) => {
+      const a = document.createElement('a');
+      const objectUrl = URL.createObjectURL(res);
+      a.href = objectUrl;
+      a.download = 'members.xlsx';
+      a.click();
+      URL.revokeObjectURL(objectUrl);
+      this.cdr.markForCheck();
+      this.cdr.markForCheck();
+    });
   }
 }

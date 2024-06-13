@@ -159,14 +159,14 @@ export class DashboardComponent implements OnInit {
       startDate: [this.formatDate(startDate), Validators.required],
       endDate: [this.formatDate(date), Validators.required],
     });
-    // this.getSummary()
-    // this.getCourseSummary()
-    // this.memberValueChain()
-    this.getIncomeSummary(this.searchForm.value);
-    this.filterVLCSummaryByLocation(this.searchForm.value);
-    this.filterGroups(this.searchForm.value);
-    this.filterCount(this.searchForm.value);
-    this.getTrainingsByLocationAndDate();
+    this.getSummary();
+    this.getCourseSummary();
+    this.memberValueChain();
+    // this.getIncomeSummary(this.searchForm.value);
+    // this.filterVLCSummaryByLocation(this.searchForm.value);
+    // this.filterGroups(this.searchForm.value);
+    // this.filterCount(this.searchForm.value);
+    // this.getTrainingsByLocationAndDate();
 
     this.trainingChart = {
       series: [
@@ -525,13 +525,14 @@ export class DashboardComponent implements OnInit {
       wardId: this.searchForm.get('wardId')?.value,
       groupId: this.searchForm.get('groupId')?.value,
     };
-    this.membersService.getCountsByLocations(obj).subscribe((res) => {
+    this.membersService.getCountsByLocations(data).subscribe((res) => {
       if (res.statusCode == 200) {
         this.totalGroups = res.message.total_groups;
         this.ToTsNo = res.message.total_tots;
         let males = res.message.total_male_members;
         let females = res.message.total_female_members;
         this.totalNumber = males + females;
+        this.totalMembers = res?.message?.total_members;
         let pwd =
           res.message.total_disabled_male_tots +
           res.message.total_disabled_female_tots;

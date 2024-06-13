@@ -30,7 +30,14 @@ export class TotsService {
 
   getTotsByLocations(data: any): Observable<any> {
     return this.http
-      .post(endpoint + '/members/by-location?page=1&size=20', data)
+      .post(
+        endpoint +
+          '/members/by-location?page=' +
+          data.page +
+          '&size=' +
+          data?.size,
+        data.dataObj
+      )
       .pipe(map(this.extractData));
   }
 
@@ -44,5 +51,23 @@ export class TotsService {
     return this.http
       .get<{ message: UserInfo }>(`${endpoint}users/get/${id}`)
       .pipe(map((response) => response?.message));
+  }
+  exportMembers(data: any) {
+    return this.http
+      .post(
+        endpoint + 'users/select/xlsx?page=' + data.page + '&size=' + data?.size,
+        data.dataObj,
+        { responseType: 'blob' }
+      )
+      .pipe(map(this.extractData));
+  }
+  exportAllMembers(data: any) {
+    return this.http
+      .post(
+        endpoint + 'members/xlsx?page=' + data.page + '&size=' + data?.size,
+        data.dataObj,
+        { responseType: 'blob' }
+      )
+      .pipe(map(this.extractData));
   }
 }
