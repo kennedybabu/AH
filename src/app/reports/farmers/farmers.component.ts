@@ -57,6 +57,7 @@ export class FarmersComponent implements OnInit {
   filteredArray = [];
   public currentPage: number = 1;
   public updateFarmerForm!: FormGroup;
+  selectedRows = new Set<number>();
 
   public updateCounties: County[] = [];
   public updateSubcounties: SubCounty[] = [];
@@ -300,9 +301,7 @@ export class FarmersComponent implements OnInit {
   }
   exportSelectedMembers() {
     let data = {
-      page: this.dataParams.page_num,
-      dataObj: this.searchForm.value,
-      size: this.dataParams.page_size,
+      memberId: Array.from(this.selectedRows),
     };
     this.farmersService.exportMembers(data).subscribe((res) => {
       const a = document.createElement('a');
@@ -358,5 +357,27 @@ export class FarmersComponent implements OnInit {
   }
   fetchWards(subCountyId: number) {
     return this.usersService.getWards(subCountyId);
+  }
+
+  selectAll(event: any) {
+    const checked = event.target.checked;
+    if (checked) {
+      this.rows.forEach((row: any) => this.selectedRows.add(row.member_id));
+    } else {
+      this.selectedRows.clear();
+    }
+  }
+
+  onRowSelect(event: any, row: any) {
+    const checked = event.target.checked;
+    if (checked) {
+      this.selectedRows.add(row.member_id);
+    } else {
+      this.selectedRows.delete(row.member_id);
+    }
+  }
+
+  isSelected(rowId: number): boolean {
+    return this.selectedRows?.has(rowId);
   }
 }

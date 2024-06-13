@@ -119,7 +119,7 @@
             color: white;
           "
         >
-          Export Report (per page)
+          Export Selected Members
         </button>
         <button
           (click)="exportEntireMembersReport()"
@@ -157,7 +157,10 @@
           font-weight: bold;
         "
       >
-        <div style="height: 100%; width: 10%">Member Id</div>
+        <div style="width: 5%">
+          <input type="checkbox" id="select_all" (change)="selectAll($event)" />
+        </div>
+        <div style="height: 100%; width: 5%">Member Id</div>
         <div style="height: 100%; width: 10%">Name</div>
         <div style="height: 100%; width: 10%">Mobile</div>
         <div style="height: 100%; width: 10%">ID Number</div>
@@ -174,8 +177,15 @@
           class="d-flex flex-row align-items-center"
           style="height: 48px; border-bottom: 1px solid #e9e9ef"
         >
+          <div style="width: 5%">
+            <input
+              type="checkbox"
+              [checked]="isSelected(row?.member_id)"
+              (change)="onRowSelect($event, row)"
+            />
+          </div>
           <div
-            style="height: 100%; width: 10%; display: flex; align-items: center"
+            style="height: 100%; width: 5%; display: flex; align-items: center"
           >
             {{ row.member_id }}
           </div>

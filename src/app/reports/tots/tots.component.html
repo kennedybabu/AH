@@ -168,7 +168,7 @@
             color: white;
           "
         >
-          Export Report (per page)
+          Export Selected Tots
         </button>
         <button
           (click)="exportEntireMembersReport()"
@@ -182,7 +182,7 @@
             color: white;
           "
         >
-          Export All Members
+          Export All Tots
         </button>
       </div>
     </div>
@@ -230,7 +230,7 @@
     <div style="width: 5%">
       <input
         type="checkbox"
-        [checked]="isSelected(row?.member_id)"
+        [checked]="isSelected(row?.member_id || row?.userId)"
         (change)="onRowSelect($event, row)"
       />
     </div>

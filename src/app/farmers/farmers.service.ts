@@ -56,11 +56,9 @@ export class FarmersService {
 
   exportMembers(data: any) {
     return this.http
-      .post(
-        endpoint + 'members/xlsx?page=' + data.page + '&size=' + data?.size,
-        data.dataObj,
-        { responseType: 'blob' }
-      )
+      .post(endpoint + 'selected-members/xlsx', data, {
+        responseType: 'blob',
+      })
       .pipe(map(this.extractData));
   }
   exportAllMembers(data: any) {

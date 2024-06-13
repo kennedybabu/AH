@@ -111,7 +111,9 @@ export class TotsComponent implements OnInit {
   selectAll(event: any) {
     const checked = event.target.checked;
     if (checked) {
-      this.rows.forEach((row: any) => this.selectedRows.add(row.member_id));
+      this.rows.forEach((row: any) =>
+        this.selectedRows.add(row.member_id || row?.userId)
+      );
     } else {
       this.selectedRows.clear();
     }
@@ -120,9 +122,9 @@ export class TotsComponent implements OnInit {
   onRowSelect(event: any, row: any) {
     const checked = event.target.checked;
     if (checked) {
-      this.selectedRows.add(row.member_id);
+      this.selectedRows.add(row.member_id || row?.userId);
     } else {
-      this.selectedRows.delete(row.member_id);
+      this.selectedRows.delete(row.member_id || row?.userId);
     }
   }
 
@@ -253,15 +255,14 @@ export class TotsComponent implements OnInit {
   }
   exportSelectedMembers() {
     let data = {
-      page: this.dataParams.page_num,
-      dataObj: this.searchForm.value,
-      size: this.dataParams.page_size,
+      userId: Array.from(this.selectedRows),
     };
     this.totsService.exportMembers(data).subscribe((res) => {
+      console.log(res);
       const a = document.createElement('a');
       const objectUrl = URL.createObjectURL(res);
       a.href = objectUrl;
-      a.download = 'members.xlsx';
+      a.download = 'Tots.xlsx';
       a.click();
       URL.revokeObjectURL(objectUrl);
       this.cdr.markForCheck();
@@ -275,10 +276,11 @@ export class TotsComponent implements OnInit {
       size: 50,
     };
     this.totsService.exportAllMembers(data).subscribe((res) => {
+      console.log(res);
       const a = document.createElement('a');
       const objectUrl = URL.createObjectURL(res);
       a.href = objectUrl;
-      a.download = 'members.xlsx';
+      a.download = 'Tots.xlsx';
       a.click();
       URL.revokeObjectURL(objectUrl);
       this.cdr.markForCheck();
