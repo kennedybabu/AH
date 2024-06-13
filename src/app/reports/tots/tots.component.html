@@ -142,31 +142,48 @@
               </ng-select>
             </div>
           </div>
-          <!-- <div class="col-xl col-md-6 d-flex h-100 align-items-center">
-            <button
-              type="button"
-              (click)="onSubmit()"
-              style="margin-top: 25px; color: #e9ecef"
-              class="btn w-100 secondary-color btn-block"
-            >
-              <i class="ft-search mr-1"></i>Search
-            </button>
-          </div> -->
         </div>
       </form>
-      <div style="margin-top: 20px; margin-bottom: 10px; width: 100%">
-        <input
-          type="text"
-          placeholder="Search a tot's id, name and email"
+      <div
+        style="
+          margin-top: 20px;
+          margin-bottom: 10px;
+          width: 100%;
+          padding-left: 0px;
+          display: flex;
+          align-items: center;
+          justify-content: end;
+          gap: 20px;
+        "
+      >
+        <button
+          (click)="exportSelectedMembers()"
           style="
-            border: 1px solid #e9e9ef;
-            border-radius: 5px;
-            width: 100%;
             height: 40px;
-            padding-left: 10px;
-            padding-right: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+            background-color: #f77e18;
+            border: none;
+            border-radius: 5px;
+            color: white;
           "
-        />
+        >
+          Export Report (per page)
+        </button>
+        <button
+          (click)="exportEntireMembersReport()"
+          style="
+            height: 40px;
+            padding-left: 20px;
+            padding-right: 20px;
+            background-color: #f77e18;
+            border: none;
+            border-radius: 5px;
+            color: white;
+          "
+        >
+          Export All Members
+        </button>
       </div>
     </div>
     <!-- </form> -->
@@ -191,14 +208,17 @@
       font-weight: bold;
     "
   >
-    <div style="width: 10%">#Id</div>
-    <div style="width: 20%">Name</div>
+    <div style="width: 5%">
+      <input type="checkbox" id="select_all" (change)="selectAll($event)" />
+    </div>
+    <div style="width: 5%">#Id</div>
+    <div style="width: 10%">Name</div>
     <div style="width: 10%">Mobile</div>
     <div style="width: 10%">Gender</div>
     <div style="width: 10%">Date of Birth</div>
     <div style="width: 10%">Status</div>
-    <div style="width: 15%">County</div>
-    <div style="width: 15%">Sub County</div>
+    <div style="width: 10%">County</div>
+    <div style="width: 10%">Sub County</div>
     <div style="width: 10%">ID Number</div>
     <div style="width: 10%">Actions</div>
   </div>
@@ -207,17 +227,29 @@
     class="d-flex flex-row align-items-center"
     style="height: 50px; border-bottom: 1px solid #e9e9ef"
   >
-    <div style="width: 10%">{{ row.member_id }}</div>
-    <div style="width: 20%">{{ row.first_name }} {{ row.last_name }}</div>
+    <div style="width: 5%">
+      <input
+        type="checkbox"
+        [checked]="isSelected(row?.member_id)"
+        (change)="onRowSelect($event, row)"
+      />
+    </div>
+    <div style="width: 5%">{{ row.member_id || row?.userId }}</div>
+    <div style="width: 10%">
+      {{ row.first_name || row?.firstName }}
+      {{ row.last_name || row?.lastName }}
+    </div>
     <div style="width: 10%">{{ row.msisdn }}</div>
     <div style="width: 10%">{{ row.gender }}</div>
     <div style="width: 10%">{{ row.dob }}</div>
     <div style="width: 10%">
       {{ row.isActive === 1 ? "Active" : "Inactive" }}
     </div>
-    <div style="width: 15%">{{ row.county_title }}</div>
-    <div style="width: 15%">{{ row.sub_county_title }}</div>
-    <div style="width: 10%">{{ row.id_number }}</div>
+    <div style="width: 10%">{{ row.county_title || row?.countyTitle }}</div>
+    <div style="width: 10%">
+      {{ row.sub_county_title || row?.subCountyTitle }}
+    </div>
+    <div style="width: 10%">{{ row.id_number || row?.idNumber }}</div>
     <div style="width: 10%">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -513,7 +545,7 @@
     <div>
       <ngb-pagination
         (pageChange)="setPage($event)"
-        [collectionSize]="200"
+        [collectionSize]="800"
         [(page)]="dataParams.page_num"
         [maxSize]="5"
         [boundaryLinks]="true"

@@ -48,6 +48,7 @@ export class TotsComponent implements OnInit {
   public selectedTrainer: Partial<Trainer> = {};
 
   updateForm!: FormGroup;
+  selectedRows = new Set<number>();
 
   dataParams: any = {
     page_num: 1,
@@ -96,8 +97,8 @@ export class TotsComponent implements OnInit {
       subCountyTitle: ['', Validators.required],
     });
 
-    // this.getUsers();
-    this.onSubmit();
+    this.getUsers();
+    // this.onSubmit();
 
     // Trigger fetch when form changes or on initialization
     this.searchForm.valueChanges
@@ -106,6 +107,28 @@ export class TotsComponent implements OnInit {
   }
 
   handleSubmit(event: Event) {}
+
+  selectAll(event: any) {
+    const checked = event.target.checked;
+    if (checked) {
+      this.rows.forEach((row: any) => this.selectedRows.add(row.member_id));
+    } else {
+      this.selectedRows.clear();
+    }
+  }
+
+  onRowSelect(event: any, row: any) {
+    const checked = event.target.checked;
+    if (checked) {
+      this.selectedRows.add(row.member_id);
+    } else {
+      this.selectedRows.delete(row.member_id);
+    }
+  }
+
+  isSelected(rowId: number): boolean {
+    return this.selectedRows?.has(rowId);
+  }
 
   centerModal(userModal: any, trainer: Trainer) {
     this.selectedTrainer = trainer;
